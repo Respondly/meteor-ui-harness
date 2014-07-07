@@ -1,0 +1,20 @@
+{
+  "name": "test-harness",
+  "description": "A visual test harness for UI controls.",
+  "homepage": "",
+  "author": "Phil Cockfield (https://github.com/philcockfield)",
+  "version": "0.0.1",
+  "git": "",
+  "packages": {
+    "sugar": {},
+    "munit": {
+      "path": "../../libs/meteor-munit"
+    },
+    "util": {
+      "path": "../meteor-util"
+    },
+    "bdd-runner": {
+      "path": "../meteor-bdd-runner"
+    }
+  }
+}
