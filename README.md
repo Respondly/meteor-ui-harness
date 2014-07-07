@@ -1,5 +1,5 @@
-# Title
-A visual test harness for UI controls.
+# TestHarness
+A visual test harness for UI controls running within Meteor.
 
 # Installation
 When running for the first time:
