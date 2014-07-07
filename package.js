@@ -7,7 +7,7 @@ Package.describe({
 Package.on_use(function (api) {
   api.use(['coffeescript', 'sugar']);
   api.use(['util', 'bdd-runner']);
-  api.export('TestHarness')
+  api.export('TestHarness');
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('shared/api.coffee', ['client', 'server']);

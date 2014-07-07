@@ -15,6 +15,9 @@
     },
     "bdd-runner": {
       "path": "../meteor-bdd-runner"
+    },
+    "ctrl": {
+      "path": "../meteor-ctrl"
     }
   }
 }
