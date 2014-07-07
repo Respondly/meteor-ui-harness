@@ -5,12 +5,17 @@ Package.describe({
 
 
 Package.on_use(function (api) {
+  api.use('http', ['client', 'server']);
+  api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use(['coffeescript', 'sugar']);
-  api.use(['util', 'bdd-runner']);
+  api.use(['util', 'bdd-runner', 'ctrl']);
   api.export('TestHarness');
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('shared/api.coffee', ['client', 'server']);
+  api.add_files('client/test-harness/test-harness.html', 'client');
+  api.add_files('client/test-harness/test-harness.coffee', 'client');
+  api.add_files('client/test-harness/test-harness.styl', 'client');
 
 });
 
