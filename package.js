@@ -8,7 +8,7 @@ Package.on_use(function (api) {
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use(['coffeescript', 'sugar']);
-  api.use(['util', 'bdd-runner', 'ctrl']);
+  api.use(['util', 'bdd', 'ctrl']);
   api.export('TestHarness');
 
   // Generated with: github.com/philcockfield/meteor-package-loader

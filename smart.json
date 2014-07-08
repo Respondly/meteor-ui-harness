@@ -13,8 +13,8 @@
     "util": {
       "path": "../meteor-util"
     },
-    "bdd-runner": {
-      "path": "../meteor-bdd-runner"
+    "bdd": {
+      "path": "../meteor-bdd"
     },
     "ctrl": {
       "path": "../meteor-ctrl"
