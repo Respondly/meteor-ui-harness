@@ -14,8 +14,14 @@ Package.on_use(function (api) {
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('shared/api.coffee', ['client', 'server']);
   api.add_files('client/test-harness/test-harness.html', 'client');
+  api.add_files('client/th-host/th-host.html', 'client');
+  api.add_files('client/th-index/th-index.html', 'client');
   api.add_files('client/test-harness/test-harness.coffee', 'client');
   api.add_files('client/test-harness/test-harness.styl', 'client');
+  api.add_files('client/th-host/th-host.coffee', 'client');
+  api.add_files('client/th-host/th-host.styl', 'client');
+  api.add_files('client/th-index/th-index.coffee', 'client');
+  api.add_files('client/th-index/th-index.styl', 'client');
 
 });
 
