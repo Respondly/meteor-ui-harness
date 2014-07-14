@@ -18,6 +18,9 @@
     },
     "ctrl": {
       "path": "../meteor-ctrl"
+    },
+    "stylus-compiler": {
+      "path": "../meteor-stylus-compiler"
     }
   }
 }
