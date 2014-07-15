@@ -1,9 +1,10 @@
 Ctrl.define
-  'th-index':
+  'th-suite-tree':
     init: ->
     created: ->
     destroyed: ->
     model: ->
     api: {}
-    helpers: {}
+    helpers:
+      suite: -> BDD.suite.children[0]
     events: {}
