@@ -5,10 +5,9 @@
     <ul class='th-specs'>
       {{#each specs}}
         <li>
-          {{ name }}
+          {{> ctrl type='th-suite-item' spec=this }}
         </li>
       {{/each}}
-
 
     </ul>
   </div>

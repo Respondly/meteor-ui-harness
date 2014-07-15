@@ -5,5 +5,8 @@ Ctrl.define
     destroyed: ->
     model: ->
     api: {}
-    helpers: {}
-    events: {}
+    helpers:
+      spec: -> @options.spec
+
+    events:
+      'click': -> console.log '@', @
