@@ -1,7 +1,7 @@
 Ctrl.define
-  'th-suite-item':
+  'th-list-spec':
     init: ->
-      @spec = @options.spec
+      @spec = @options.data
 
     created: ->
     destroyed: ->

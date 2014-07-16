@@ -1,0 +1,28 @@
+<template name='th-list'>
+  <div class='th-list'>
+    <code>{{instance}}</code>
+
+
+    <ul class='th-items'>
+      {{#each items}}
+        <li>
+          {{#if isSuite}}
+            {{> ctrl type='th-list-suite' data=data }}
+
+          {{/if}}
+
+          {{#if isSpec}}
+            {{> ctrl type='th-list-spec' data=data }}
+          {{/if}}
+
+
+        </li>
+      {{/each}}
+    </ul>
+
+  </div>
+</template>
+
+
+
+
