@@ -1,17 +1,14 @@
 Ctrl.define
   'th-list-spec':
     init: ->
-      @spec = @options.data
-
     created: ->
     destroyed: ->
     model: ->
     api: {}
-    helpers:
-      spec: -> @spec
+    helpers: {}
 
     events:
       'click': ->
-        @spec.run @, ->
+        @data.run @, ->
           console.log 'RUN DONE'
           console.log ''
