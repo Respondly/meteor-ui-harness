@@ -1,12 +1,17 @@
 Ctrl.define
   'th-suite-item':
     init: ->
+      @spec = @options.spec
+
     created: ->
     destroyed: ->
     model: ->
     api: {}
     helpers:
-      spec: -> @options.spec
+      spec: -> @spec
 
     events:
-      'click': -> console.log '@', @
+      'click': ->
+        @spec.run @, ->
+          console.log 'RUN DONE'
+          console.log ''

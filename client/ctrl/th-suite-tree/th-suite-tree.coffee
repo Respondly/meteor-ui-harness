@@ -6,5 +6,5 @@ Ctrl.define
     model: ->
     api: {}
     helpers:
-      suite: -> BDD.suite.children[0]
+      suite: -> BDD.suite.children()[0]
     events: {}
