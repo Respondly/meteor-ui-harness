@@ -9,6 +9,6 @@ Ctrl.define
 
     events:
       'click': ->
-        @data.run @, ->
+        @data.run TestHarness.context, ->
           console.log 'RUN DONE'
           console.log ''

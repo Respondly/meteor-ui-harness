@@ -33,6 +33,7 @@ Package.on_use(function (api) {
   api.add_files('client/ctrl/th-suite-tree/th-suite-tree.coffee', 'client');
   api.add_files('client/ctrl/th-suite-tree/th-suite-tree.styl', 'client');
   api.add_files('client/css-mixins/th.import.styl', 'client');
+  api.add_files('client/invoke_context.coffee', 'client');
   api.add_files('client/main.coffee', 'client');
 
 });
