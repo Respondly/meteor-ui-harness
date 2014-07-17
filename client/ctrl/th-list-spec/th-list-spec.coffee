@@ -5,10 +5,17 @@ Ctrl.define
     destroyed: ->
     model: ->
     api: {}
-    helpers: {}
+    helpers:
+      invokeCount: (value) -> @prop 'invokeCount', value
 
     events:
       'click': ->
-        @data.run TestHarness.context, ->
-          console.log 'RUN DONE'
-          console.log ''
+        # Increment the count.
+        invokeCount = @helpers.invokeCount() ? 0
+        invokeCount += 1
+        @helpers.invokeCount(invokeCount)
+
+        # Invoke the method.
+        @data.run TestHarness.context, -> # Complete.
+
+

@@ -11,12 +11,17 @@ Ctrl.define
       Clears the host.
       ###
       reset: ->
+        # Dispose of the Blaze view.
+        if view = @blazeView
+          UI.remove(view.domrange)
+          console.log 'view', view
+
+        # Ensure the DOM element is empty.
         @find('.th-container').empty()
-        console.log 'TODO - Dispose of control'
 
 
       ###
-      Inserts an visual contorl into the Host.
+      Inserts a visual element into the [Host].
       @param ctrl:    The control to insert. Can be:
                       - Ctrl (definition)
                       - Ctrl (instance)
@@ -25,17 +30,26 @@ Ctrl.define
       @param options:
       ###
       insert: (ctrl, options = {}) ->
+        # Setup initial conditions.
         @api.reset()
-
-        console.log 'INSERT', @
-        console.log 'ctrl', ctrl
-
         el = @find('.th-container')
-        ctrl.insert(el)
+        callback = options.callback
 
-        console.log 'TODO', 'Position'
-        console.log 'TODO', 'Invoke callback'
-        console.log ''
+        # Ctrl.
+        if (ctrl instanceof Ctrl.Definition)
+          result = ctrl.insert(el, options.args)
+          result.ready -> callback?()
+          @blazeView = result.instance.__internal__.blazeView
+
+        # Template.
+        if ctrl.__proto__ is Template.prototype
+          tmpl = ctrl
+          domrange = UI.renderWithData(tmpl, options.args)
+          result = UI.insert(domrange, el[0])
+          # @blazeView = result.view
+
+          console.error 'TODO - Store a ref to the blaze view'
+
 
     helpers: {}
     events: {}
