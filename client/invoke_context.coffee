@@ -5,7 +5,7 @@ class Context
   ###
   Inserts the given control into the host.
   ###
-  load: (ctrl, options = {}) -> TestHarness.host.insert(ctrl, options)
+  load: (ctrl, options, callback) -> TestHarness.host.insert(ctrl, options, callback)
 
 
 
