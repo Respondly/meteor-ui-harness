@@ -1,6 +1,6 @@
 Ctrl.define
   'th-list-spec':
-    init: ->
+    init: -> @spec = @data
     created: ->
     destroyed: ->
     model: ->
@@ -16,6 +16,4 @@ Ctrl.define
         @helpers.invokeCount(invokeCount)
 
         # Invoke the method.
-        @data.run TestHarness, -> # Complete.
-
-
+        @spec.run { this:TestHarness, throw:true }, -> # Complete.
