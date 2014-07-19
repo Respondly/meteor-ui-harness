@@ -1,7 +1,7 @@
 Ctrl.define
   'th-host':
     init: ->
-      TestHarness.host = @ctrl
+      TH.host = @ctrl
 
     created: ->
     destroyed: ->
@@ -10,17 +10,11 @@ Ctrl.define
     api:
       ###
       Inserts a visual element into the [Host].
-      @param content: The control to insert. Can be:
-                      - Ctrl (definition)
-                      - Ctrl (instance)
-                      - DOM element
-                      - jQuery element
-                      - String (HTML)
-      @param options:
+      See: [TestHarness] object for parameter documentation.
       ###
       insert: (content, options = {}, callback) ->
         # Setup initial conditions.
-        @api.reset()
+        @api.clear()
         el = @find('.th-container')
 
         # Parameter fix-up.
@@ -28,16 +22,21 @@ Ctrl.define
           callback = options
           options = {}
 
+        done = -> callback?()
+
+        # Don't continue unless some content has been specified.
+        return done() unless content?
+
         # Ctrl.
         if (content instanceof Ctrl.Definition)
           result = content.insert(el, options.args)
-          result.ready -> callback?()
+          result.ready -> done()
           @blazeView = result.instance.__internal__.blazeView
 
         # Template.
         if content.__proto__ is Template.prototype
           domrange = UI.renderWithData(content, options.args)
-          domrange.view.onRendered -> callback?()
+          domrange.view.onRendered -> done()
           UI.insert(domrange, el[0])
           @blazeView = domrange.view
 
@@ -50,14 +49,14 @@ Ctrl.define
         # DOM element.
         if (content instanceof HTMLElement)
           el.append(content)
-          callback?()
+          done()
 
 
 
       ###
       Clears the host.
       ###
-      reset: ->
+      clear: ->
         # Dispose of the Blaze view.
         if view = @blazeView
           UI.remove(view.domrange)

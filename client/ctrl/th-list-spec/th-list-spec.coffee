@@ -16,6 +16,6 @@ Ctrl.define
         @helpers.invokeCount(invokeCount)
 
         # Invoke the method.
-        @data.run TestHarness.context, -> # Complete.
+        @data.run TestHarness, -> # Complete.
 
 
