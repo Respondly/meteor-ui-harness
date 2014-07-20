@@ -35,16 +35,41 @@ class TH.TestHarness
 
 
   ###
-  Clears the hosted control.
+  Removes the hosted control.
   ###
   clear: -> TH.host.clear()
 
+
+  ###
+  Resets the TestHarness to it's default state.
+  ###
+  reset: -> TH.host.reset()
 
 
   ###
   Updates the visual state of the test-harness.
   ###
   updateState: -> TH.host.updateState()
+
+
+  ###
+  Gets or sets the size of the hosted controls
+  @param value:
+           - 'width,height', eg: '20,30'
+           - 'fill'
+           - 'auto' (default)
+  ###
+  size: (value) -> TH.host.size(value)
+
+
+  ###
+  Gets or sets the alignment of the hosted control.
+  @param value: {x:y}
+           - 'center,middle' (default)
+           - x: left|center|right
+           - y: top|middle|bottom
+  ###
+  align: (value) -> TH.host.align(value)
 
 
 

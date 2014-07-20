@@ -1,10 +1,28 @@
+DEFAULT_SIZE = 'auto'
+DEFAULT_ALIGN = 'center,middle'
+
+
 Ctrl.define
   'th-host':
-    init: -> TH.host = @ctrl
+    init: ->
+      TH.host = @ctrl
+
+      @autorun =>
+          @api.size() # Hook into reactive callback.
+          @api.updateSize()
+
+      @autorun =>
+          @api.align() # Hook into reactive callback.
+          @api.updatePosition()
+
+
 
     api:
       elContainer: -> @find('.th-container')
       elContent: -> $(@api.elContainer()?.children()[0])
+
+      size: (value) -> @prop 'size', value, default:DEFAULT_SIZE
+      align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
 
 
       ###
@@ -22,7 +40,9 @@ Ctrl.define
           options = {}
 
         done = =>
-            @api.updateState()
+            @api.size(options.size ? DEFAULT_SIZE)
+            @api.align(options.align ? DEFAULT_ALIGN)
+            el.toggle(true)
             callback?()
 
         # Don't continue unless some content has been specified.
@@ -49,7 +69,6 @@ Ctrl.define
             blazeView:  domrange.view
             options:    options
 
-
         # String (HTML).
         content = $(content) if Object.isString(content)
 
@@ -68,7 +87,16 @@ Ctrl.define
 
 
       ###
-      Clears the host.
+      Resets the host to it's default state.
+      ###
+      reset: ->
+        @api.clear()
+        @api.size(DEFAULT_SIZE)
+        @api.align(DEFAULT_ALIGN)
+
+
+      ###
+      Removes the host.
       ###
       clear: ->
         # Dispose of the Blaze view.
@@ -84,20 +112,22 @@ Ctrl.define
         delete @_current
 
 
-
       ###
       Updates the visual state of the host.
       ###
       updateState: ->
-        # Setup initial conditions.
-        options = @_current?.options
-        return unless options
+        @api.updateSize()
+        @api.updatePosition()
+
+
+      ###
+      Updates the size of the hosted content.
+      ###
+      updateSize: ->
+        size = @api.size()
 
         if elContainer = @api.elContainer()
           elContent = @api.elContent()
-
-          # Set default values.
-          options.size ?= 'auto'
 
           # Reset.
           elContent.removeClass('th-fill')
@@ -106,40 +136,38 @@ Ctrl.define
           elContainer.css('height', '')
 
           # Adjust size.
-          switch options.size
+          switch size
             when 'auto' then # No-op.
             when 'fill'
               elContainer.addClass('th-fill')
               elContent.addClass('th-fill')
 
             else
-              if options.size?
-                size = Util.toSize(options.size) if options.size?
+              if size?
+                size = Util.toSize(size)
                 elContainer.css('width', "#{ size.width }px")
                 elContainer.css('height', "#{ size.height }px")
                 elContent.addClass('th-fill')
 
-          # Adjust position.
-          @api.updatePosition() unless options.size is 'fill'
-
-          # Finish up.
-          elContainer.toggle(true)
 
 
       ###
       Updates the positon of the hosted control.
       ###
       updatePosition: ->
-        if options = @_current?.options
-          if elContainer = @api.elContainer()
+        size  = @api.size()
+        align = @api.align()
 
-            # Reset CSS classes.
-            elContainer.removeClass 'th-left th-center th-right'
-            elContainer.removeClass 'th-top th-middle th-bottom'
-            elContainer.removeClass 'th-center-middle'
+        if elContainer = @api.elContainer()
 
-            # Update CSS classes.
-            align = Util.toAlignment(options.align ? 'center,middle')
+          # Reset CSS classes.
+          elContainer.removeClass 'th-left th-center th-right'
+          elContainer.removeClass 'th-top th-middle th-bottom'
+          elContainer.removeClass 'th-center-middle'
+
+          # Update CSS classes.
+          unless size is 'fill'
+            align = Util.toAlignment(align ? 'center,middle')
             if align.x is 'center' and align.y is 'middle'
               elContainer.addClass('th-center-middle')
             else
