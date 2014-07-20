@@ -1,5 +1,10 @@
 <template name='th-suite-tree'>
   <div class='th-suite-tree'>
+    <div class='th-header'>
+      {{#if hasParent}}
+        <span class='back-btn'>Back</span>
+      {{/if}}
+    </div>
     <div class='th-tree-outer'></div>
   </div>
 </template>

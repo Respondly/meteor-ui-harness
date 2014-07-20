@@ -8,10 +8,13 @@ Handles navigation through the hierarchy of lists.
 Ctrl.define
   'th-suite-tree':
     created: -> @api.insert(BDD.suite)
-    destroyed: -> @currentListCtrl()?.dispose()
+    destroyed: ->
+      @api.currentListCtrl()?.dispose()
+      @api.currentSuite(null)
 
     api:
-      currentListCtrl: (value) -> @prop 'currentSuite', value
+      currentSuite: (value) -> @prop 'currentSuite', value
+      currentListCtrl: (value) -> @prop 'currentListCtrl', value
       insertFromRight: (suite) -> @api.insert(suite, direction:'left')
       insertFromLeft: (suite) -> @api.insert(suite, direction:'right')
 
@@ -52,6 +55,7 @@ Ctrl.define
             onComplete = =>
                 @api.currentListCtrl()?.dispose()
                 @api.currentListCtrl(ctrl)
+                @api.currentSuite(suite)
                 callback?(ctrl)
 
             if isAnimated
@@ -62,5 +66,16 @@ Ctrl.define
 
             else
               onComplete() # No slide animation.
+
+
+
+    helpers:
+      hasParent: -> @api.currentSuite()?.parent?
+
+
+    events:
+      'click .back-btn': ->
+        if suite = @api.currentSuite()?.parent
+          @api.insertFromLeft(suite)
 
 
