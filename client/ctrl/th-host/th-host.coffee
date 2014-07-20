@@ -1,6 +1,6 @@
 DEFAULT_SIZE = 'auto'
 DEFAULT_ALIGN = 'center,middle'
-
+DEFAULT_MARGIN = null
 
 Ctrl.define
   'th-host':
@@ -8,11 +8,9 @@ Ctrl.define
       TH.host = @ctrl
 
       @autorun =>
-          @api.size() # Hook into reactive callback.
           @api.updateSize()
 
       @autorun =>
-          @api.align() # Hook into reactive callback.
           @api.updatePosition()
 
 
@@ -23,6 +21,7 @@ Ctrl.define
 
       size: (value) -> @prop 'size', value, default:DEFAULT_SIZE
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
+      margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
 
 
       ###
@@ -42,6 +41,7 @@ Ctrl.define
         done = =>
             @api.size(options.size ? DEFAULT_SIZE)
             @api.align(options.align ? DEFAULT_ALIGN)
+            @api.margin(options.margin ? DEFAULT_MARGIN)
             el.toggle(true)
             callback?()
 
@@ -125,6 +125,7 @@ Ctrl.define
       ###
       updateSize: ->
         size = @api.size()
+        margin = @api.margin()
 
         if elContainer = @api.elContainer()
           elContent = @api.elContent()
@@ -132,15 +133,21 @@ Ctrl.define
           # Reset.
           elContent.removeClass('th-fill')
           elContainer.removeClass('th-fill')
-          elContainer.css('width', '')
-          elContainer.css('height', '')
+          for attr in ['width', 'height', 'left', 'top', 'right', 'bottom']
+            elContainer.css(attr, '')
 
           # Adjust size.
           switch size
             when 'auto' then # No-op.
             when 'fill'
-              elContainer.addClass('th-fill')
               elContent.addClass('th-fill')
+              if margin? and margin isnt 'none'
+                margin = Util.toSpacing(margin)
+                for attr in ['left', 'top', 'right', 'bottom']
+                  elContainer.css(attr, "#{ margin[attr] }px")
+
+              else
+                elContainer.addClass('th-fill')
 
             else
               if size?
@@ -166,11 +173,13 @@ Ctrl.define
           elContainer.removeClass 'th-center-middle'
 
           # Update CSS classes.
-          unless size is 'fill'
-            align = Util.toAlignment(align ? 'center,middle')
-            if align.x is 'center' and align.y is 'middle'
-              elContainer.addClass('th-center-middle')
+          switch size
+            when 'fill' then # Ignore
             else
-              elContainer.addClass("th-#{ align.x } th-#{ align.y }")
+              align = Util.toAlignment(align ? 'center,middle')
+              if align.x is 'center' and align.y is 'middle'
+                elContainer.addClass('th-center-middle')
+              else
+                elContainer.addClass("th-#{ align.x } th-#{ align.y }")
 
 
