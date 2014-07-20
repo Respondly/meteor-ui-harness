@@ -50,18 +50,33 @@ Ctrl.define
           cssClass: revealClass
         result = @appendCtrl('th-list', '.th-tree-outer', data:args)
         result.ready =>
-            ctrl = result.ctrl
+            listCtrl = result.ctrl
 
             onComplete = =>
-                @api.currentListCtrl()?.dispose()
-                @api.currentListCtrl(ctrl)
-                @api.currentSuite(suite)
-                callback?(ctrl)
+                  # Store state.
+                  retiredListCtrl = @api.currentListCtrl()
+                  @api.currentListCtrl(listCtrl)
+                  @api.currentSuite(suite)
+
+                  retireList = (ctrl, done) ->
+                      return done() unless ctrl?
+                      ctrl.onHidden ->
+                          ctrl.dispose()
+                          done()
+
+                  initializeList = (ctrl, done) ->
+                      return done() unless ctrl?
+                      ctrl.onRevealed(done)
+
+                  # Finish up.
+                  retireList retiredListCtrl, ->
+                    initializeList listCtrl, ->
+                      callback?(listCtrl)
 
             if isAnimated
               # Remove the offset class.
-              Util.delay 100, =>
-                  ctrl.el().removeClass(revealClass)
+              Util.delay 0, =>
+                  listCtrl.el().removeClass(revealClass)
                   Util.delay SLIDE_DURATION, => onComplete()
 
             else

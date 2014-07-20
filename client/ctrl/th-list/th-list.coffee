@@ -4,6 +4,24 @@ Lists a set of specs and sub-suites.
 Ctrl.define
   'th-list':
     init: -> @suite = @data.suite
+
+    api:
+      ###
+      Invoked when the list has been revealed on screen.
+      ###
+      onRevealed: (callback) ->
+        beforeHandlers = @suite.getBefore()
+        BDD.Method.runMany beforeHandlers, { this:TestHarness, throw:true }, -> callback?()
+
+      ###
+      Invoked when the list has been taken off screen.
+      ###
+      onHidden: (callback) ->
+        afterHandlers = @suite.getAfter()
+        BDD.Method.runMany afterHandlers, { this:TestHarness, throw:true }, -> callback?()
+
+
+
     helpers:
       items: ->
         @suite.items.map (item) ->
