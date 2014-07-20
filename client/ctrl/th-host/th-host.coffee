@@ -6,13 +6,8 @@ Ctrl.define
   'th-host':
     init: ->
       TH.host = @ctrl
-
-      @autorun =>
-          @api.updateSize()
-
-      @autorun =>
-          @api.updatePosition()
-
+      @autorun => @api.updateSize()
+      @autorun => @api.updatePosition()
 
 
     api:
@@ -51,12 +46,13 @@ Ctrl.define
 
         # Ctrl.
         if (content instanceof Ctrl.Definition)
-          result = content.insert(el, options.args)
+          result = @appendCtrl(content, '.th-container', options.args)
+          # result = content.insert(el, options.args)
           result.ready -> done()
           @_current =
             type:       'ctrl'
-            ctrl:       result.instance.ctrl
-            blazeView:  result.instance.__internal__.blazeView
+            ctrl:       result.ctrl
+            blazeView:  result.ctrl.context.__internal__.blazeView
             options:    options
 
         # Template.
