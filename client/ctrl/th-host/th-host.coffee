@@ -42,6 +42,7 @@ Ctrl.define
             @api.size(options.size ? DEFAULT_SIZE)
             @api.align(options.align ? DEFAULT_ALIGN)
             @api.margin(options.margin ? DEFAULT_MARGIN)
+            @api.updateState()
             el.toggle(true)
             callback?()
 

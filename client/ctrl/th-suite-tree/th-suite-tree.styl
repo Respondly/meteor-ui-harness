@@ -2,10 +2,26 @@
 
 
 .th-suite-tree
+  HEADER_HEIGHT = 40px
+
   abs-pos 0, 0, null, 0
   width TEST_HARNESS_INDEX_WIDTH
   background rgba(black, 0.03)
 
   .th-tree-outer
-    position relative
-    margin 0 10px
+    abs-pos 0, HEADER_HEIGHT, 0, 0
+    background $RED
+
+
+  .th-list
+    abs-pos 0, 0, 0, 0
+    transition transform 0.2s
+
+    &.th-right
+      transform translateX(TEST_HARNESS_INDEX_WIDTH)
+
+    &.th-left
+      transform translateX(0 - TEST_HARNESS_INDEX_WIDTH)
+
+
+

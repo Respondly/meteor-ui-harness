@@ -3,14 +3,7 @@ Lists a set of specs and sub-suites.
 ###
 Ctrl.define
   'th-list':
-    init: ->
-      @suite = @options.suite
-
-    created: ->
-    destroyed: ->
-    model: ->
-    api: {}
-
+    init: -> @suite = @data.suite
     helpers:
       items: ->
         @suite.items.map (item) ->
@@ -19,6 +12,5 @@ Ctrl.define
                   isSpec:  (item instanceof BDD.Spec)
                   data: item
 
-    events: {}
 
 

@@ -1,9 +1,8 @@
 Ctrl.define
   'th-list-suite':
-    init: ->
-    created: ->
-    destroyed: ->
-    model: ->
-    api: {}
-    helpers: {}
-    events: {}
+    init: -> @suite = @data
+    events:
+      'click': ->
+        treeCtrl = @ctrl.parent.parent
+        treeCtrl.insertFromRight(@suite)
+
