@@ -1,8 +1,6 @@
 Ctrl.define
   'th-host':
     init: -> TH.host = @ctrl
-    created: ->
-    destroyed: ->
 
     api:
       elContainer: -> @find('.th-container')
@@ -94,33 +92,57 @@ Ctrl.define
         # Setup initial conditions.
         options = @_current?.options
         return unless options
-        if el = @api.elContent()
+
+        if elContainer = @api.elContainer()
+          elContent = @api.elContent()
 
           # Set default values.
-          options.size  ?= 'auto'
-          options.align ?= 'center,middle'
+          options.size ?= 'auto'
 
           # Reset.
-          el.removeClass('th-fill')
-          el.css('width', '')
-          el.css('height', '')
+          elContent.removeClass('th-fill')
+          elContainer.removeClass('th-fill')
+          elContainer.css('width', '')
+          elContainer.css('height', '')
 
           # Adjust size.
           switch options.size
             when 'auto' then # No-op.
-            when 'fill' then el.addClass 'th-fill'
+            when 'fill'
+              elContainer.addClass('th-fill')
+              elContent.addClass('th-fill')
+
             else
               if options.size?
                 size = Util.toSize(options.size) if options.size?
-                el.css('width', "#{ size.width }px")
-                el.css('height', "#{ size.height }px")
+                elContainer.css('width', "#{ size.width }px")
+                elContainer.css('height', "#{ size.height }px")
+                elContent.addClass('th-fill')
+
+          # Adjust position.
+          @api.updatePosition() unless options.size is 'fill'
 
           # Finish up.
-          @api.elContainer().toggle(true)
+          elContainer.toggle(true)
 
 
+      ###
+      Updates the positon of the hosted control.
+      ###
+      updatePosition: ->
+        if options = @_current?.options
+          if elContainer = @api.elContainer()
 
-    helpers: {}
-    events: {}
+            # Reset CSS classes.
+            elContainer.removeClass 'th-left th-center th-right'
+            elContainer.removeClass 'th-top th-middle th-bottom'
+            elContainer.removeClass 'th-center-middle'
+
+            # Update CSS classes.
+            align = Util.toAlignment(options.align ? 'center,middle')
+            if align.x is 'center' and align.y is 'middle'
+              elContainer.addClass('th-center-middle')
+            else
+              elContainer.addClass("th-#{ align.x } th-#{ align.y }")
 
 

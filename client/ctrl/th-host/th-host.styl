@@ -8,7 +8,34 @@
   box-shadow 0px 0px 30px 10px rgba(black ,0.10)
 
   .th-container
-    abs-pos 0, 0, 0, 0
+    position absolute
+    background orange
 
-    > .th-fill
-      abs-pos 0, 0, 0, 0
+    &.th-left
+      left 0px
+
+    &.th-center
+      left 50%
+      transform translateX(-50%)
+
+    &.th-right
+      right 0px
+
+    &.th-top
+      top 0px
+
+    &.th-middle
+      top 50%
+      transform translateY(-50%)
+
+    &.th-bottom
+      bottom 0px
+
+    &.th-center-middle
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+
+
+  .th-fill
+    abs-pos 0, 0, 0, 0
