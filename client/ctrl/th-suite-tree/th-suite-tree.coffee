@@ -29,6 +29,8 @@ Ctrl.define
       ###
       insert: (suite, options = {}, callback) ->
         # Setup initial conditions.
+        return if @isInserting
+        @isInserting = true
         isAnimated = options.direction?
         options.suite = suite
 
@@ -71,6 +73,7 @@ Ctrl.define
                   # Finish up.
                   retire retiredListCtrl, =>
                     initialize listCtrl, =>
+                      delete @isInserting
                       callback?() # Complete.
 
             if isAnimated
