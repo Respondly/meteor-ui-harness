@@ -89,7 +89,9 @@ Ctrl.define
     helpers:
       hasParent: -> @api.currentSuite()?.parent?
       cssClasses: -> 'th-has-parent' if @helpers.hasParent()
-      title: -> @api.currentSuite()?.name ? 'Test Harness'
+      title: ->
+        @api.currentSuite()?.name ? 'Test Harness'
+        # 'Test Harness'
 
 
 
