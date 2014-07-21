@@ -35,6 +35,8 @@ Package.on_use(function (api) {
   api.add_files('client/css-mixins/th.import.styl', 'client');
   api.add_files('client/api.js', 'client');
   api.add_files('client/test-harness.coffee', 'client');
+  api.add_files('images/suite.png', ['client', 'server']);
+  api.add_files('images/suite@2x.png', ['client', 'server']);
 
 });
 

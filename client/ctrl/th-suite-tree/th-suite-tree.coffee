@@ -58,27 +58,26 @@ Ctrl.define
                   @api.currentListCtrl(listCtrl)
                   @api.currentSuite(suite)
 
-                  retireList = (ctrl, done) ->
+                  retire = (ctrl, done) ->
                       return done() unless ctrl?
                       ctrl.onHidden ->
                           ctrl.dispose()
                           done()
 
-                  initializeList = (ctrl, done) ->
+                  initialize = (ctrl, done) ->
                       return done() unless ctrl?
                       ctrl.onRevealed(done)
 
                   # Finish up.
-                  retireList retiredListCtrl, ->
-                    initializeList listCtrl, ->
-                      callback?(listCtrl)
+                  retire retiredListCtrl, ->
+                    initialize listCtrl, ->
+                      callback?() # Complete.
 
             if isAnimated
               # Remove the offset class.
               Util.delay 0, =>
                   listCtrl.el().removeClass(revealClass)
                   Util.delay SLIDE_DURATION, => onComplete()
-
             else
               onComplete() # No slide animation.
 

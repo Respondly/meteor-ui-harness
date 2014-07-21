@@ -21,7 +21,6 @@ Ctrl.define
         BDD.Method.runMany afterHandlers, { this:TestHarness, throw:true }, -> callback?()
 
 
-
     helpers:
       items: ->
         @suite.items.map (item) ->
