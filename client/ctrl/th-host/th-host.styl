@@ -14,8 +14,7 @@
       left 0px
 
     &.th-center
-      left 50%
-      transform translateX(-50%)
+      abs-center-x()
 
     &.th-right
       right 0px
@@ -24,17 +23,15 @@
       top 0px
 
     &.th-middle
-      top 50%
-      transform translateY(-50%)
+      abs-center-y()
 
     &.th-bottom
       bottom 0px
 
     &.th-center-middle
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
+      abs-center-xy()
 
 
   .th-fill
     abs-pos 0, 0, 0, 0
+

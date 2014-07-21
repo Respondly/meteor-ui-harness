@@ -19,23 +19,27 @@
     height HEADER_HEIGHT
     .th-back-btn
       cursor pointer
-      abs-pos 5, 5, null, 5
-      width 30px
-      background rgba(black, 0.1)
+      abs-pos 0, 0, null, 0
+      width 35px
       opacity 0
       transform translateX(-35px)
       transition transform DURATION, opacity DURATION
+      .th-ico
+        package-image('test-harness', 'nav_back.png', 13, 18)
+
+    .th-titles
+      abs-pos 10, 10, 10, null
+      height 26px
+      transition left DURATION
 
     .th-title
+      abs-pos 0, 0, 0, 0
       ellipsis()
       text-align center
       font-weight bold
       text-shadow 0px 1px white
       font-size 18px
       opacity 0.6
-      margin 0 10px
-      margin-top 10px
-      transition margin DURATION, padding DURATION
 
 
   > .th-tree-outer
@@ -54,9 +58,8 @@
 
   &.th-has-parent
     .th-header
-      .th-title
-        margin-left 40px
-        padding-right 30px
+      .th-titles
+        left 40px
       .th-back-btn
         transform translateX(0px)
         opacity 1
