@@ -2,15 +2,13 @@
   <div class='th-list {{ data.cssClass }}'>
     <ul class='th-items'>
       {{#each items}}
-        <li>
-          {{#if isSuite}}
-            {{> ctrl type='th-list-suite' data=data }}
-          {{/if}}
+        {{#if isSuite}}
+          {{> ctrl type='th-list-suite' data=data }}
+        {{/if}}
 
-          {{#if isSpec}}
-            {{> ctrl type='th-list-spec' data=data }}
-          {{/if}}
-        </li>
+        {{#if isSpec}}
+          {{> ctrl type='th-list-spec' data=data }}
+        {{/if}}
       {{/each}}
     </ul>
   </div>

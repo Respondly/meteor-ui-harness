@@ -3,33 +3,46 @@
 
 .th-suite-tree
   HEADER_HEIGHT = 40px
+  BG_LIGHT = #e0e4ea
+  BG_DARK = #d0d7e0
 
   abs-pos 0, 0, null, 0
   width TEST_HARNESS_INDEX_WIDTH
-  background rgba(black, 0.03)
 
   > .th-header
-    background rgba(black, 0.05)
-    border-bottom solid 1px rgba(black, 0.1)
+    background BG_DARK
+    border-bottom solid 1px rgba(black, 0.15)
     abs-pos 0, 0, 0, null
     height HEADER_HEIGHT
-    .back-btn
+    .th-back-btn
       cursor pointer
-
+      abs-pos 5, 5, null, 5
+      width 30px
+      background rgba(black, 0.1)
+      opacity 0
+      transform translateX(-35px)
+      DURATION = 0.2s
+      transition transform DURATION, opacity DURATION
 
   > .th-tree-outer
     abs-pos 0, HEADER_HEIGHT + 1, 0, 0
-
+    background linear-gradient(top, BG_LIGHT, BG_DARK)
+    border-top solid 1px rgba(white, 0.8)
 
   .th-list
     abs-pos 0, 0, 0, 0
     transition transform 0.2s
-
     &.th-right
       transform translateX(TEST_HARNESS_INDEX_WIDTH)
-
     &.th-left
       transform translateX(0 - TEST_HARNESS_INDEX_WIDTH)
+
+
+  &.th-has-parent
+    .th-header
+      .th-back-btn
+        transform translateX(0px)
+        opacity 1
 
 
 

@@ -51,12 +51,12 @@ Ctrl.define
         result = @appendCtrl('th-list', '.th-tree-outer', data:args)
         result.ready =>
             listCtrl = result.ctrl
+            @api.currentSuite(suite)
 
             onComplete = =>
                   # Store state.
                   retiredListCtrl = @api.currentListCtrl()
                   @api.currentListCtrl(listCtrl)
-                  @api.currentSuite(suite)
 
                   retire = (ctrl, done) ->
                       return done() unless ctrl?
@@ -69,8 +69,8 @@ Ctrl.define
                       ctrl.onRevealed(done)
 
                   # Finish up.
-                  retire retiredListCtrl, ->
-                    initialize listCtrl, ->
+                  retire retiredListCtrl, =>
+                    initialize listCtrl, =>
                       callback?() # Complete.
 
             if isAnimated
@@ -85,10 +85,15 @@ Ctrl.define
 
     helpers:
       hasParent: -> @api.currentSuite()?.parent?
+      cssClasses: ->
+        css = ''
+        css += 'th-has-parent' if @helpers.hasParent()
+        console.log 'css', css
+        css
 
 
     events:
-      'click .back-btn': ->
+      'click .th-back-btn': ->
         if suite = @api.currentSuite()?.parent
           @api.insertFromLeft(suite)
 
