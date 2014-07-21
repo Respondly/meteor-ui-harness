@@ -37,10 +37,12 @@ Package.on_use(function (api) {
   api.add_files('client/api.js', 'client');
   api.add_files('client/common.styl', 'client');
   api.add_files('client/test-harness.coffee', 'client');
-  api.add_files('images/nav_back.png', ['client', 'server']);
-  api.add_files('images/nav_back@2x.png', ['client', 'server']);
-  api.add_files('images/nav_child.png', ['client', 'server']);
-  api.add_files('images/nav_child@2x.png', ['client', 'server']);
+  api.add_files('images/nav-back-hover.png', ['client', 'server']);
+  api.add_files('images/nav-back-hover@2x.png', ['client', 'server']);
+  api.add_files('images/nav-back.png', ['client', 'server']);
+  api.add_files('images/nav-back@2x.png', ['client', 'server']);
+  api.add_files('images/nav-child.png', ['client', 'server']);
+  api.add_files('images/nav-child@2x.png', ['client', 'server']);
   api.add_files('images/suite.png', ['client', 'server']);
   api.add_files('images/suite@2x.png', ['client', 'server']);
 

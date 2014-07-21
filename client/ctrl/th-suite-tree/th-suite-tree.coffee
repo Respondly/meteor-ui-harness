@@ -46,6 +46,8 @@ Ctrl.define
         if current = @api.currentListCtrl()
           current.el().addClass(hideClass)
 
+        fadeTitle = (toggle) => @find('.th-title').toggleClass('th-fade-out', not toggle)
+
         # Insert the new list.
         args =
           suite: suite
@@ -74,12 +76,15 @@ Ctrl.define
                   retire retiredListCtrl, =>
                     initialize listCtrl, =>
                       delete @isInserting
+                      @helpers.title(suite.name ? 'Test Harness')
+                      Util.delay 10, => fadeTitle(true)
                       callback?() # Complete.
 
             if isAnimated
               # Remove the offset class.
               Util.delay 0, =>
                   listCtrl.el().removeClass(revealClass)
+                  fadeTitle(false)
                   Util.delay SLIDE_DURATION, => onComplete()
             else
               onComplete() # No slide animation.
@@ -89,10 +94,7 @@ Ctrl.define
     helpers:
       hasParent: -> @api.currentSuite()?.parent?
       cssClasses: -> 'th-has-parent' if @helpers.hasParent()
-      title: ->
-        @api.currentSuite()?.name ? 'Test Harness'
-        # 'Test Harness'
-
+      title: (value) -> @prop 'title', value
 
 
     events:
