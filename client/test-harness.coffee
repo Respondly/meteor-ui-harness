@@ -1,4 +1,5 @@
 #= require ./api.js
+@expect = chai.expect
 
 
 ###

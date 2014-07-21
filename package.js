@@ -8,7 +8,8 @@ Package.on_use(function (api) {
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use(['coffeescript', 'sugar']);
-  api.use(['util', 'bdd', 'ctrl', 'stylus-compiler']);
+  api.use(['util', 'bdd', 'ctrl', 'stylus-compiler', 'chai']);
+  api.export('chai');
   api.export('TestHarness');
   api.export(['describe', 'it', 'before', 'beforeEach', 'afterEach', 'after']);
 
