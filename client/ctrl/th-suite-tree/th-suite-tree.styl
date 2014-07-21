@@ -5,6 +5,7 @@
   HEADER_HEIGHT = 40px
   BG_LIGHT = #e0e4ea
   BG_DARK = #d0d7e0
+  DURATION = 0.2s
 
   abs-pos 0, 0, null, 0
   width $TH_INDEX_WIDTH
@@ -23,8 +24,19 @@
       background rgba(black, 0.1)
       opacity 0
       transform translateX(-35px)
-      DURATION = 0.2s
       transition transform DURATION, opacity DURATION
+
+    .th-title
+      ellipsis()
+      text-align center
+      font-weight bold
+      text-shadow 0px 1px white
+      font-size 18px
+      opacity 0.6
+      margin 0 10px
+      margin-top 10px
+      transition margin DURATION, padding DURATION
+
 
   > .th-tree-outer
     abs-pos 0, HEADER_HEIGHT + 1, 0, 0
@@ -42,6 +54,9 @@
 
   &.th-has-parent
     .th-header
+      .th-title
+        margin-left 40px
+        padding-right 30px
       .th-back-btn
         transform translateX(0px)
         opacity 1
