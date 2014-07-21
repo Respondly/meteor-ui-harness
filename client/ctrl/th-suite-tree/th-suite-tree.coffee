@@ -85,12 +85,7 @@ Ctrl.define
 
     helpers:
       hasParent: -> @api.currentSuite()?.parent?
-      cssClasses: ->
-        css = ''
-        css += 'th-has-parent' if @helpers.hasParent()
-        console.log 'css', css
-        css
-
+      cssClasses: -> 'th-has-parent' if @helpers.hasParent()
 
     events:
       'click .th-back-btn': ->
