@@ -1,8 +1,7 @@
 <template name='th-list-spec'>
-  <div class='th-list-spec'>
-
+  <div class='th-list-spec {{ cssClasses }}'>
+    <div class='th-bullet'></div>
     <div class='th-name'>{{ data.name }}</div>
-    <div class='th-count'>{{ invokeCount }}</div>
-
+    <div class='th-count'>{{ count }}</div>
   </div>
 </template>

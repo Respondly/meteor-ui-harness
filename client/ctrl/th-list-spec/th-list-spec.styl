@@ -4,10 +4,21 @@
 .th-list-spec
   position relative
   cursor pointer
-  padding-left 18px
+  padding-left 20px
+
+  .th-bullet
+    abs-pos 3, 6, null, null
+    size 8, 8
+    background rgba(black, 0.1)
+    border-radius 50%
 
   .th-name
     margin-right 20px
 
   .th-count
     abs-pos null, 0, 0, 0
+
+
+  &.th-has-count
+    .th-bullet
+      background linear-gradient(top, #a7c7ec, #6984d5)
