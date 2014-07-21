@@ -7,7 +7,8 @@
   BG_DARK = #d0d7e0
 
   abs-pos 0, 0, null, 0
-  width TEST_HARNESS_INDEX_WIDTH
+  width $TH_INDEX_WIDTH
+  font-family $TH_SANS
 
   > .th-header
     background BG_DARK
@@ -33,9 +34,9 @@
     abs-pos 0, 0, 0, 0
     transition transform 0.2s
     &.th-right
-      transform translateX(TEST_HARNESS_INDEX_WIDTH)
+      transform translateX($TH_INDEX_WIDTH)
     &.th-left
-      transform translateX(0 - TEST_HARNESS_INDEX_WIDTH)
+      transform translateX(0 - $TH_INDEX_WIDTH)
 
 
   &.th-has-parent
