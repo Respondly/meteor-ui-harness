@@ -43,6 +43,8 @@ Package.on_use(function (api) {
   api.add_files('images/nav-back-hover@2x.png', ['client', 'server']);
   api.add_files('images/nav-back.png', ['client', 'server']);
   api.add_files('images/nav-back@2x.png', ['client', 'server']);
+  api.add_files('images/nav-child-hover.png', ['client', 'server']);
+  api.add_files('images/nav-child-hover@2x.png', ['client', 'server']);
   api.add_files('images/nav-child.png', ['client', 'server']);
   api.add_files('images/nav-child@2x.png', ['client', 'server']);
   api.add_files('images/suite.png', ['client', 'server']);

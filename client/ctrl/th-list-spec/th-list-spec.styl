@@ -5,6 +5,7 @@
   position relative
   padding-left 20px
 
+
   .th-bullet
     abs-pos 3, 6, null, null
     size 8, 8
@@ -21,7 +22,24 @@
 
   &.th-has-count
     .th-bullet
-      background linear-gradient(top, #a7c7ec, #6984d5)
+      background $TH_BLUE_GRADIENT
 
     .th-count-badge
       display block
+
+
+
+// ------------------------------------------------------
+
+
+
+.th-list
+  li
+    .th-spec-hover
+      abs-pos 0, 0, null, 0
+      width 4px
+      background linear-gradient(top, lighten($TH_LINK_BLUE, 20%), $TH_LINK_BLUE)
+      display none
+    &:hover
+      .th-spec-hover
+        display block
