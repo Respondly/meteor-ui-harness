@@ -26,7 +26,7 @@ Ctrl.define
       insert: (content, options = {}, callback) ->
         # Setup initial conditions.
         @api.clear()
-        el = @api.elContainer()
+        elContainer = @api.elContainer()
 
         # Parameter fix-up.
         if Object.isFunction(options)
@@ -34,12 +34,29 @@ Ctrl.define
           options = {}
 
         done = =>
-            @api.size(options.size ? DEFAULT_SIZE)
-            @api.align(options.align ? DEFAULT_ALIGN)
-            @api.margin(options.margin ? DEFAULT_MARGIN)
-            @api.updateState()
-            el.toggle(true)
-            callback?()
+              # Update visual state.
+              @api.size(options.size ? DEFAULT_SIZE)
+              @api.align(options.align ? DEFAULT_ALIGN)
+              @api.margin(options.margin ? DEFAULT_MARGIN)
+              @api.updateState()
+
+              # Store global state.
+              # console.log 'DONE'
+              # console.log '@api.elContent()?[0]', @api.elContent()?[0]
+              TestHarness.el(@api.elContent())
+
+              # console.log 'TestHarness.el()', TestHarness.el()
+
+              # console.log '@_current.ctrl', @_current.ctrl
+
+              # console.log '-------------------------------------------'
+
+
+              TestHarness.ctrl(@_current.ctrl ? null)
+              elContainer.toggle(true)
+
+              # Finish up.
+              callback?()
 
         # Don't continue unless some content has been specified.
         return done() unless content?
@@ -47,7 +64,6 @@ Ctrl.define
         # Ctrl.
         if (content instanceof Ctrl.Definition)
           result = @appendCtrl(content, '.th-container', options.args)
-          # result = content.insert(el, options.args)
           result.ready -> done()
           @_current =
             type:       'ctrl'
@@ -59,7 +75,7 @@ Ctrl.define
         if content.__proto__ is Template.prototype
           domrange = UI.renderWithData(content, options.args)
           domrange.view.onRendered -> done()
-          UI.insert(domrange, el[0])
+          UI.insert(domrange, elContainer[0])
           @_current =
             type:       'tmpl'
             tmpl:       content
@@ -74,7 +90,7 @@ Ctrl.define
 
         # DOM element.
         if (content instanceof HTMLElement)
-          el.append(content)
+          elContainer.append(content)
           @_current =
             type:       'element'
             el:         $(content)
@@ -101,11 +117,13 @@ Ctrl.define
           UI.remove(view.domrange)
 
         # Ensure the DOM element is empty.
-        el = @api.elContainer()
-        el.empty()
-        el.toggle(false)
+        elContainer = @api.elContainer()
+        elContainer.empty()
+        elContainer.toggle(false)
 
         # Finish up.
+        TestHarness.el(null)
+        TestHarness.ctrl(null)
         delete @_current
 
 

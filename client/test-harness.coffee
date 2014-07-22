@@ -1,5 +1,10 @@
-#= require ./api.js
+#= require ./internal-api.js
 @expect = chai.expect
+
+hash = new ReactiveHash()
+
+
+# ----------------------------------------------------------------------
 
 
 ###
@@ -7,9 +12,22 @@ Root API for the TestHarness
 ###
 class TH.TestHarness
   ###
-  Retrieves the element for the content that is currently under test.
+  REACTIVE Gets or sets the current [Suite].
   ###
-  el: -> $(TH.host?.elContainer()?.children()?[0])
+  suite: (value) -> hash.prop 'suite', value, default:null
+
+
+  ###
+  REACTIVE Retrieves the element for the content that is currently under test.
+  ###
+  el: (value) -> hash.prop 'el', value, default:null
+
+
+  ###
+  REACTIVE Retrieves the Ctrl that is currently under test (if exists).
+  ###
+  ctrl: (value) -> hash.prop 'ctrl', value, default:null
+
 
 
   ###
@@ -86,10 +104,12 @@ class TH.TestHarness
 
 
 
-
-
 # EXPORT ----------------------------------------------------------------------
 
 
-
 TestHarness = new TH.TestHarness()
+
+
+
+
+

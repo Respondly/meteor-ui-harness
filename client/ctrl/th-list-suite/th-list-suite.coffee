@@ -3,7 +3,6 @@ Ctrl.define
     init: -> @suite = @data
 
     events:
-      'click': ->
-        treeCtrl = @ctrl.parent.parent
-        treeCtrl.insertFromRight(@suite)
+      'click': -> TH.index.insertFromRight(@suite)
+
 

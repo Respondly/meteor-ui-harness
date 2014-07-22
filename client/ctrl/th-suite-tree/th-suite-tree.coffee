@@ -7,16 +7,18 @@ Handles navigation through the hierarchy of lists.
 ###
 Ctrl.define
   'th-suite-tree':
+    init: -> TH.index = @ctrl
     created: -> @api.insert(BDD.suite)
     destroyed: ->
       @api.currentListCtrl()?.dispose()
-      @api.currentSuite(null)
+      TestHarness.suite(null)
+
 
     api:
       currentSuite: (value) -> @prop 'currentSuite', value
       currentListCtrl: (value) -> @prop 'currentListCtrl', value
-      insertFromRight: (suite) -> @api.insert(suite, direction:'left')
-      insertFromLeft: (suite) -> @api.insert(suite, direction:'right')
+      insertFromRight: (suite, callback) -> @api.insert(suite, direction:'left', callback)
+      insertFromLeft: (suite, callback) -> @api.insert(suite, direction:'right', callback)
 
 
 
@@ -55,7 +57,7 @@ Ctrl.define
         result = @appendCtrl('th-list', '.th-tree-outer', data:args)
         result.ready =>
             listCtrl = result.ctrl
-            @api.currentSuite(suite)
+            TestHarness.suite(suite)
 
             onComplete = =>
                   # Store state.
@@ -92,14 +94,15 @@ Ctrl.define
 
 
     helpers:
-      hasParent: -> @api.currentSuite()?.parent?
+      hasParent: -> TestHarness.suite()?.parent?
       cssClasses: -> 'th-has-parent' if @helpers.hasParent()
       title: (value) -> @prop 'title', value
 
 
     events:
-      'click .th-back-btn': ->
-        if suite = @api.currentSuite()?.parent
-          @api.insertFromLeft(suite)
+      'click .th-back-btn': -> TH.gotoParentSuite()
+
+
+
 
 
