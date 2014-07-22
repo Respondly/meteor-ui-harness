@@ -16,6 +16,12 @@ Ctrl.define
       # Load the tree with the initial Suite.
       @api.insert(suite ? BDD.suite)
 
+      # Mark as loaded
+      # NB: This prevents the [<] arrow from animating
+      #     on first load.
+      Util.delay =>
+        @el().addClass('th-loaded')
+
 
     destroyed: ->
       @api.currentListCtrl()?.dispose()

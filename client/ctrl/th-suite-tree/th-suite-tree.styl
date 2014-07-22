@@ -20,7 +20,6 @@
       abs-pos 0, 0, null, 0
       width 35px
       opacity 0
-      transform translateX(-35px)
       transition transform DURATION, opacity DURATION
       .th-ico
         package-image('test-harness', 'nav-back.png', 13, 18)
@@ -59,6 +58,17 @@
       transform translateX(0 - $TH_INDEX_WIDTH)
 
 
+  // ------------------------------------------------------
+
+
+  &.th-loaded
+    > .th-header
+      .th-back-btn
+        transform translateX(-35px)
+
+
+  // ------------------------------------------------------
+
   &.th-has-parent
     .th-header
       .th-titles
@@ -68,6 +78,5 @@
       .th-back-btn
         transform translateX(0px)
         opacity 1
-
 
 
