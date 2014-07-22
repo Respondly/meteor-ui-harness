@@ -8,7 +8,15 @@ Handles navigation through the hierarchy of lists.
 Ctrl.define
   'th-suite-tree':
     init: -> TH.index = @ctrl
-    created: -> @api.insert(BDD.suite)
+    created: ->
+      # Retrieve the Suite that was last loaded from [localStorage].
+      if uid = TH.currentSuiteUid()
+        suite = BDD.suite.findOne(uid:uid)
+
+      # Load the tree with the initial Suite.
+      @api.insert(suite ? BDD.suite)
+
+
     destroyed: ->
       @api.currentListCtrl()?.dispose()
       TestHarness.suite(null)
