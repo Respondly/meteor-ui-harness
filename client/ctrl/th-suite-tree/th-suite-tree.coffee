@@ -92,7 +92,7 @@ Ctrl.define
                   retire retiredListCtrl, =>
                     initialize listCtrl, =>
                       delete @isInserting
-                      @helpers.title(suite.name ? 'Test Harness')
+                      @helpers.title(suite.name ? 'UI Harness')
                       Util.delay 10, => fadeTitle(true)
                       callback?() # Complete.
 
