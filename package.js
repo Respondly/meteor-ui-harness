@@ -56,7 +56,7 @@ Package.on_use(function (api) {
 
 Package.on_test(function (api) {
   api.use(['munit', 'coffeescript', 'chai']);
-  api.use('test-harness');
+  api.use('ui-harness');
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('tests/shared/_init.coffee', ['client', 'server']);
