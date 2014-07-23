@@ -10,7 +10,7 @@ When running for the first time:
 
 # Run tests
 
-    mrt test-packages test-harness
+    mrt test-packages ui-harness
 
 
 
