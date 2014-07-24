@@ -7,7 +7,7 @@ Handles navigation through the hierarchy of lists.
 ###
 Ctrl.define
   'th-suite-tree':
-    init: -> TH.index = @ctrl
+    init: -> # TH.index = @ctrl
     created: ->
       # Retrieve the Suite that was last loaded from [localStorage].
       if uid = TH.currentSuiteUid()
@@ -114,7 +114,12 @@ Ctrl.define
 
 
     events:
-      'click .th-back-btn': -> TH.gotoParentSuite()
+      'click .th-back-btn': (e) ->
+        if e.metaKey
+          TH.gotoRootSuite()
+        else
+          TH.gotoParentSuite()
+
 
 
 
