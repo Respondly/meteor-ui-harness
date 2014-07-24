@@ -1,9 +1,4 @@
 Ctrl.define
   'test-harness':
-    init: ->
-    created: ->
-    destroyed: ->
-    model: ->
-    api: {}
-    helpers: {}
-    events: {}
+    created: -> TH.index = @children.index.ctrl
+
