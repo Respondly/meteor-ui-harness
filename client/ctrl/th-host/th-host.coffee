@@ -33,6 +33,15 @@ Ctrl.define
           callback = options
           options = {}
 
+        # Attempt to match strings with Ctrl/Template.
+        if Object.isString(content)
+          unless content.startsWith('<')
+            if ctrl = Ctrl.defs[content]
+              content = ctrl
+            else
+              content = Template[content] if Template[content]?
+
+
         done = =>
               # Update visual state.
               @api.size(options.size ? DEFAULT_SIZE)
@@ -41,17 +50,7 @@ Ctrl.define
               @api.updateState()
 
               # Store global state.
-              # console.log 'DONE'
-              # console.log '@api.elContent()?[0]', @api.elContent()?[0]
               TestHarness.el(@api.elContent())
-
-              # console.log 'TestHarness.el()', TestHarness.el()
-
-              # console.log '@_current.ctrl', @_current.ctrl
-
-              # console.log '-------------------------------------------'
-
-
               TestHarness.ctrl(@_current.ctrl ? null)
               elContainer.toggle(true)
 
