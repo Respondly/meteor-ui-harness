@@ -103,6 +103,34 @@ class TH.TestHarness
   margin: (value) -> TH.host.margin(value)
 
 
+  ###
+  Toggles a boolean property method on the ctrl.
+  @param attr:    The name of the property.
+  @param value:   (optional) The boolean value to set.
+                             Calculates the opposite if not specified.
+  ###
+  toggle: (attr, value) ->
+    if ctrl = @ctrl()
+      # Ensure the property exists.
+      unless Object.isFunction(ctrl[attr])
+        throw new Error("The control does not have a property named '#{ attr }'.")
+
+      # Determine the new toggled value.
+      unless value?
+        value = ctrl[attr]()
+        value = true if (not value?) or Util.isBlank(value)
+        unless Object.isBoolean(value)
+          throw new Error("Cannot toggle because the current '#{ attr }' value is not a boolean. (Value: #{ value })")
+        value = not value
+
+      # Update the property.
+      ctrl[attr](value)
+      value
+
+
+
+
+
 
 # EXPORT ----------------------------------------------------------------------
 
