@@ -1,10 +1,6 @@
 Ctrl.define
   'th-list-spec':
     init: -> @spec = @data
-    # created: ->
-    # destroyed: ->
-    # model: ->
-    # api: {}
     helpers:
       count: (value) -> @prop 'count', value
       cssClasses: ->
@@ -23,4 +19,3 @@ Ctrl.define
         # Invoke the method.
         @spec.run { this:TestHarness, throw:true }, -> # Complete.
 
-        console.log '@el()[0]', @el()[0]
