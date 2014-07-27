@@ -31,6 +31,7 @@ Ctrl.define
     api:
       currentSuite: (value) -> @prop 'currentSuite', value
       currentListCtrl: (value) -> @prop 'currentListCtrl', value
+
       insertFromRight: (suite, callback) -> @api.insert(suite, direction:'left', callback)
       insertFromLeft: (suite, callback) -> @api.insert(suite, direction:'right', callback)
 
