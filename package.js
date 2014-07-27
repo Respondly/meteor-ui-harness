@@ -13,7 +13,7 @@ Package.on_use(function (api) {
   api.export('TestHarness');
   api.export(['describe', 'it', 'before', 'beforeEach', 'afterEach', 'after']);
 
-  // Generated with: github.com/philcockfield/meteor-package-loader
+  // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/api.coffee', ['client', 'server']);
   api.add_files('client/ctrl/th/test-harness.html', 'client');
   api.add_files('client/ctrl/th-host/th-host.html', 'client');
@@ -58,7 +58,7 @@ Package.on_test(function (api) {
   api.use(['munit', 'coffeescript', 'chai']);
   api.use('ui-harness');
 
-  // Generated with: github.com/philcockfield/meteor-package-loader
+  // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('tests/shared/_init.coffee', ['client', 'server']);
   api.add_files('tests/shared/test-harness-test.coffee', ['client', 'server']);
 
