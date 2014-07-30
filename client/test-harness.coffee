@@ -132,6 +132,19 @@ class TH.TestHarness
 
 
   ###
+  Provides a convenient way of setting a timeout.
+
+  @param msecs:  The milliseconds to delay.
+  @param func:   The function to invoke.
+
+  @returns  The timer handle.
+            Use the [stop] method to cancel the timer.
+  ###
+  delay: (msecs, func) -> Util.delay(msecs, func)
+
+
+
+  ###
   Generates a string of Lorem Ipsum
   @param options: The number of words, or an object:
                     - words:        The total number of words to return.
