@@ -2,7 +2,7 @@
   "name": "ui-harness",
   "description": "A visual test harness for UI controls.",
   "homepage": "",
-  "author": "Phil Cockfield (https://github.com/philcockfield)",
+  "author": "Respondly (https://github.com/Respondly)",
   "version": "0.0.1",
   "git": "",
   "packages": {
