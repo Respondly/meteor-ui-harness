@@ -34,6 +34,7 @@ Package.on_use(function (api) {
   api.add_files('client/ctrl/th-suite-tree/th-suite-tree.coffee', 'client');
   api.add_files('client/ctrl/th-suite-tree/th-suite-tree.styl', 'client');
   api.add_files('client/css-mixins/th.import.styl', 'client');
+  api.add_files('client/bdd.coffee', 'client');
   api.add_files('client/common.styl', 'client');
   api.add_files('client/internal-api.js', 'client');
   api.add_files('client/internal-api.coffee', 'client');
