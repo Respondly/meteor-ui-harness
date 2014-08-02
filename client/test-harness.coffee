@@ -190,8 +190,16 @@ class TH.TestHarness
     result
 
 
-
-
+  ###
+  Retrieves the computed CSS style on the given element.
+  @param el:    The element to examine.
+  @param prop:  The name of the property/attribute.
+  @returns string.
+  ###
+  getStyle: (el, prop) ->
+    return unless el
+    el = el[0] if el.jquery
+    window.getComputedStyle(el, null).getPropertyValue(prop)
 
 
 
