@@ -7,10 +7,9 @@ Handles navigation through the hierarchy of lists.
 ###
 Ctrl.define
   'th-suite-tree':
-    init: -> # TH.index = @ctrl
     created: ->
       # Retrieve the Suite that was last loaded from [localStorage].
-      if uid = TH.currentSuiteUid()
+      if uid = LOCAL.currentSuiteUid()
         suite = BDD.suite.findOne(uid:uid)
 
       # Load the tree with the initial Suite.
@@ -117,9 +116,9 @@ Ctrl.define
     events:
       'click .th-back-btn': (e) ->
         if e.metaKey
-          TH.gotoRootSuite()
+          LOCAL.gotoRootSuite()
         else
-          TH.gotoParentSuite()
+          LOCAL.gotoParentSuite()
 
 
 

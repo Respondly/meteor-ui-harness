@@ -1,26 +1,26 @@
-#= require ./internal-api.js
+#= require ./local-api.js
 
 
 ###
 Loads the parent suite into the tree index.
 ###
-TH.gotoParentSuite = (callback) ->
+LOCAL.gotoParentSuite = (callback) ->
   if suite = TestHarness.suite()?.parent
-    TH.index.insertFromLeft(suite, callback)
+    LOCAL.index.insertFromLeft(suite, callback)
 
 
 ###
 Loads the root suite into the tree index.
 ###
-TH.gotoRootSuite = (callback) ->
-  TH.index.insertFromLeft(BDD.suite, callback)
+LOCAL.gotoRootSuite = (callback) ->
+  LOCAL.index.insertFromLeft(BDD.suite, callback)
 
 
 
 ###
 LOCAL-STORAGE: Gets or sets the UID of the current suite.
 ###
-TH.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
+LOCAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
 
 
 
@@ -29,5 +29,5 @@ Meteor.startup ->
   # Keep the current Suite ID up-to-date.
   Deps.autorun ->
     if currentSuite = TestHarness.suite()
-      TH.currentSuiteUid(currentSuite.uid())
+      LOCAL.currentSuiteUid(currentSuite.uid())
 

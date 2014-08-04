@@ -36,9 +36,9 @@ Package.on_use(function (api) {
   api.add_files('client/css-mixins/th.import.styl', 'client');
   api.add_files('client/bdd.coffee', 'client');
   api.add_files('client/common.styl', 'client');
-  api.add_files('client/internal-api.js', 'client');
-  api.add_files('client/internal-api.coffee', 'client');
   api.add_files('client/key-handlers.coffee', 'client');
+  api.add_files('client/local-api.js', 'client');
+  api.add_files('client/local-api.coffee', 'client');
   api.add_files('client/test-harness.coffee', 'client');
   api.add_files('images/nav-back-hover.png', ['client', 'server']);
   api.add_files('images/nav-back-hover@2x.png', ['client', 'server']);

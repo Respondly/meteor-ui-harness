@@ -2,10 +2,11 @@ DEFAULT_SIZE = 'auto'
 DEFAULT_ALIGN = 'center,middle'
 DEFAULT_MARGIN = null
 
+
 Ctrl.define
   'th-host':
     init: ->
-      TH.host = @ctrl
+      LOCAL.host = @ctrl
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
 

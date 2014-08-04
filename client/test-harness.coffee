@@ -1,4 +1,4 @@
-#= require ./internal-api.js
+#= require ./local-api.js
 @expect = chai.expect
 
 hash = new ReactiveHash()
@@ -12,7 +12,7 @@ LOREM_WORDS = LOREM.split(' ')
 ###
 Root API for the TestHarness
 ###
-class TH.TestHarness
+class LOCAL.TestHarness
   ###
   REACTIVE Gets or sets the current [Suite].
   ###
@@ -55,26 +55,26 @@ class TH.TestHarness
                           when the size is set to 'fill'.
                              String: {left|top|right|bottom}
   ###
-  load: (content, options, callback) -> TH.host.insert(content, options, callback)
+  load: (content, options, callback) -> LOCAL.host.insert(content, options, callback)
 
 
 
   ###
   Removes the hosted control.
   ###
-  clear: -> TH.host.clear()
+  clear: -> LOCAL.host.clear()
 
 
   ###
   Resets the TestHarness to it's default state.
   ###
-  reset: -> TH.host.reset()
+  reset: -> LOCAL.host.reset()
 
 
   ###
   Updates the visual state of the test-harness.
   ###
-  updateState: -> TH.host.updateState()
+  updateState: -> LOCAL.host.updateState()
 
 
   ###
@@ -84,7 +84,7 @@ class TH.TestHarness
            - 'fill'
            - 'auto' (default)
   ###
-  size: (value) -> TH.host.size(value)
+  size: (value) -> LOCAL.host.size(value)
 
 
   ###
@@ -94,7 +94,7 @@ class TH.TestHarness
            - x: left|center|right
            - y: top|middle|bottom
   ###
-  align: (value) -> TH.host.align(value)
+  align: (value) -> LOCAL.host.align(value)
 
 
   ###
@@ -102,7 +102,7 @@ class TH.TestHarness
   Relevant when 'size' is set to 'fill'.
   @param value: String - {left|top|right|bottom}
   ###
-  margin: (value) -> TH.host.margin(value)
+  margin: (value) -> LOCAL.host.margin(value)
 
 
   ###
@@ -206,7 +206,7 @@ class TH.TestHarness
 # EXPORT ----------------------------------------------------------------------
 
 
-TestHarness = new TH.TestHarness()
+TestHarness = new LOCAL.TestHarness()
 
 
 
