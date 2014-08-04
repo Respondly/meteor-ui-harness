@@ -1,16 +1,16 @@
-<template name='th-list'>
-  <div class='th-list {{ data.cssClass }}'>
+<template name='uih-list'>
+  <div class='uih-list {{ data.cssClass }}'>
     {{#if isEmpty}}
-      <div class='th-empty'>Nothing to display.</div>
+      <div class='uih-empty'>Nothing to display.</div>
     {{else}}
-      <ul class='th-items'>
+      <ul class='uih-items'>
         {{#each items}}
           {{#if isSuite}}
-            {{> ctrl type='th-list-suite' data=data }}
+            {{> ctrl type='uih-list-suite' data=data }}
           {{/if}}
 
           {{#if isSpec}}
-            {{> ctrl type='th-list-spec' data=data }}
+            {{> ctrl type='uih-list-spec' data=data }}
           {{/if}}
         {{/each}}
       </ul>

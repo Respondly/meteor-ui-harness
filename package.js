@@ -33,7 +33,7 @@ Package.on_use(function (api) {
   api.add_files('client/ctrl/th-list-suite/th-list-suite.styl', 'client');
   api.add_files('client/ctrl/th-suite-tree/th-suite-tree.coffee', 'client');
   api.add_files('client/ctrl/th-suite-tree/th-suite-tree.styl', 'client');
-  api.add_files('client/css-mixins/th.import.styl', 'client');
+  api.add_files('client/css-mixins/ui-harness.import.styl', 'client');
   api.add_files('client/bdd.coffee', 'client');
   api.add_files('client/common.styl', 'client');
   api.add_files('client/key-handlers.coffee', 'client');

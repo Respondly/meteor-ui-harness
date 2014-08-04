@@ -4,7 +4,7 @@ DEFAULT_MARGIN = 30
 
 
 Ctrl.define
-  'th-host':
+  'uih-host':
     init: ->
       LOCAL.host = @ctrl
       @autorun => @api.updateSize()
@@ -12,7 +12,7 @@ Ctrl.define
 
 
     api:
-      elContainer: -> @find('.th-container')
+      elContainer: -> @find('.uih-container')
       elContent: -> $(@api.elContainer()?.children()[0])
 
       size: (value) -> @prop 'size', value, default:DEFAULT_SIZE
@@ -63,7 +63,7 @@ Ctrl.define
 
         # Ctrl.
         if (content instanceof Ctrl.Definition)
-          result = @appendCtrl(content, '.th-container', options.args)
+          result = @appendCtrl(content, '.uih-container', options.args)
           result.ready -> done()
           @_current =
             type:       'ctrl'
@@ -146,28 +146,28 @@ Ctrl.define
           elContent = @api.elContent()
 
           # Reset.
-          elContent.removeClass('th-fill')
-          elContainer.removeClass('th-fill')
+          elContent.removeClass('uih-fill')
+          elContainer.removeClass('uih-fill')
           for attr in ['width', 'height', 'left', 'top', 'right', 'bottom']
             elContainer.css(attr, '')
 
           # Adjust size.
           switch size
             when 'auto' then # No-op.
-            when 'fill' then elContent.addClass('th-fill')
+            when 'fill' then elContent.addClass('uih-fill')
             else
               if size?
                 size = Util.toSize(size)
                 elContainer.css('width', "#{ size.width }px")
                 elContainer.css('height', "#{ size.height }px")
-                elContent.addClass('th-fill')
+                elContent.addClass('uih-fill')
 
           # Adjust margin.
           margin = 0 if margin is 'none'
           margin = DEFAULT_MARGIN if margin is undefined
           margin = Util.toSpacing(margin)
 
-          elContainerOuter = @find('.th-container-margin')
+          elContainerOuter = @find('.uih-container-margin')
           for attr in ['left', 'top', 'right', 'bottom']
             elContainerOuter.css(attr, "#{ margin[attr] }px")
 
@@ -184,9 +184,9 @@ Ctrl.define
         if elContainer = @api.elContainer()
 
           # Reset CSS classes.
-          elContainer.removeClass 'th-left th-center th-right'
-          elContainer.removeClass 'th-top th-middle th-bottom'
-          elContainer.removeClass 'th-center-middle'
+          elContainer.removeClass 'uih-left uih-center uih-right'
+          elContainer.removeClass 'uih-top uih-middle uih-bottom'
+          elContainer.removeClass 'uih-center-middle'
 
           # Update CSS classes.
           switch size
@@ -194,8 +194,8 @@ Ctrl.define
             else
               align = Util.toAlignment(align ? 'center,middle')
               if align.x is 'center' and align.y is 'middle'
-                elContainer.addClass('th-center-middle')
+                elContainer.addClass('uih-center-middle')
               else
-                elContainer.addClass("th-#{ align.x } th-#{ align.y }")
+                elContainer.addClass("uih-#{ align.x } uih-#{ align.y }")
 
 

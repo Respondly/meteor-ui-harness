@@ -2,7 +2,7 @@
 Lists a set of specs and sub-suites.
 ###
 Ctrl.define
-  'th-list':
+  'uih-list':
     init: -> @suite = @data.suite
 
     api:

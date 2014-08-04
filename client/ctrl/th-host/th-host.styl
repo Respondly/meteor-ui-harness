@@ -1,40 +1,39 @@
-@import 'th.import'
+@import 'ui-harness.import'
 
 
-.th-host
+.uih-host
   abs-pos $TH_INDEX_WIDTH, 0, 0, 0
   background white
   border-left solid 1px darken(white, 50%)
   box-shadow 0px 0px 30px 10px rgba(black ,0.10)
 
-  .th-container-margin
+  .uih-container-margin
     position absolute
 
-  .th-container
+  .uih-container
     position absolute
 
-    &.th-left
+    &.uih-left
       left 0px
 
-    &.th-center
+    &.uih-center
       abs-center-x()
 
-    &.th-right
+    &.uih-right
       right 0px
 
-    &.th-top
+    &.uih-top
       top 0px
 
-    &.th-middle
+    &.uih-middle
       abs-center-y()
 
-    &.th-bottom
+    &.uih-bottom
       bottom 0px
 
-    &.th-center-middle
+    &.uih-center-middle
       abs-center-xy()
 
-
-  .th-fill
+  .uih-fill
     abs-pos 0, 0, 0, 0
 

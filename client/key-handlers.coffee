@@ -2,7 +2,7 @@ Meteor.startup ->
   $(document).keydown (e) ->
 
     # Only react if the UIHarness has been instantiated.
-    elTree = $('.th-suite-tree')
+    elTree = $('.uih-suite-tree')
     return unless elTree.length > 0
 
     if e.which is 8 # DELETE / BACKSPACE

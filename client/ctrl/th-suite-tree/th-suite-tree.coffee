@@ -6,7 +6,7 @@ The root of the tree.
 Handles navigation through the hierarchy of lists.
 ###
 Ctrl.define
-  'th-suite-tree':
+  'uih-suite-tree':
     created: ->
       # Retrieve the Suite that was last loaded from [localStorage].
       if uid = LOCAL.currentSuiteUid()
@@ -19,7 +19,7 @@ Ctrl.define
       # NB: This prevents the [<] arrow from animating
       #     on first load.
       Util.delay =>
-        @el().addClass('th-loaded')
+        @el().addClass('uih-loaded')
 
 
     destroyed: ->
@@ -52,23 +52,23 @@ Ctrl.define
 
         switch options.direction
           when 'left'
-            revealClass = 'th-right'
-            hideClass   = 'th-left'
+            revealClass = 'uih-right'
+            hideClass   = 'uih-left'
           when 'right'
-            revealClass = 'th-left'
-            hideClass   = 'th-right'
+            revealClass = 'uih-left'
+            hideClass   = 'uih-right'
 
         # Hide the existing list.
         if current = @api.currentListCtrl()
           current.el().addClass(hideClass)
 
-        fadeTitle = (toggle) => @find('.th-title').toggleClass('th-fade-out', not toggle)
+        fadeTitle = (toggle) => @find('.uih-title').toggleClass('uih-fade-out', not toggle)
 
         # Insert the new list.
         args =
           suite: suite
           cssClass: revealClass
-        result = @appendCtrl('th-list', '.th-tree-outer', data:args)
+        result = @appendCtrl('uih-list', '.uih-tree-outer', data:args)
         result.ready =>
             listCtrl = result.ctrl
             UIHarness.suite(suite)
@@ -109,12 +109,12 @@ Ctrl.define
 
     helpers:
       hasParent: -> UIHarness.suite()?.parent?
-      cssClasses: -> 'th-has-parent' if @helpers.hasParent()
+      cssClasses: -> 'uih-has-parent' if @helpers.hasParent()
       title: (value) -> @prop 'title', value
 
 
     events:
-      'click .th-back-btn': (e) ->
+      'click .uih-back-btn': (e) ->
         if e.metaKey
           LOCAL.gotoRootSuite()
         else

@@ -1,41 +1,41 @@
-@import 'th.import'
+@import 'ui-harness.import'
 
 
 
-li.th-list-spec
-  .th-details
+li.uih-list-spec
+  .uih-details
     position relative
     padding-left 20px
 
-    .th-bullet
+    .uih-bullet
       abs-pos 3, 6, null, null
       size 8, 8
       background rgba(black, 0.1)
       border-radius 50%
 
-    .th-label
+    .uih-label
       margin-right 20px
 
-    .th-count-badge
+    .uih-count-badge
       abs-pos null, 0, 0, 0
       display none
 
 
-    &.th-has-count
-      .th-bullet
+    &.uih-has-count
+      .uih-bullet
         background $TH_BLUE_GRADIENT
-      .th-count-badge
+      .uih-count-badge
         display block
 
   // ----------------------------------------------------
 
-  .th-spec-hover
+  .uih-spec-hover
     abs-pos 0, 0, null, 0
     width 4px
     background linear-gradient(top, lighten($TH_LINK_BLUE, 20%), $TH_LINK_BLUE)
     display none
   &:hover
-    .th-spec-hover
+    .uih-spec-hover
       display block
 
 

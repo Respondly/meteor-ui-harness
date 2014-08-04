@@ -1,5 +1,5 @@
 Ctrl.define
-  'th-list-suite':
+  'uih-list-suite':
     init: -> @suite = @data
 
     events:

@@ -1,5 +1,5 @@
 Ctrl.define
-  'th-list-spec':
+  'uih-list-spec':
     init: ->
       @spec = @data
       @extension = @spec.extension
@@ -23,7 +23,7 @@ Ctrl.define
       isBoolean: -> @isBoolean
       cssClasses: ->
         css = ''
-        css += ' th-has-count' if @helpers.count() > 0 and not @isBoolean
+        css += ' uih-has-count' if @helpers.count() > 0 and not @isBoolean
         css
 
 
