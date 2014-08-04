@@ -1,6 +1,6 @@
 DEFAULT_SIZE = 'auto'
 DEFAULT_ALIGN = 'center,middle'
-DEFAULT_MARGIN = null
+DEFAULT_MARGIN = 30
 
 
 Ctrl.define
@@ -154,22 +154,23 @@ Ctrl.define
           # Adjust size.
           switch size
             when 'auto' then # No-op.
-            when 'fill'
-              elContent.addClass('th-fill')
-              if margin? and margin isnt 'none'
-                margin = Util.toSpacing(margin)
-                for attr in ['left', 'top', 'right', 'bottom']
-                  elContainer.css(attr, "#{ margin[attr] }px")
-
-              else
-                elContainer.addClass('th-fill')
-
+            when 'fill' then elContent.addClass('th-fill')
             else
               if size?
                 size = Util.toSize(size)
                 elContainer.css('width', "#{ size.width }px")
                 elContainer.css('height', "#{ size.height }px")
                 elContent.addClass('th-fill')
+
+          # Adjust margin.
+          margin = 0 if margin is 'none'
+          margin = DEFAULT_MARGIN if margin is undefined
+          margin = Util.toSpacing(margin)
+
+          elContainerOuter = @find('.th-container-margin')
+          for attr in ['left', 'top', 'right', 'bottom']
+            elContainerOuter.css(attr, "#{ margin[attr] }px")
+
 
 
 
