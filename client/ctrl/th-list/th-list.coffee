@@ -11,14 +11,14 @@ Ctrl.define
       ###
       onRevealed: (callback) ->
         beforeHandlers = @suite.getBefore()
-        BDD.runMany beforeHandlers, { this:TestHarness, throw:true }, -> callback?()
+        BDD.runMany beforeHandlers, { this:UIHarness, throw:true }, -> callback?()
 
       ###
       Invoked when the list has been taken off screen.
       ###
       onHidden: (callback) ->
         afterHandlers = @suite.getAfter()
-        BDD.runMany afterHandlers, { this:TestHarness, throw:true }, -> callback?()
+        BDD.runMany afterHandlers, { this:UIHarness, throw:true }, -> callback?()
 
 
     helpers:

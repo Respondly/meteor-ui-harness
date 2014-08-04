@@ -22,7 +22,7 @@ Ctrl.define
 
       ###
       Inserts a visual element into the [Host].
-      See: [TestHarness] object for parameter documentation.
+      See: [UIHarness] object for parameter documentation.
       ###
       insert: (content, options = {}, callback) ->
         # Setup initial conditions.
@@ -51,8 +51,8 @@ Ctrl.define
               @api.updateState()
 
               # Store global state.
-              TestHarness.el(@api.elContent())
-              TestHarness.ctrl(@_current.ctrl ? null)
+              UIHarness.el(@api.elContent())
+              UIHarness.ctrl(@_current.ctrl ? null)
               elContainer.toggle(true)
 
               # Finish up.
@@ -122,8 +122,8 @@ Ctrl.define
         elContainer.toggle(false)
 
         # Finish up.
-        TestHarness.el(null)
-        TestHarness.ctrl(null)
+        UIHarness.el(null)
+        UIHarness.ctrl(null)
         delete @_current
 
 

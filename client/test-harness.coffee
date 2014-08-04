@@ -10,9 +10,9 @@ LOREM_WORDS = LOREM.split(' ')
 
 
 ###
-Root API for the TestHarness
+Root API for the [UIHarness]
 ###
-class LOCAL.TestHarness
+class LOCAL.UIHarness
   ###
   REACTIVE Gets or sets the current [Suite].
   ###
@@ -66,7 +66,7 @@ class LOCAL.TestHarness
 
 
   ###
-  Resets the TestHarness to it's default state.
+  Resets the UIHarness to it's default state.
   ###
   reset: -> LOCAL.host.reset()
 
@@ -206,7 +206,7 @@ class LOCAL.TestHarness
 # EXPORT ----------------------------------------------------------------------
 
 
-TestHarness = new LOCAL.TestHarness()
+UIHarness = new LOCAL.UIHarness()
 
 
 

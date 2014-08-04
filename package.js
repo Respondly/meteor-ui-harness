@@ -10,7 +10,7 @@ Package.on_use(function (api) {
   api.use(['coffeescript', 'sugar']);
   api.use(['util', 'bdd', 'ctrl', 'stylus-compiler', 'chai']);
   api.export('chai');
-  api.export('TestHarness');
+  api.export('UIHarness');
   api.export(['describe', 'it', 'before', 'beforeEach', 'afterEach', 'after']);
 
   // Generated with: github.com/philcockfield/meteor-package-paths

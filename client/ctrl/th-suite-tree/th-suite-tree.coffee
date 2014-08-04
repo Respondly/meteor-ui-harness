@@ -24,7 +24,7 @@ Ctrl.define
 
     destroyed: ->
       @api.currentListCtrl()?.dispose()
-      TestHarness.suite(null)
+      UIHarness.suite(null)
 
 
     api:
@@ -71,7 +71,7 @@ Ctrl.define
         result = @appendCtrl('th-list', '.th-tree-outer', data:args)
         result.ready =>
             listCtrl = result.ctrl
-            TestHarness.suite(suite)
+            UIHarness.suite(suite)
 
             onComplete = =>
                   # Store state.
@@ -108,7 +108,7 @@ Ctrl.define
 
 
     helpers:
-      hasParent: -> TestHarness.suite()?.parent?
+      hasParent: -> UIHarness.suite()?.parent?
       cssClasses: -> 'th-has-parent' if @helpers.hasParent()
       title: (value) -> @prop 'title', value
 

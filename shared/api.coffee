@@ -1,6 +1,4 @@
 #= base
-### @export TestHarness ###
-
-TestHarness = {} unless TestHarness?
+UIHarness = {} unless UIHarness?
 
 

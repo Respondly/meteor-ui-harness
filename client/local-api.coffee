@@ -5,7 +5,7 @@
 Loads the parent suite into the tree index.
 ###
 LOCAL.gotoParentSuite = (callback) ->
-  if suite = TestHarness.suite()?.parent
+  if suite = UIHarness.suite()?.parent
     LOCAL.index.insertFromLeft(suite, callback)
 
 
@@ -28,6 +28,6 @@ LOCAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
 Meteor.startup ->
   # Keep the current Suite ID up-to-date.
   Deps.autorun ->
-    if currentSuite = TestHarness.suite()
+    if currentSuite = UIHarness.suite()
       LOCAL.currentSuiteUid(currentSuite.uid())
 

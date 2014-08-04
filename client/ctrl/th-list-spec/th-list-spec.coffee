@@ -9,7 +9,7 @@ Ctrl.define
       # Handle Boolean toggling.
       if @isBoolean
         @autorun =>
-          if ctrl = TestHarness.ctrl()
+          if ctrl = UIHarness.ctrl()
             key = @spec.name
             if Object.isFunction(ctrl[key])
               value = ctrl[key]()
@@ -36,8 +36,8 @@ Ctrl.define
         @helpers.count(count)
 
         # Toggle if the spec represents a Boolean property.
-        TestHarness.toggle(@spec.name) if @isBoolean
+        UIHarness.toggle(@spec.name) if @isBoolean
 
         # Invoke the method.
-        @spec.run { this:TestHarness, throw:true }, -> # Complete.
+        @spec.run { this:UIHarness, throw:true }, -> # Complete.
 
