@@ -1,4 +1,4 @@
 Ctrl.define
-  'test-harness':
+  'ui-harness':
     created: -> INTERNAL.index = @children.index.ctrl
 
