@@ -55,6 +55,8 @@ class INTERNAL.UIHarness
             - margin:     The margin to place around the hosted control
                           when the size is set to 'fill'.
                              String: {left|top|right|bottom}
+
+            - args:       Arguments to pass to the content/ctrl/template.
   ###
   load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
 

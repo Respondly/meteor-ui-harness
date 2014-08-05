@@ -1,6 +1,6 @@
 DEFAULT_SIZE = 'auto'
 DEFAULT_ALIGN = 'center,middle'
-DEFAULT_MARGIN = 30
+DEFAULT_MARGIN = 50
 
 
 Ctrl.define
