@@ -109,7 +109,7 @@ Ctrl.define
 
 
       ###
-      Removes the host.
+      Removes the hosted control.
       ###
       clear: ->
         # Dispose of the Blaze view.

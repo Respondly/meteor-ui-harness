@@ -61,17 +61,17 @@ class INTERNAL.UIHarness
   load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
 
 
-
   ###
   Removes the hosted control.
   ###
-  clear: -> INTERNAL.host.clear()
+  unload: -> INTERNAL.host.clear()
 
 
   ###
   Resets the UIHarness to it's default state.
   ###
   reset: -> INTERNAL.host.reset()
+
 
 
   ###
