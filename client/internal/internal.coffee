@@ -1,4 +1,13 @@
 #= require ./internal.js
+INTERNAL.hash = hash = new ReactiveHash()
+
+
+
+###
+REACTIVE: Gets or sets the [Suite] list-item
+###
+INTERNAL.overSuiteCtrl = (value) -> hash.prop 'overSuiteCtrl', value, onlyOnChange:true
+
 
 
 ###

@@ -30,5 +30,7 @@ Ctrl.define
                   isSpec:  (item instanceof BDD.Spec)
                   data: item
 
-
+    events:
+      'mouseover .uih-items > li': (e) -> Ctrl.fromElement(e)?.onMouseOver?(e)
+      'mouseleave .uih-items > li': (e) -> Ctrl.fromElement(e)?.onMouseLeave?(e)
 
