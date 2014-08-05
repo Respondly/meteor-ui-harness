@@ -1,4 +1,4 @@
 Ctrl.define
   'test-harness':
-    created: -> LOCAL.index = @children.index.ctrl
+    created: -> INTERNAL.index = @children.index.ctrl
 

@@ -9,7 +9,7 @@ Ctrl.define
   'uih-suite-tree':
     created: ->
       # Retrieve the Suite that was last loaded from [localStorage].
-      if uid = LOCAL.currentSuiteUid()
+      if uid = INTERNAL.currentSuiteUid()
         suite = BDD.suite.findOne(uid:uid)
 
       # Load the tree with the initial Suite.
@@ -116,9 +116,9 @@ Ctrl.define
     events:
       'click .uih-back-btn': (e) ->
         if e.metaKey
-          LOCAL.gotoRootSuite()
+          INTERNAL.gotoRootSuite()
         else
-          LOCAL.gotoParentSuite()
+          INTERNAL.gotoParentSuite()
 
 
 

@@ -3,6 +3,6 @@ Ctrl.define
     init: -> @suite = @data
 
     events:
-      'click': -> LOCAL.index.insertFromRight(@suite)
+      'click': -> INTERNAL.index.insertFromRight(@suite)
 
 

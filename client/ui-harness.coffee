@@ -1,5 +1,6 @@
-#= require ./local-api.js
+#= require ./internal/internal.js
 @expect = chai.expect
+
 
 hash = new ReactiveHash()
 LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -12,7 +13,7 @@ LOREM_WORDS = LOREM.split(' ')
 ###
 Root API for the [UIHarness]
 ###
-class LOCAL.UIHarness
+class INTERNAL.UIHarness
   ###
   REACTIVE Gets or sets the current [Suite].
   ###
@@ -55,26 +56,26 @@ class LOCAL.UIHarness
                           when the size is set to 'fill'.
                              String: {left|top|right|bottom}
   ###
-  load: (content, options, callback) -> LOCAL.host.insert(content, options, callback)
+  load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
 
 
 
   ###
   Removes the hosted control.
   ###
-  clear: -> LOCAL.host.clear()
+  clear: -> INTERNAL.host.clear()
 
 
   ###
   Resets the UIHarness to it's default state.
   ###
-  reset: -> LOCAL.host.reset()
+  reset: -> INTERNAL.host.reset()
 
 
   ###
   Updates the visual state of the test-harness.
   ###
-  updateState: -> LOCAL.host.updateState()
+  updateState: -> INTERNAL.host.updateState()
 
 
   ###
@@ -84,7 +85,7 @@ class LOCAL.UIHarness
            - 'fill'
            - 'auto' (default)
   ###
-  size: (value) -> LOCAL.host.size(value)
+  size: (value) -> INTERNAL.host.size(value)
 
 
   ###
@@ -94,7 +95,7 @@ class LOCAL.UIHarness
            - x: left|center|right
            - y: top|middle|bottom
   ###
-  align: (value) -> LOCAL.host.align(value)
+  align: (value) -> INTERNAL.host.align(value)
 
 
   ###
@@ -102,7 +103,7 @@ class LOCAL.UIHarness
   Relevant when 'size' is set to 'fill'.
   @param value: String - {left|top|right|bottom}
   ###
-  margin: (value) -> LOCAL.host.margin(value)
+  margin: (value) -> INTERNAL.host.margin(value)
 
 
   ###
@@ -206,7 +207,7 @@ class LOCAL.UIHarness
 # EXPORT ----------------------------------------------------------------------
 
 
-UIHarness = new LOCAL.UIHarness()
+UIHarness = new INTERNAL.UIHarness()
 
 
 

@@ -6,7 +6,7 @@ DEFAULT_MARGIN = 30
 Ctrl.define
   'uih-host':
     init: ->
-      LOCAL.host = @ctrl
+      INTERNAL.host = @ctrl
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
 
