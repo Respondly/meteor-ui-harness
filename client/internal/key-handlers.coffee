@@ -26,7 +26,9 @@ Meteor.startup ->
       # Handle "open suite" keys (right key).
       if isOverTree and keyCode is KEYS.CURSOR_RIGHT
         if ctrlSuite = INTERNAL.overSuiteCtrl()
+          INTERNAL.overSuiteCtrl(null)
           ctrlSuite.open()
+
 
 
 
