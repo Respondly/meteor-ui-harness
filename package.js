@@ -36,9 +36,10 @@ Package.on_use(function (api) {
   api.add_files('client/css/common.styl', 'client');
   api.add_files('client/css-mixins/ui-harness.import.styl', 'client');
   api.add_files('client/internal/bdd.coffee', 'client');
-  api.add_files('client/internal/internal.js', 'client');
+  api.add_files('client/internal/ns.js', 'client');
   api.add_files('client/internal/internal.coffee', 'client');
   api.add_files('client/internal/key-handlers.coffee', 'client');
+  api.add_files('client/internal/util.coffee', 'client');
   api.add_files('client/ui-harness.coffee', 'client');
   api.add_files('images/nav-back-hover.png', ['client', 'server']);
   api.add_files('images/nav-back-hover@2x.png', ['client', 'server']);

@@ -1,10 +1,10 @@
-#= require ./internal.js
+#= require ./ns.js
 INTERNAL.hash = hash = new ReactiveHash()
 
 
-
 ###
-REACTIVE: Gets or sets the [Suite] list-item
+REACTIVE: Gets or sets the [Suite] list-item that the
+          mouse is currently over.
 ###
 INTERNAL.overSuiteCtrl = (value) -> hash.prop 'overSuiteCtrl', value, onlyOnChange:true
 
@@ -39,6 +39,9 @@ LOCAL-STORAGE: Gets or sets the UID of the current suite.
 ###
 INTERNAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
 
+
+
+# ----------------------------------------------------------------------
 
 
 
