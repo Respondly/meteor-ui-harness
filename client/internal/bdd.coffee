@@ -13,3 +13,27 @@ it.boolean = (name, func) ->
   spec
 
 
+
+
+# ----------------------------------------------------------------------
+
+
+
+###
+Update the [this] context that is passed to the
+"describe" function
+###
+BDD.beforeDescribe (context) ->
+  context.title = setTitle
+
+
+###
+Sets the "display" title on the host header.
+@param title: The title to display:
+               - String
+               - Function
+###
+setTitle = (title) ->
+  meta = @suite.uiHarness ?= {}
+  meta.title = title
+

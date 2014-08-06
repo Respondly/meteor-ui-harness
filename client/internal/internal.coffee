@@ -1,4 +1,9 @@
 #= require ./ns.js
+
+###
+Internal API for shared functions and state.
+###
+
 INTERNAL.hash = hash = new ReactiveHash()
 
 
@@ -38,6 +43,24 @@ INTERNAL.gotoRootSuite = (callback) ->
 LOCAL-STORAGE: Gets or sets the UID of the current suite.
 ###
 INTERNAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
+
+
+
+###
+REACTIVE: The current display title.
+###
+INTERNAL.displayTitle = ->
+  # Retrieve reactive values.
+  viaProp   = UIHarness.title()
+  viaBefore = UIHarness.suite()?.uiHarness?.title
+
+  # Explicitly set property values on UIHarness used first.
+  if viaProp?
+    return Util.asValue(viaProp)
+
+  # Fall back to the @title value set within the "describe" statement.
+  if viaBefore?
+    return Util.asValue(viaBefore)
 
 
 
