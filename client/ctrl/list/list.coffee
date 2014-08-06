@@ -10,7 +10,13 @@ Ctrl.define
       Invoked when the list has been revealed on screen.
       ###
       onRevealed: (callback) ->
-        beforeHandlers = @suite.getBefore()
+        # Run all the "before" handlers in the hierarchy if
+        # this is the initial load, because they won't have been
+        # run already.
+        # If this is not the initial load, then each "before" handler
+        # will have been run as the user stepped down into the suite.
+        deep = not INTERNAL.isInitialized()
+        beforeHandlers = @suite.getBefore(deep)
         BDD.runMany beforeHandlers, { this:UIHarness, throw:true }, -> callback?()
 
       ###

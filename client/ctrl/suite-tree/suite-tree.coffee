@@ -20,6 +20,8 @@ Ctrl.define
       #     on first load.
       Util.delay =>
         @el().addClass('uih-loaded')
+        INTERNAL.isInitialized(true)
+
 
 
     destroyed: ->

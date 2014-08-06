@@ -11,6 +11,14 @@ INTERNAL.overSuiteCtrl = (value) -> hash.prop 'overSuiteCtrl', value, onlyOnChan
 
 
 ###
+REACTIVE: Gets or sets whether the UIHarness has completed
+          it's initial load sequence.
+###
+INTERNAL.isInitialized = (value) -> hash.prop 'isInitialized', value, onlyOnChange:true, default:false
+
+
+
+###
 Loads the parent suite into the tree index.
 ###
 INTERNAL.gotoParentSuite = (callback) ->
