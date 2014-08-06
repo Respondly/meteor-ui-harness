@@ -34,6 +34,12 @@ Ctrl.define
 
 
     helpers:
+      mouseOver: (e, isOver) ->
+        # Store a reference to the currently overed list-item ctrl.
+        ctrl = Ctrl.fromElement(e) ? null
+        INTERNAL.hoveredListItemCtrl(ctrl)
+
+
       isEmpty: -> @suite.items.length is 0
       items: ->
         @suite.items.map (item) ->
@@ -43,6 +49,6 @@ Ctrl.define
                   data: item
 
     events:
-      'mouseover .uih-items > li': (e) -> Ctrl.fromElement(e)?.onMouseOver?(e)
-      'mouseleave .uih-items > li': (e) -> Ctrl.fromElement(e)?.onMouseLeave?(e)
+      'mouseover .uih-items > li': (e) -> @helpers.mouseOver(e, true)
+      'mouseleave .uih-items > li': (e) -> @helpers.mouseOver(e, false)
 

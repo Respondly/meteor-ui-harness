@@ -4,8 +4,6 @@ Ctrl.define
 
     api:
       open: -> INTERNAL.index.insertFromRight(@suite)
-      onMouseOver: (e) -> INTERNAL.overSuiteCtrl(@ctrl)
-      onMouseLeave: (e) -> INTERNAL.overSuiteCtrl(null)
 
     helpers:
       label: -> UTIL.formatText(@suite.name)

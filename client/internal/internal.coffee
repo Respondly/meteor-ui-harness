@@ -3,10 +3,10 @@ INTERNAL.hash = hash = new ReactiveHash()
 
 
 ###
-REACTIVE: Gets or sets the [Suite] list-item that the
-          mouse is currently over.
+REACTIVE: Gets or sets the [Suite] or [Spec] list-item control
+          that the mouse is currently over.
 ###
-INTERNAL.overSuiteCtrl = (value) -> hash.prop 'overSuiteCtrl', value, onlyOnChange:true
+INTERNAL.hoveredListItemCtrl = (value) -> hash.prop 'hoveredListItemCtrl', value, onlyOnChange:true
 
 
 

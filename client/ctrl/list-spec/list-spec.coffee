@@ -19,8 +19,17 @@ Ctrl.define
 
 
     api:
-      onMouseOver: (e) -> INTERNAL.overSuiteCtrl(null)
-      onMouseLeave: (e) -> INTERNAL.overSuiteCtrl(null)
+      run: ->
+        # Increment the count.
+        count = @helpers.count() ? 0
+        count += 1
+        @helpers.count(count)
+
+        # Toggle if the spec represents a [Boolean] property.
+        UIHarness.toggle(@spec.name) if @isBoolean
+
+        # Invoke the method.
+        @spec.run { this:UIHarness, throw:true }, -> # Complete.
 
 
     helpers:
@@ -35,15 +44,5 @@ Ctrl.define
 
 
     events:
-      'click': ->
-        # Increment the count.
-        count = @helpers.count() ? 0
-        count += 1
-        @helpers.count(count)
-
-        # Toggle if the spec represents a [Boolean] property.
-        UIHarness.toggle(@spec.name) if @isBoolean
-
-        # Invoke the method.
-        @spec.run { this:UIHarness, throw:true }, -> # Complete.
+      'click': -> @api.run()
 

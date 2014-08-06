@@ -25,9 +25,14 @@ Meteor.startup ->
 
       # Handle "open suite" keys (right key).
       if isOverTree and keyCode is KEYS.CURSOR_RIGHT
-        if ctrlSuite = INTERNAL.overSuiteCtrl()
-          INTERNAL.overSuiteCtrl(null)
-          ctrlSuite.open()
+        if ctrl = INTERNAL.hoveredListItemCtrl()
+          type = ctrl.type
+          if type.endsWith('-suite')
+            INTERNAL.hoveredListItemCtrl(null) # Reset.
+            ctrl.open()
+
+          if type.endsWith('-spec')
+            ctrl.run()
 
 
 
