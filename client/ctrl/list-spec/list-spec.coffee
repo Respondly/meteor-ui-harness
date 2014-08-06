@@ -18,6 +18,11 @@ Ctrl.define
               chk.toggle(value) if Object.isBoolean(value)
 
 
+    api:
+      onMouseOver: (e) -> INTERNAL.overSuiteCtrl(null)
+      onMouseLeave: (e) -> INTERNAL.overSuiteCtrl(null)
+
+
     helpers:
       label: -> UTIL.formatText(@spec.name)
       count: (value) -> @prop 'count', value
@@ -36,7 +41,7 @@ Ctrl.define
         count += 1
         @helpers.count(count)
 
-        # Toggle if the spec represents a Boolean property.
+        # Toggle if the spec represents a [Boolean] property.
         UIHarness.toggle(@spec.name) if @isBoolean
 
         # Invoke the method.
