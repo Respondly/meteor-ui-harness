@@ -9,7 +9,6 @@ Ctrl.define
         title = INTERNAL.displayTitle() # Hook into reactive callback.
         Deps.afterFlush =>
             top = @ctrl.children.header?.el().height() ? 0
-            top = 80
             @el('.uih-host').css('top', (top + 1) + 'px')
 
 
