@@ -9,7 +9,7 @@ Ctrl.define
       ###
       Invoked when the list has been revealed on screen.
       ###
-      onRevealed: (callback) ->
+      onRevealed: (direction, callback) ->
         # Run all the "before" handlers in the hierarchy if
         # this is the initial load, because they won't have been
         # run already.
@@ -22,9 +22,15 @@ Ctrl.define
       ###
       Invoked when the list has been taken off screen.
       ###
-      onHidden: (callback) ->
-        afterHandlers = @suite.getAfter()
-        BDD.runMany afterHandlers, { this:UIHarness, throw:true }, -> callback?()
+      onHidden: (direction, callback) ->
+        if direction is 'right'
+          # Only run "after" handlers if the user is stepping up/out
+          # of the suite, not drilling deeper down into the suite.
+          afterHandlers = @suite.getAfter()
+          BDD.runMany afterHandlers, { this:UIHarness, throw:true }, -> callback?()
+
+        else
+          callback?()
 
 
     helpers:

@@ -48,11 +48,12 @@ Ctrl.define
       insert: (suite, options = {}, callback) ->
         # Setup initial conditions.
         return if @isInserting
-        @isInserting = true
-        isAnimated = options.direction?
+        @isInserting  = true
+        direction     = options.direction
+        isAnimated    = direction?
         options.suite = suite
 
-        switch options.direction
+        switch direction
           when 'left'
             revealClass = 'uih-right'
             hideClass   = 'uih-left'
@@ -82,13 +83,13 @@ Ctrl.define
 
                   retire = (ctrl, done) ->
                       return done() unless ctrl?
-                      ctrl.onHidden ->
+                      ctrl.onHidden direction, ->
                           ctrl.dispose()
                           done()
 
                   initialize = (ctrl, done) ->
                       return done() unless ctrl?
-                      ctrl.onRevealed(done)
+                      ctrl.onRevealed(direction, done)
 
                   # Finish up.
                   retire retiredListCtrl, =>
