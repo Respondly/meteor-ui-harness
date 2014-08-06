@@ -30,6 +30,7 @@ Ctrl.define
 
 
     api:
+      title: (value) -> @prop 'title', value
       currentSuite: (value) -> @prop 'currentSuite', value
       currentListCtrl: (value) -> @prop 'currentListCtrl', value
 
@@ -95,7 +96,7 @@ Ctrl.define
                   retire retiredListCtrl, =>
                     initialize listCtrl, =>
                       delete @isInserting
-                      @helpers.title(suite.name ? 'UI Harness')
+                      @api.title(suite.name ? 'UI Harness')
                       Util.delay 10, => fadeTitle(true)
                       callback?() # Complete.
 
@@ -113,7 +114,7 @@ Ctrl.define
     helpers:
       hasParent: -> UIHarness.suite()?.parent?
       cssClasses: -> 'uih-has-parent' if @helpers.hasParent()
-      title: (value) -> @prop 'title', value
+      title: -> @api.title()?.remove(/`/g)
 
 
     events:

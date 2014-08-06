@@ -5,7 +5,7 @@
 Formats the text of labels within the index tree.
 ###
 UTIL.formatText = (text) ->
-  text = ticksToCode(text)
+  text = ticksToCode(text) unless Util.isBlank(text)
   text = '&nbsp;' if Util.isBlank(text)
   text
 
