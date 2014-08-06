@@ -49,6 +49,6 @@ Ctrl.define
                   data: item
 
     events:
-      'mouseover .uih-items > li': (e) -> @helpers.mouseOver(e, true)
+      'mouseenter .uih-items > li': (e) -> @helpers.mouseOver(e, true)
       'mouseleave .uih-items > li': (e) -> @helpers.mouseOver(e, false)
 
