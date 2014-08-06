@@ -15,26 +15,29 @@ Package.on_use(function (api) {
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/api.coffee', ['client', 'server']);
-  api.add_files('client/ctrl/host/host.html', 'client');
+  api.add_files('client/ctrl/suite-tree/suite-tree.html', 'client');
   api.add_files('client/ctrl/list/list.html', 'client');
+  api.add_files('client/ctrl/host/host.html', 'client');
   api.add_files('client/ctrl/list-spec/list-spec.html', 'client');
   api.add_files('client/ctrl/list-suite/list-suite.html', 'client');
-  api.add_files('client/ctrl/suite-tree/suite-tree.html', 'client');
+  api.add_files('client/ctrl/header/header.html', 'client');
   api.add_files('client/ctrl/ui-harness/ui-harness.html', 'client');
-  api.add_files('client/ctrl/host/host.coffee', 'client');
-  api.add_files('client/ctrl/host/host.styl', 'client');
+  api.add_files('client/ctrl/suite-tree/suite-tree.coffee', 'client');
+  api.add_files('client/ctrl/suite-tree/suite-tree.styl', 'client');
   api.add_files('client/ctrl/list/list.coffee', 'client');
   api.add_files('client/ctrl/list/list.styl', 'client');
+  api.add_files('client/ctrl/host/host.coffee', 'client');
+  api.add_files('client/ctrl/host/host.styl', 'client');
   api.add_files('client/ctrl/list-spec/list-spec.coffee', 'client');
   api.add_files('client/ctrl/list-spec/list-spec.styl', 'client');
   api.add_files('client/ctrl/list-suite/list-suite.coffee', 'client');
   api.add_files('client/ctrl/list-suite/list-suite.styl', 'client');
-  api.add_files('client/ctrl/suite-tree/suite-tree.coffee', 'client');
-  api.add_files('client/ctrl/suite-tree/suite-tree.styl', 'client');
+  api.add_files('client/ctrl/header/header.coffee', 'client');
+  api.add_files('client/ctrl/header/header.styl', 'client');
   api.add_files('client/ctrl/ui-harness/ui-harness.coffee', 'client');
   api.add_files('client/ctrl/ui-harness/ui-harness.styl', 'client');
-  api.add_files('client/css/common.styl', 'client');
   api.add_files('client/css-mixins/ui-harness.import.styl', 'client');
+  api.add_files('client/css/common.styl', 'client');
   api.add_files('client/internal/bdd.coffee', 'client');
   api.add_files('client/internal/ns.js', 'client');
   api.add_files('client/internal/internal.coffee', 'client');

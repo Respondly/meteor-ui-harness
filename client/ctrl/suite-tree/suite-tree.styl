@@ -4,9 +4,6 @@
 .uih-suite-tree
   HEADER_HEIGHT = 40px
   DURATION = 0.2s
-
-  abs-pos 0, 0, null, 0
-  width $TH_INDEX_WIDTH
   font-family $TH_SANS
   user-select none
   overflow hidden
@@ -49,7 +46,7 @@
       cursor default
 
   > .uih-tree-outer
-    abs-pos 0, HEADER_HEIGHT + 1, 0, 0
+    abs-pos 0, HEADER_HEIGHT, 0, 0
     background linear-gradient(top, $TH_INDEX_BG_LIGHT, $TH_INDEX_BG_DARK)
     border-top solid 1px rgba(white, 0.8)
 

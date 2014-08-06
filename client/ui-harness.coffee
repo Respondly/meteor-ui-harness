@@ -32,6 +32,12 @@ class INTERNAL.UIHarness
   ctrl: (value) -> hash.prop 'ctrl', value, default:null
 
 
+  ###
+  REACTIVE Gets or sets the display title in the harness.
+  ###
+  title: (value) -> hash.prop 'title', value, default:null
+
+
 
   ###
   Inserts a visual element into the [Host].
@@ -70,7 +76,9 @@ class INTERNAL.UIHarness
   ###
   Resets the UIHarness to it's default state.
   ###
-  reset: -> INTERNAL.host.reset()
+  reset: ->
+    @title(null)
+    INTERNAL.host.reset()
 
 
 
