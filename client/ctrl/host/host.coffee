@@ -1,17 +1,18 @@
 DEFAULT_SIZE = 'auto'
 DEFAULT_ALIGN = 'center,middle'
-DEFAULT_MARGIN = null
+DEFAULT_MARGIN = 50
+
 
 Ctrl.define
-  'th-host':
+  'uih-host':
     init: ->
-      TH.host = @ctrl
+      INTERNAL.host = @ctrl
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
 
 
     api:
-      elContainer: -> @find('.th-container')
+      elContainer: -> @find('.uih-container')
       elContent: -> $(@api.elContainer()?.children()[0])
 
       size: (value) -> @prop 'size', value, default:DEFAULT_SIZE
@@ -21,7 +22,7 @@ Ctrl.define
 
       ###
       Inserts a visual element into the [Host].
-      See: [TestHarness] object for parameter documentation.
+      See: [UIHarness] object for parameter documentation.
       ###
       insert: (content, options = {}, callback) ->
         # Setup initial conditions.
@@ -50,8 +51,8 @@ Ctrl.define
               @api.updateState()
 
               # Store global state.
-              TestHarness.el(@api.elContent())
-              TestHarness.ctrl(@_current.ctrl ? null)
+              UIHarness.el(@api.elContent())
+              UIHarness.ctrl(@_current.ctrl ? null)
               elContainer.toggle(true)
 
               # Finish up.
@@ -62,7 +63,7 @@ Ctrl.define
 
         # Ctrl.
         if (content instanceof Ctrl.Definition)
-          result = @appendCtrl(content, '.th-container', options.args)
+          result = @appendCtrl(content, '.uih-container', options.args)
           result.ready -> done()
           @_current =
             type:       'ctrl'
@@ -108,7 +109,7 @@ Ctrl.define
 
 
       ###
-      Removes the host.
+      Removes the hosted control.
       ###
       clear: ->
         # Dispose of the Blaze view.
@@ -121,8 +122,8 @@ Ctrl.define
         elContainer.toggle(false)
 
         # Finish up.
-        TestHarness.el(null)
-        TestHarness.ctrl(null)
+        UIHarness.el(null)
+        UIHarness.ctrl(null)
         delete @_current
 
 
@@ -145,30 +146,31 @@ Ctrl.define
           elContent = @api.elContent()
 
           # Reset.
-          elContent.removeClass('th-fill')
-          elContainer.removeClass('th-fill')
+          elContent.removeClass('uih-fill')
+          elContainer.removeClass('uih-fill')
           for attr in ['width', 'height', 'left', 'top', 'right', 'bottom']
             elContainer.css(attr, '')
 
           # Adjust size.
           switch size
             when 'auto' then # No-op.
-            when 'fill'
-              elContent.addClass('th-fill')
-              if margin? and margin isnt 'none'
-                margin = Util.toSpacing(margin)
-                for attr in ['left', 'top', 'right', 'bottom']
-                  elContainer.css(attr, "#{ margin[attr] }px")
-
-              else
-                elContainer.addClass('th-fill')
-
+            when 'fill' then elContent.addClass('uih-fill')
             else
               if size?
                 size = Util.toSize(size)
                 elContainer.css('width', "#{ size.width }px")
                 elContainer.css('height', "#{ size.height }px")
-                elContent.addClass('th-fill')
+                elContent.addClass('uih-fill')
+
+          # Adjust margin.
+          margin = 0 if margin is 'none'
+          margin = DEFAULT_MARGIN if margin is undefined
+          margin = Util.toSpacing(margin)
+
+          elContainerOuter = @find('.uih-container-margin')
+          for attr in ['left', 'top', 'right', 'bottom']
+            elContainerOuter.css(attr, "#{ margin[attr] }px")
+
 
 
 
@@ -182,9 +184,9 @@ Ctrl.define
         if elContainer = @api.elContainer()
 
           # Reset CSS classes.
-          elContainer.removeClass 'th-left th-center th-right'
-          elContainer.removeClass 'th-top th-middle th-bottom'
-          elContainer.removeClass 'th-center-middle'
+          elContainer.removeClass 'uih-left uih-center uih-right'
+          elContainer.removeClass 'uih-top uih-middle uih-bottom'
+          elContainer.removeClass 'uih-center-middle'
 
           # Update CSS classes.
           switch size
@@ -192,8 +194,8 @@ Ctrl.define
             else
               align = Util.toAlignment(align ? 'center,middle')
               if align.x is 'center' and align.y is 'middle'
-                elContainer.addClass('th-center-middle')
+                elContainer.addClass('uih-center-middle')
               else
-                elContainer.addClass("th-#{ align.x } th-#{ align.y }")
+                elContainer.addClass("uih-#{ align.x } uih-#{ align.y }")
 
 

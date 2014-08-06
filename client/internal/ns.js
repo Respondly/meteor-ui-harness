@@ -3,6 +3,5 @@ Package level scope.
 NOTE: Must be a JS file to share the variables at package-scope.
       See Meteor documentation for more.
 */
-TH = {} // Internal namespace - shared within package only.
-
-
+INTERNAL = {} // Internal namespace - scoped within package only.
+UTIL = {} // Utility helpers scoped within this package only.

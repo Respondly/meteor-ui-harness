@@ -1,5 +1,6 @@
-#= require ./internal-api.js
+#= require ./internal/ns.js
 @expect = chai.expect
+
 
 hash = new ReactiveHash()
 LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -10,9 +11,9 @@ LOREM_WORDS = LOREM.split(' ')
 
 
 ###
-Root API for the TestHarness
+Root API for the [UIHarness]
 ###
-class TH.TestHarness
+class INTERNAL.UIHarness
   ###
   REACTIVE Gets or sets the current [Suite].
   ###
@@ -54,27 +55,29 @@ class TH.TestHarness
             - margin:     The margin to place around the hosted control
                           when the size is set to 'fill'.
                              String: {left|top|right|bottom}
-  ###
-  load: (content, options, callback) -> TH.host.insert(content, options, callback)
 
+            - args:       Arguments to pass to the content/ctrl/template.
+  ###
+  load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
 
 
   ###
   Removes the hosted control.
   ###
-  clear: -> TH.host.clear()
+  unload: -> INTERNAL.host.clear()
 
 
   ###
-  Resets the TestHarness to it's default state.
+  Resets the UIHarness to it's default state.
   ###
-  reset: -> TH.host.reset()
+  reset: -> INTERNAL.host.reset()
+
 
 
   ###
   Updates the visual state of the test-harness.
   ###
-  updateState: -> TH.host.updateState()
+  updateState: -> INTERNAL.host.updateState()
 
 
   ###
@@ -84,7 +87,7 @@ class TH.TestHarness
            - 'fill'
            - 'auto' (default)
   ###
-  size: (value) -> TH.host.size(value)
+  size: (value) -> INTERNAL.host.size(value)
 
 
   ###
@@ -94,7 +97,7 @@ class TH.TestHarness
            - x: left|center|right
            - y: top|middle|bottom
   ###
-  align: (value) -> TH.host.align(value)
+  align: (value) -> INTERNAL.host.align(value)
 
 
   ###
@@ -102,7 +105,7 @@ class TH.TestHarness
   Relevant when 'size' is set to 'fill'.
   @param value: String - {left|top|right|bottom}
   ###
-  margin: (value) -> TH.host.margin(value)
+  margin: (value) -> INTERNAL.host.margin(value)
 
 
   ###
@@ -190,15 +193,23 @@ class TH.TestHarness
     result
 
 
-
-
+  ###
+  Retrieves the computed CSS style on the given element.
+  @param el:    The element to examine.
+  @param prop:  The name of the property/attribute.
+  @returns string.
+  ###
+  getStyle: (el, prop) ->
+    return unless el
+    el = el[0] if el.jquery
+    window.getComputedStyle(el, null).getPropertyValue(prop)
 
 
 
 # EXPORT ----------------------------------------------------------------------
 
 
-TestHarness = new TH.TestHarness()
+UIHarness = new INTERNAL.UIHarness()
 
 
 
