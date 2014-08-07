@@ -7,8 +7,10 @@ Ctrl.define
       @autorun =>
         suite = UIHarness.suite() # Hook into reactive context.
         Deps.nonreactive =>
-            if Util.asValue(suite?.uiHarness?.title)
-              UIHarness.title(null)
+            if metaValues = suite?.uiHarness
+              UIHarness.title(null) if Util.asValue(metaValues.title)?
+              UIHarness.subtitle(null) if Util.asValue(metaValues.subtitle)?
+
 
     helpers:
       text: -> INTERNAL.headerText()
