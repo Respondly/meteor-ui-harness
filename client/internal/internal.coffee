@@ -24,6 +24,12 @@ INTERNAL.isInitialized = (value) -> hash.prop 'isInitialized', value, onlyOnChan
 
 
 ###
+REACTIVE: Gets or sets the screen dimensions.
+###
+INTERNAL.windowSize = (value) -> hash.prop 'windowSize', value
+
+
+###
 Loads the parent suite into the tree index.
 ###
 INTERNAL.gotoParentSuite = (callback) ->
@@ -91,4 +97,16 @@ Meteor.startup ->
   Deps.autorun ->
     if currentSuite = UIHarness.suite()
       INTERNAL.currentSuiteUid(currentSuite.uid())
+
+  # Monitor the screen size (throttled).
+  elWindow = $(window)
+  updateWindowSize = ->
+        size =
+          width:elWindow.width()
+          height:elWindow.height()
+        INTERNAL.windowSize(size)
+  updateWindowSize = updateWindowSize.throttle(100)
+  elWindow.resize (e) -> updateWindowSize()
+  updateWindowSize()
+
 

@@ -6,7 +6,8 @@ Ctrl.define
       # Keen the top of the [host] in sync with the height
       # of the header if it's visible.
       @autorun =>
-        title = INTERNAL.headerText() # Hook into reactive callback.
+        title      = INTERNAL.headerText() # Hook into reactive callback.
+        windowSize = INTERNAL.windowSize() # Hook into reactive callback.
         Deps.afterFlush =>
             top = @ctrl.children.header?.el().height() ? 0
             @el('.uih-host').css('top', (top + 1) + 'px')
