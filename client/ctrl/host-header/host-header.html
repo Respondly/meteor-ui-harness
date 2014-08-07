@@ -1,7 +1,12 @@
 <template name='uih-host-header'>
   <div class='uih-host-header'>
     <div class='uih-content'>
-      <h1>{{ title }}</h1>
+      {{#with text}}
+        <h1>{{ title }}</h1>
+        <h2>{{ subtitle }}</h2>
+      {{/with}}
     </div>
   </div>
 </template>
+
+

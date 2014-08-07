@@ -24,16 +24,20 @@ Update the [this] context that is passed to the
 "describe" function
 ###
 BDD.beforeDescribe (context) ->
-  context.title = setTitle
+  context.title    = (value) -> setHeaderText.call(context, 'title', value)
+  context.subtitle = (value) -> setHeaderText.call(context, 'subtitle', value)
 
 
 ###
-Sets the "display" title on the host header.
-@param title: The title to display:
+Sets the "display" title/subtitle on the host header.
+@param prop:  The name of the property attribute.
+@param value: The title to display:
                - String
                - Function
 ###
-setTitle = (title) ->
+setHeaderText = (prop, value) ->
   meta = @suite.uiHarness ?= {}
-  meta.title = title
+  meta[prop] = value
+
+
 

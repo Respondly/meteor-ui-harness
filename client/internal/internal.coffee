@@ -47,20 +47,38 @@ INTERNAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
 
 
 ###
-REACTIVE: The current display title.
+REACTIVE: Gets the current title/sub-title text for the header.
+          This is set either from:
+
+            1. Calling UIHarness.title(value)
+
+            2. Setting @title within a describe block:
+
+                describe 'suite', ->
+                  @title('My Title')
+
 ###
-INTERNAL.displayTitle = ->
-  # Retrieve reactive values.
-  viaProp   = UIHarness.title()
-  viaBefore = UIHarness.suite()?.uiHarness?.title
+INTERNAL.headerText = ->
+  asValue = (value) ->
+      value = value.call(UIHarness) if Object.isFunction(value)
+      value
 
-  # Explicitly set property values on UIHarness used first.
-  if viaProp?
-    return Util.asValue(viaProp)
+  getText = (prop) ->
+        # Retrieve reactive values.
+        viaProp   = UIHarness[prop]()
+        viaBefore = UIHarness.suite()?.uiHarness?[prop]
 
-  # Fall back to the @title value set within the "describe" statement.
-  if viaBefore?
-    return Util.asValue(viaBefore)
+        # Explicitly set title values on [UIHarness].
+        if viaProp?
+          return asValue(viaProp)
+
+        # Fall back to the @title(...) value set within the "describe" function.
+        if viaBefore?
+          return asValue(viaBefore)
+
+  result =
+    title:    getText('title')
+    subtitle: getText('subtitle')
 
 
 

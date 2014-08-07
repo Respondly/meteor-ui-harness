@@ -11,5 +11,5 @@ Ctrl.define
               UIHarness.title(null)
 
     helpers:
-      title: -> INTERNAL.displayTitle()
+      text: -> INTERNAL.headerText()
 

@@ -33,9 +33,15 @@ class INTERNAL.UIHarness
 
 
   ###
-  REACTIVE Gets or sets the display title in the harness.
+  REACTIVE Gets or sets the display title shown in the header of the Harness
   ###
   title: (value) -> hash.prop 'title', value, default:null
+
+
+  ###
+  REACTIVE Gets or sets the display sub-title shown in the header of the Harness
+  ###
+  subtitle: (value) -> hash.prop 'subtitle', value, default:null
 
 
 
@@ -78,6 +84,7 @@ class INTERNAL.UIHarness
   ###
   reset: ->
     @title(null)
+    @subtitle(null)
     INTERNAL.host.reset()
 
 

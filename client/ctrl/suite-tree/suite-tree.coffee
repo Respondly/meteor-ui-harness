@@ -76,13 +76,13 @@ Ctrl.define
         result.ready =>
             listCtrl = result.ctrl
             UIHarness.suite(suite)
+            INTERNAL.hoveredListItemCtrl(null)
 
             onComplete = =>
                   # Store state.
                   retiredListCtrl = @api.currentListCtrl()
                   @api.currentListCtrl(listCtrl)
 
-                  INTERNAL.hoveredListItemCtrl(null)
 
                   retire = (ctrl, done) ->
                       return done() unless ctrl?
