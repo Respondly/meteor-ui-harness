@@ -1,4 +1,4 @@
-#= require ./ns.js
+#= require ../ns.js
 
 
 ###

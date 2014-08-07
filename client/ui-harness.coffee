@@ -1,4 +1,4 @@
-#= require ./internal/ns.js
+#= require ./ns.js
 @expect = chai.expect
 
 
