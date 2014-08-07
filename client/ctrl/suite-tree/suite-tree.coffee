@@ -82,6 +82,8 @@ Ctrl.define
                   retiredListCtrl = @api.currentListCtrl()
                   @api.currentListCtrl(listCtrl)
 
+                  INTERNAL.hoveredListItemCtrl(null)
+
                   retire = (ctrl, done) ->
                       return done() unless ctrl?
                       ctrl.onHidden direction, ->

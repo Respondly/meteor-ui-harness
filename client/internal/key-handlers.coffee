@@ -28,7 +28,6 @@ Meteor.startup ->
         if ctrl = INTERNAL.hoveredListItemCtrl()
           type = ctrl.type
           if type.endsWith('-suite')
-            INTERNAL.hoveredListItemCtrl(null) # Reset.
             ctrl.open()
 
           if type.endsWith('-spec')
