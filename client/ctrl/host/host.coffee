@@ -154,7 +154,9 @@ Ctrl.define
           # Adjust size.
           switch size
             when 'auto' then # No-op.
-            when 'fill' then elContent.addClass('uih-fill')
+            when 'fill'
+              elContainer.addClass('uih-fill')
+              elContent.addClass('uih-fill')
             else
               if size?
                 size = Util.toSize(size)
