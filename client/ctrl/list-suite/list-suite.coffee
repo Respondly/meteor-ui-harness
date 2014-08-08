@@ -6,7 +6,7 @@ Ctrl.define
       open: -> INTERNAL.index.insertFromRight(@suite)
 
     helpers:
-      label: -> UTIL.formatText(@suite.name)
+      label: -> INTERNAL.formatText(@suite.name)
 
     events:
       'click': -> @api.open()

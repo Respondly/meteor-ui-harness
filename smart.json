@@ -19,6 +19,9 @@
     },
     "stylus-compiler": {
       "path": "../meteor-stylus-compiler"
+    },
+    "markdown": {
+      "path": "../meteor-markdown"
     }
   }
 }

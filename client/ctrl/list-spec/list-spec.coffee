@@ -33,7 +33,7 @@ Ctrl.define
 
 
     helpers:
-      label: -> UTIL.formatText(@spec.name)
+      label: -> INTERNAL.formatText(@spec.name)
       count: (value) -> @prop 'count', value
       isBoolean: -> @isBoolean
       cssClasses: ->

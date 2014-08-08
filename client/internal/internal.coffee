@@ -65,10 +65,7 @@ REACTIVE: Gets the current title/sub-title text for the header.
 
 ###
 INTERNAL.headerText = ->
-  asValue = (value) ->
-      value = value.call(UIHarness) if Object.isFunction(value)
-      value
-
+  asMarkdown = (value) -> INTERNAL.valueAsMarkdown(value)
   getText = (prop) ->
         # Retrieve reactive values.
         viaProp   = UIHarness[prop]()
@@ -76,15 +73,32 @@ INTERNAL.headerText = ->
 
         # Explicitly set title values on [UIHarness].
         if viaProp?
-          return asValue(viaProp)
+          return asMarkdown(viaProp)
 
         # Fall back to the @title(...) value set within the "describe" function.
         if viaBefore?
-          return asValue(viaBefore)
+          return asMarkdown(viaBefore)
 
   result =
     title:    getText('title')
     subtitle: getText('subtitle')
+
+
+
+INTERNAL.valueAsMarkdown = (value) ->
+  value = value.call(UIHarness) if Object.isFunction(value)
+  Markdown.toHtml(value)
+
+
+
+
+###
+Formats the text of labels within the index tree.
+###
+INTERNAL.formatText = (text) ->
+  text = Markdown.toHtml(text)
+  text = '&nbsp;' if Util.isBlank(text)
+  text
 
 
 

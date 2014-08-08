@@ -8,8 +8,8 @@ Ctrl.define
         suite = UIHarness.suite() # Hook into reactive context.
         Deps.nonreactive =>
             if metaValues = suite?.uiHarness
-              UIHarness.title(null) if Util.asValue(metaValues.title)?
-              UIHarness.subtitle(null) if Util.asValue(metaValues.subtitle)?
+              UIHarness.title(null)    if INTERNAL.valueAsMarkdown(metaValues.title)?
+              UIHarness.subtitle(null) if INTERNAL.valueAsMarkdown(metaValues.subtitle)?
 
 
     helpers:
