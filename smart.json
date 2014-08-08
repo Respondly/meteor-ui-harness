@@ -10,19 +10,19 @@
     "munit": {},
     "npm": {},
     "util": {
-      "path": "../meteor-util"
+      "path": "../util"
     },
     "bdd": {
-      "path": "../meteor-bdd"
+      "path": "../bdd"
     },
     "ctrl": {
-      "path": "../meteor-ctrl"
+      "path": "../ctrl"
     },
     "stylus-compiler": {
-      "path": "../meteor-stylus-compiler"
+      "path": "../stylus-compiler"
     },
     "markdown": {
-      "path": "../meteor-markdown"
+      "path": "../markdown"
     }
   }
 }

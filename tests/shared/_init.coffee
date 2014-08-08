@@ -2,5 +2,4 @@
 
 
 if Meteor.isClient
-  Meteor.startup ->
-    $('title').html('Tests:test-harness')
+  Meteor.startup -> $('title').html('Tests: UI Harness')
