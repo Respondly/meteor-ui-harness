@@ -8,6 +8,7 @@
   "packages": {
     "sugar": {},
     "munit": {},
+    "npm": {},
     "util": {
       "path": "../meteor-util"
     },

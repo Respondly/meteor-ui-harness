@@ -7,7 +7,7 @@ Package.describe({
 Package.on_use(function (api) {
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
-  api.use(['coffeescript', 'sugar', 'chai']);
+  api.use(['coffeescript', 'sugar', 'chai', 'npm']);
   api.use(['util', 'bdd', 'ctrl', 'stylus-compiler', 'markdown']);
   api.export('chai');
   api.export('UIHarness');
@@ -15,6 +15,7 @@ Package.on_use(function (api) {
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/api.coffee', ['client', 'server']);
+  api.add_files('server/markdown.coffee', 'server');
   api.add_files('client/ctrl/suite-tree/suite-tree.html', 'client');
   api.add_files('client/ctrl/list/list.html', 'client');
   api.add_files('client/ctrl/host-header/host-header.html', 'client');
