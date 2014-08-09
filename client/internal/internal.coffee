@@ -1,4 +1,4 @@
-#= require ../ns.js
+#= require ../ns.client.js
 
 ###
 Internal API for shared functions and state.
@@ -65,23 +65,35 @@ REACTIVE: Gets the current title/sub-title text for the header.
 
 ###
 INTERNAL.headerText = ->
-  asMarkdown = (value) -> INTERNAL.valueAsMarkdown(value)
   getText = (prop) ->
+
+        formatValue = (value) ->
+              return value unless Object.isString(value)
+              INTERNAL.valueAsMarkdown(value)
+
         # Retrieve reactive values.
         viaProp   = UIHarness[prop]()
         viaBefore = UIHarness.suite()?.uiHarness?[prop]
 
         # Explicitly set title values on [UIHarness].
         if viaProp?
-          return asMarkdown(viaProp)
+          return formatValue(viaProp)
 
         # Fall back to the @title(...) value set within the "describe" function.
         if viaBefore?
-          return asMarkdown(viaBefore)
+          return formatValue(viaBefore)
 
+  title = getText('title')
+  subtitle = getText('subtitle')
+
+  if title is true
+    if suiteName = UIHarness.suite().name
+      title = suiteName
+
+  # Finish up.
   result =
-    title:    getText('title')
-    subtitle: getText('subtitle')
+    title:    title
+    subtitle: subtitle
 
 
 
