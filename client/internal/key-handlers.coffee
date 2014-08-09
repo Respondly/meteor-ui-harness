@@ -1,5 +1,6 @@
 KEYS =
   DELETE: 8
+  ENTER: 13
   CURSOR_LEFT: 37
   CURSOR_RIGHT: 39
 
@@ -24,7 +25,7 @@ Meteor.startup ->
 
 
       # Handle "open suite" keys (right key).
-      if isOverTree and keyCode is KEYS.CURSOR_RIGHT
+      if isOverTree and (keyCode is KEYS.CURSOR_RIGHT or keyCode is KEYS.ENTER)
         if ctrl = INTERNAL.hoveredListItemCtrl()
           type = ctrl.type
           if type.endsWith('-suite')

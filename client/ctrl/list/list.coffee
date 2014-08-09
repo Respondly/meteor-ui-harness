@@ -36,7 +36,10 @@ Ctrl.define
     helpers:
       mouseOver: (e, isOver) ->
         # Store a reference to the currently overed list-item ctrl.
-        ctrl = Ctrl.fromElement(e) ? null
+        if isOver
+          ctrl = Ctrl.fromElement(e) ? null
+        else
+          ctrl = null
         INTERNAL.hoveredListItemCtrl(ctrl)
 
 
@@ -51,4 +54,5 @@ Ctrl.define
     events:
       'mouseenter .uih-items > li': (e) -> @helpers.mouseOver(e, true)
       'mouseleave .uih-items > li': (e) -> @helpers.mouseOver(e, false)
+
 
