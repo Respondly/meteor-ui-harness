@@ -200,4 +200,11 @@ Ctrl.define
               else
                 elContainer.addClass("uih-#{ align.x } uih-#{ align.y }")
 
+    helpers:
+      containerClass: ->
+        ctrl = UIHarness.ctrl()
+        if ctrl
+          # Provide a simple for putting styles in test/spec files.
+          "#{ ctrl.type }-outer"
+
 
