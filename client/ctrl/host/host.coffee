@@ -161,8 +161,14 @@ Ctrl.define
             else
               if size?
                 size = Util.toSize(size)
-                elContent.css('width', "#{ size.width }px") if size.width?
-                elContent.css('height', "#{ size.height }px") if size.height?
+                setSize = (prop) ->
+                      if size[prop]?
+                        unit  = size["#{prop}Unit"]
+                        value = size.toValueString(prop, 'px')
+                        elContent.css(prop, value)
+                        elContainer.css(prop, value) if unit is '%'
+                setSize('width')
+                setSize('height')
 
           # Adjust margin.
           margin = 0 if margin is 'none'
