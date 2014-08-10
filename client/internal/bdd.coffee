@@ -26,6 +26,7 @@ Update the [this] context that is passed to the
 BDD.beforeDescribe (context) ->
   context.title    = (value) -> setHeaderText.call(context, 'title', value)
   context.subtitle = (value) -> setHeaderText.call(context, 'subtitle', value)
+  context.hash = UIHarness.hash
 
 
 ###

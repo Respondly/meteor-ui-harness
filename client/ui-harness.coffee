@@ -2,7 +2,7 @@
 @expect = chai.expect
 
 
-hash = new ReactiveHash()
+hash = new ReactiveHash() # Internal hash.
 LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 LOREM_WORDS = LOREM.split(' ')
 depsHandles = []
@@ -14,6 +14,10 @@ depsHandles = []
 Root API for the [UIHarness]
 ###
 class INTERNAL.UIHarness
+  constructor: ->
+    @hash = new ReactiveHash() # Hash used by specs.
+
+
   ###
   Provides global configruation for the UIHarness.
   @param options:
@@ -94,6 +98,7 @@ class INTERNAL.UIHarness
   reset: ->
     @title(null)
     @subtitle(null)
+    @hash.clear()
     INTERNAL.host.reset()
     depsHandles.each (handle) -> handle?.stop?()
     depsHandles = []
