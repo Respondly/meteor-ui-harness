@@ -1,11 +1,11 @@
-#= require ./ns.js
+#= require ./ns.client.js
 @expect = chai.expect
 
 
 hash = new ReactiveHash()
 LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 LOREM_WORDS = LOREM.split(' ')
-
+depsHandles = []
 
 # ----------------------------------------------------------------------
 
@@ -14,6 +14,15 @@ LOREM_WORDS = LOREM.split(' ')
 Root API for the [UIHarness]
 ###
 class INTERNAL.UIHarness
+  ###
+  Provides global configruation for the UIHarness.
+  @param options:
+            - title: The root title.
+  ###
+  configure: (options = {}) ->
+    BDD.suite.name = options.title if options.title?
+
+
   ###
   REACTIVE Gets or sets the current [Suite].
   ###
@@ -86,6 +95,20 @@ class INTERNAL.UIHarness
     @title(null)
     @subtitle(null)
     INTERNAL.host.reset()
+    depsHandles.each (handle) -> handle?.stop?()
+    depsHandles = []
+
+
+  ###
+  Safely provides [Deps.autorun] funtionality stopping the
+  handle when the UI-Harness is reset.
+  @param func: The function to monitor.
+  ###
+  autorun: (func) ->
+    handle = Deps.autorun(func)
+    depsHandles = depsHandles ?= []
+    depsHandles.push(handle)
+    handle
 
 
 

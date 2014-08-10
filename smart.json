@@ -7,7 +7,6 @@
   "git": "",
   "packages": {
     "sugar": {},
-    "munit": {},
     "npm": {},
     "util": {
       "path": "../util"
@@ -18,8 +17,11 @@
     "ctrl": {
       "path": "../ctrl"
     },
-    "stylus-compiler": {
-      "path": "../stylus-compiler"
+    "ctrls-input": {
+      "path": "../ctrls-input"
+    },
+    "css-stylus": {
+      "path": "../css-stylus"
     },
     "markdown": {
       "path": "../markdown"
