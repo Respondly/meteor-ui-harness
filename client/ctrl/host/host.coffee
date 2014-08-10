@@ -15,9 +15,9 @@ Ctrl.define
       elContainer: -> @find('.uih-container')
       elContent: -> $(@api.elContainer()?.children()[0])
 
-      size: (value) -> @prop 'size', value, default:DEFAULT_SIZE
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
+      size: (value) -> @prop 'size', value, default:DEFAULT_SIZE
 
 
       ###
@@ -150,6 +150,7 @@ Ctrl.define
           elContainer.removeClass('uih-fill')
           for attr in ['width', 'height', 'left', 'top', 'right', 'bottom']
             elContainer.css(attr, '')
+            elContent.css(attr, '')
 
           # Adjust size.
           switch size
@@ -160,9 +161,8 @@ Ctrl.define
             else
               if size?
                 size = Util.toSize(size)
-                elContainer.css('width', "#{ size.width }px")
-                elContainer.css('height', "#{ size.height }px")
-                elContent.addClass('uih-fill')
+                elContent.css('width', "#{ size.width }px") if size.width?
+                elContent.css('height', "#{ size.height }px") if size.height?
 
           # Adjust margin.
           margin = 0 if margin is 'none'

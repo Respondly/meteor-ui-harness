@@ -64,7 +64,7 @@ class INTERNAL.UIHarness
                   - String (HTML)
   @param options:
             - size:       The size of the control:
-                             - 'width,height', eg: '20,30'
+                             - 'width,height', eg: '20,30', 'auto,30'
                              - 'fill'
                              - 'auto' (default)
 
