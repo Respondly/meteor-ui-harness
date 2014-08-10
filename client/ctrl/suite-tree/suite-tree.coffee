@@ -74,6 +74,7 @@ Ctrl.define
           cssClass: revealClass
         result = @appendCtrl('uih-list', '.uih-tree-outer', data:args)
         result.ready =>
+            # Store new state.
             listCtrl = result.ctrl
             UIHarness.suite(suite)
             INTERNAL.hoveredListItemCtrl(null)
@@ -102,14 +103,22 @@ Ctrl.define
                       Util.delay 10, => fadeTitle(true)
                       callback?() # Complete.
 
-            if isAnimated
-              # Remove the offset class.
-              Util.delay 0, =>
-                  listCtrl.el().removeClass(revealClass)
-                  fadeTitle(false)
-                  Util.delay SLIDE_DURATION, => onComplete()
+            removeList = =>
+                if isAnimated
+                  # Remove the offset class.
+                  Util.delay 0, =>
+                      listCtrl.el().removeClass(revealClass)
+                      fadeTitle(false)
+                      Util.delay SLIDE_DURATION, => onComplete()
+                else
+                  onComplete() # No slide animation.
+
+            # Alert the list that it is about to be hidden.
+            if currentListCtrl = @api.currentListCtrl()
+              currentListCtrl.onHiding direction, => removeList()
             else
-              onComplete() # No slide animation.
+              removeList()
+
 
 
 

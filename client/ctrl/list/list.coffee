@@ -20,9 +20,9 @@ Ctrl.define
         BDD.runMany beforeHandlers, { this:UIHarness, throw:true }, -> callback?()
 
       ###
-      Invoked when the list has been taken off screen.
+      Invoked immediately before the list is taken off screen.
       ###
-      onHidden: (direction, callback) ->
+      onHiding: (direction, callback) ->
         if direction is 'right'
           # Only run "after" handlers if the user is stepping up/out
           # of the suite, not drilling deeper down into the suite.
@@ -31,6 +31,12 @@ Ctrl.define
 
         else
           callback?()
+
+
+      ###
+      Invoked when the list has been taken off screen.
+      ###
+      onHidden: (direction, callback) -> callback?()
 
 
     helpers:
