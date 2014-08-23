@@ -1,0 +1,44 @@
+<template name='uih-list-spec'>
+  <li class='uih-list-spec'>
+    <div class='uih-spec-hover'></div>
+    <div class='uih-details {{ cssClasses }}'>
+      <div class='uih-bullet'></div>
+      <div class='uih-label'>{{{ label }}}</div>
+      <div class='uih-count-badge'>{{ count }}</div>
+    </div>
+
+    {{#if isBoolean}}
+      {{> ctrl
+            type='c-checkbox-slider'
+            id='chk'
+            isClickable=false
+      }}
+    {{/if}}
+
+    {{#if select}}
+      <div class='uih-select-options'>
+        <select>
+          {{#each select.options}}
+            <option value='{{ value }}'>{{ label }}</option>
+          {{/each}}
+        </select>
+      </div>
+    {{/if}}
+
+    {{#if radio}}
+      <div class='uih-radio-options'>
+        <ul>
+          {{#each radio.options}}
+            <li>
+              <label class='{{ cssClass }}'>
+                <input type='radio' name='{{ uid }}' value='{{ value }}'>
+                <code>{{ label }}</code>
+              </label>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+  </li>
+</template>

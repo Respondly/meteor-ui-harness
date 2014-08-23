@@ -9,5 +9,23 @@ $TH_INDEX_TEXT_DARK = #7E8893
 $TH_INDEX_BG_LIGHT = #e0e4ea
 $TH_INDEX_BG_DARK = #d0d7e0
 
+$TH_INDEX_HEADER_HEIGHT = 40px
+
+$TH_INDEX_DIVIDER_COLOR = darken($TH_INDEX_BG_DARK, 3%)
+
 $TH_LINK_BLUE = #2987d0
 $TH_BLUE_GRADIENT = linear-gradient(top, #a7c7ec, #6984d5)
+
+$TH_CODE_COLOR = #d14
+
+
+uih-code()
+  padding 2px 4px
+  color $TH_CODE_COLOR
+  white-space nowrap
+  background-color #f7f7f9
+  border 1px solid #e1e1e8
+
+uih-index-code()
+  background rgba(white, 0.3)
+  border-color darken($TH_INDEX_BG_LIGHT, 7%)

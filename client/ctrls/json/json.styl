@@ -1,0 +1,32 @@
+@import 'core.import'
+
+
+.uih-json
+  font-family Monaco, Menlo, Consolas, "Courier New", monospace
+  font-size 12px
+  box-sizing border-box
+  li
+    padding-bottom 4px
+    > ul
+      margin-left 20px
+      margin-top 5px
+
+  .uih-key
+    color #890193
+
+  .uih-value
+    color darken(white, 75%)
+
+    &.uih-string
+      color #C61604
+
+    &.uih-number, &.uih-bool
+      color #1900D3
+
+    &.uih-circular
+      color rgba(black, 0.3)
+
+    &.uih-null, &.uih-undefined, &.uih-excluded
+      color darken(white, 30%)
+
+

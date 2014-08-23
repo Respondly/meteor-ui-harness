@@ -1,0 +1,83 @@
+@import 'ui-harness.import'
+
+
+
+.uih-suite-tree-header
+  DURATION = 0.2s
+
+  background $TH_INDEX_BG_DARK
+  border-bottom solid 1px rgba(black, 0.15)
+  abs-pos 0, 0, 0, null
+  height $TH_INDEX_HEADER_HEIGHT
+
+  .uih-btn
+    cursor pointer
+    width 35px
+    opacity 0
+    transition transform DURATION, opacity DURATION
+    > .uih-inner
+      abs-pos()
+    &:active
+      > .uih-inner
+        transform translateY(1px)
+
+  .uih-back-btn
+    abs-pos 0, 0, null, 0
+    .uih-ico
+      package-image('ui-harness', 'nav-back.png', 13, 18)
+    &:hover
+      .uih-ico
+        package-image('ui-harness', 'nav-back-hover.png', 13, 18)
+
+  .uih-refresh-btn
+    abs-pos null, 0, 0, 0
+    width 35px
+    .uih-ico
+      package-image('ui-harness', 'refresh.png', 18, 18)
+    &:hover
+      .uih-ico
+        package-image('ui-harness', 'refresh-hover.png', 18, 18)
+
+
+  .uih-titles
+    abs-pos 10, 8, 10, null
+    height 26px
+    transition left DURATION, right DURATION
+
+  .uih-title
+    abs-pos 0, 0, 0, 0
+    ellipsis()
+    text-align center
+    font-weight bold
+    text-shadow 0px 1px rgba(white, 0.9)
+    font-size 18px
+    color $TH_INDEX_TEXT_DARK
+    transition opacity DURATION
+    cursor default
+    line-height normal
+
+
+// ------------------------------------------------------
+
+
+.uih-suite-tree
+  &.uih-loaded
+    > .uih-suite-tree-header
+      .uih-back-btn
+        transform translateX(-35px)
+      .uih-refresh-btn
+        transform translateX(35px)
+
+
+  // ------------------------------------------------------
+
+
+  &.uih-has-parent
+    .uih-suite-tree-header
+      .uih-titles
+        left 35px
+        right 35px
+      .uih-btn
+        transform translateX(0px)
+        opacity 1
+

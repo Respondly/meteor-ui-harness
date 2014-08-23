@@ -1,0 +1,14 @@
+<template name='uih-list-suite-section'>
+  <div class='uih-list-suite-section'>
+
+    <div class='uih-title'>
+      {{> ctrl type='c-twisty' id='twisty' opacity=0.2 }}
+      {{{ title }}}
+    </div>
+
+    <div class='uih-list-outer'>
+      {{> ctrl type='uih-list' data=listData expandSections=false }}
+    </div>
+
+  </div>
+</template>

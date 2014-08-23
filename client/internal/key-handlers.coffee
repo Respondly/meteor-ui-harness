@@ -18,7 +18,11 @@ Meteor.startup ->
       if keyCode is KEYS.DELETE or keyCode is KEYS.CURSOR_LEFT
         # Step up to the parent suite if the DELETE/BACKSPACE key
         # was pressed while the mouse is over the index.
-        INTERNAL.gotoParentSuite() if isOverTree
+        if isOverTree
+          if e.metaKey
+            INTERNAL.gotoRootSuite()
+          else
+            INTERNAL.gotoParentSuite()
 
         # Prevent backspacing off the page by default.
         e.preventDefault()

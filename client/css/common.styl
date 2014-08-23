@@ -1,6 +1,13 @@
 @import 'ui-harness.import'
 
 
+/* Make all UIHarness classes conform to "border-box" */
+*[class*='uih-']
+  box-sizing border-box
+
+
+// ------------------------------------------------------
+
 
 .uih-count-badge
   background rgba(black, 0.1)
@@ -52,15 +59,10 @@ code, pre
   font-size 12px
   color #333333
   border-radius 3px
+  text-shadow none
 
 code
-  padding 2px 4px
-  color #d14
-  white-space nowrap
-  background-color #f7f7f9
-  border 1px solid #e1e1e8
-
-
+  uih-code()
 
 
 

@@ -1,0 +1,33 @@
+@import 'ui-harness.import'
+
+
+.uih-list-suite-section
+  .uih-title
+    position relative
+    background darken($TH_INDEX_DIVIDER_COLOR, 5%)
+    padding 5px
+    padding-left 25px
+    color white
+    text-shadow 0px 1px rgba(black, 0.25)
+    cursor pointer
+    .c-twisty
+      abs-pos 8, 11, null, null
+
+  > .uih-list-outer
+    position relative
+    padding-left 20px
+    overflow hidden
+
+
+    // List Overrides ------------------------------------------------------
+
+    > .uih-list
+      position relative
+      > ul > li:last-child
+        border-bottom none
+
+      .uih-empty
+        padding-right 20px
+        margin-top 8px
+        margin-bottom 8px
+

@@ -17,11 +17,17 @@
     "ctrl": {
       "path": "../ctrl"
     },
+    "ctrls": {
+      "path": "../ctrls"
+    },
     "ctrls-input": {
       "path": "../ctrls-input"
     },
     "css-stylus": {
       "path": "../css-stylus"
+    },
+    "css-common": {
+      "path": "../css-common"
     },
     "markdown": {
       "path": "../markdown"

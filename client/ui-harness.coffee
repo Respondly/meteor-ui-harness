@@ -7,6 +7,7 @@ LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo
 LOREM_WORDS = LOREM.split(' ')
 depsHandles = []
 
+
 # ----------------------------------------------------------------------
 
 
@@ -15,7 +16,21 @@ Root API for the [UIHarness]
 ###
 class INTERNAL.UIHarness
   constructor: ->
+    @__internal__ =
+      timers:[]
     @hash = new ReactiveHash() # Hash used by specs.
+
+
+  ###
+  Gets or sets the value for the given key.
+  @param key:         The unique identifier of the value (this is prefixed with the namespace).
+  @param value:       (optional). The value to set (pass null to remove).
+  @param options:
+            default:  (optional). The default value to return if the session does not contain the value (ie. undefined).
+            onlyOnChange:  (optional). Will only call set if the value has changed.
+                                           Default is set by the [defaultOnlySetIfChanged] property.
+  ###
+  prop: (key, value, options) -> @hash.prop(key, value, options)
 
 
   ###
@@ -35,8 +50,18 @@ class INTERNAL.UIHarness
 
   ###
   REACTIVE Retrieves the element for the content that is currently under test.
+  @param value: (optional)
+            - Nothing: READ.
+            - String: READ with selector.
+            - jQuery element: WRITE.
   ###
-  el: (value) -> hash.prop 'el', value, default:null
+  el: (value) ->
+    selector = ''
+    if Object.isString(value)
+      selector = value
+      value = undefined
+    result = hash.prop 'el', value, default:null
+    if Util.isBlank(selector) then result else result.find(selector)
 
 
   ###
@@ -77,6 +102,7 @@ class INTERNAL.UIHarness
                              - x: left|center|right
                              - y: top|middle|bottom
 
+
             - margin:     The margin to place around the hosted control
                           when the size is set to 'fill'.
                              String: {left|top|right|bottom}
@@ -84,6 +110,37 @@ class INTERNAL.UIHarness
             - args:       Arguments to pass to the content/ctrl/template.
   ###
   load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
+
+
+  ###
+  Loads a visual object.
+  @param value: The object to load.
+  @param options:
+            - showFuncs:    Flag indicating whether function values are rendered.
+            - invokeFuncs:  Flag indicating whether functions should be invoked to convert them to a value.
+            - exclude:      The key name(s) to exclude from the output.
+                            String or Array of strings.
+  ###
+  json: (value, options = {}) ->
+    Deps.nonreactive =>
+      return unless Util.isObject(value)
+      options.showFuncs ?= true
+      if ctrl = @ctrl()
+        if ctrl.type is 'uih-json'
+          # Set the value on existing JSON ctrl.
+          ctrl.showFuncs(options.showFuncs)
+          ctrl.invokeFuncs(options.invokeFuncs)
+          ctrl.exclude(options.exclude)
+          ctrl.value(value)
+          return
+
+      # Load new JSON ctrl.
+      args =
+        value:        value
+        showFuncs:    options.showFuncs
+        invokeFuncs:  options.invokeFuncs
+        exclude:      options.exclude
+      @load 'uih-json', size:'fill', args:args, scroll:true
 
 
   ###
@@ -98,7 +155,9 @@ class INTERNAL.UIHarness
   reset: ->
     @title(null)
     @subtitle(null)
+    @scroll(false)
     @hash.clear()
+    @stopTimers()
     INTERNAL.host.reset()
     depsHandles.each (handle) -> handle?.stop?()
     depsHandles = []
@@ -126,11 +185,25 @@ class INTERNAL.UIHarness
   ###
   Gets or sets the size of the hosted controls
   @param value: String
-           - 'width,height', eg: '20,30'
+           - 'width,height', eg: '20,30', [20,30], (30,40)
            - 'fill'
            - 'auto' (default)
   ###
-  size: (value) -> INTERNAL.host.size(value)
+  size: (value...) ->
+    value = undefined if value.length is 0
+    INTERNAL.host.size(value)
+
+
+  ###
+  Gets or sets the scroll behavior of the host.
+  @param value:
+            - boolean (value for X and Y)
+            - {x:boolean, y:boolean}
+  ###
+  scroll: (value...) ->
+    value = undefined if value.length is 0
+    INTERNAL.host.scroll(value)
+
 
 
   ###
@@ -149,6 +222,7 @@ class INTERNAL.UIHarness
   @param value: String - {left|top|right|bottom}
   ###
   margin: (value) -> INTERNAL.host.margin(value)
+
 
 
   ###
@@ -186,7 +260,17 @@ class INTERNAL.UIHarness
   @returns  The timer handle.
             Use the [stop] method to cancel the timer.
   ###
-  delay: (msecs, func) -> Util.delay(msecs, func)
+  delay: (msecs, func) ->
+    timer = Util.delay(msecs, func)
+    @__internal__.timers.push(timer)
+
+
+  ###
+  Stops any timers that have been started.
+  ###
+  stopTimers: ->
+    timer.stop() for timer in @__internal__.timers
+    @__internal__.timers = []
 
 
 

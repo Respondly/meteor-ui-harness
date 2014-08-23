@@ -1,0 +1,100 @@
+@import 'ui-harness.import'
+
+
+
+li.uih-list-spec
+  .uih-details
+    position relative
+    padding-left 20px
+
+    .uih-bullet
+      abs-pos 3, 6, null, null
+      size 8, 8
+      background rgba(black, 0.1)
+      border-radius 50%
+
+    .uih-label
+      margin-right 20px
+
+    .uih-count-badge
+      abs-pos null, 0, 0, 0
+      display none
+
+    &.uih-has-count
+      .uih-count-badge
+        display block
+
+    &.uih-blue-bullet
+      .uih-bullet
+        background $TH_BLUE_GRADIENT
+
+
+  // ----------------------------------------------------
+
+  .uih-spec-hover
+    abs-pos 0, 0, null, 0
+    width 4px
+    background linear-gradient(top, lighten($TH_LINK_BLUE, 20%), $TH_LINK_BLUE)
+    display none
+  &:hover
+    .uih-spec-hover
+      display block
+
+
+  // ------------------------------------------------------
+
+  .c-checkbox-slider
+    abs-pos null, 11, 10, null
+
+  // ------------------------------------------------------
+
+  .uih-select-options
+    position relative
+    margin-left 20px
+    margin-top 5px
+    select
+      width 100%
+      background rgba(white, 0.8)
+      border-color darken($TH_INDEX_BG_DARK, 8%)
+      appearance none
+      outline none
+      line-height normal
+      padding 8px 10px
+
+  // ------------------------------------------------------
+
+  .uih-radio-options
+    position relative
+    margin-left 20px
+    margin-top 5px
+
+    .uih-not-checked
+      code
+        background none
+        border-color transparent
+        color rgba(black, 0.6)
+
+    .uih-checked
+      cursor default
+
+    ul
+      margin 0
+      paddding 0
+    li
+      margin-bottom 5px
+    label
+      display block
+      &:hover
+        code
+          uih-index-code()
+
+    input
+      margin-right 3px
+
+    .uih-blank-value
+      code, code:hover
+        background none !important
+        border-color transparent !important
+        color rgba(black, 0.3) !important
+
+

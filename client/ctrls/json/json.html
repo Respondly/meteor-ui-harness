@@ -1,0 +1,20 @@
+<template name='uih-json'>
+  <ul class='uih-json'>
+    {{#each props}}
+      <li>
+        <span class='uih-key'>{{ key }}</span>:
+        {{#if isObject}}
+          {{> ctrl type='uih-json'
+                value=value
+                parentKey=key
+                showFuncs=showFuncs
+                invokeFuncs=invokeFuncs
+                exclude=exclude
+          }}
+        {{else}}
+          <span class='uih-value {{ valueCss }}'>{{ value }}</span>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+</template>

@@ -3,7 +3,6 @@
 ###
 Internal API for shared functions and state.
 ###
-
 INTERNAL.hash = hash = new ReactiveHash()
 
 
@@ -33,8 +32,15 @@ INTERNAL.windowSize = (value) -> hash.prop 'windowSize', value
 Loads the parent suite into the tree index.
 ###
 INTERNAL.gotoParentSuite = (callback) ->
-  if suite = UIHarness.suite()?.parent
-    INTERNAL.index.insertFromLeft(suite, callback)
+  if parentSuite = UIHarness.suite()?.parent
+    # Step up a level if this is a "section"
+    # ie. [describe.section '', ->]
+    parentSuite = parentSuite.parent if parentSuite.isSection
+
+    if parentSuite is BDD.suite
+      INTERNAL.gotoRootSuite()
+    else
+      INTERNAL.index.insertFromLeft(parentSuite, callback)
 
 
 ###
@@ -42,6 +48,7 @@ Loads the root suite into the tree index.
 ###
 INTERNAL.gotoRootSuite = (callback) ->
   INTERNAL.index.insertFromLeft(BDD.suite, callback)
+  UIHarness.reset()
 
 
 
@@ -49,6 +56,35 @@ INTERNAL.gotoRootSuite = (callback) ->
 LOCAL-STORAGE: Gets or sets the UID of the current suite.
 ###
 INTERNAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
+
+
+###
+Invokes the "before" handlers for the given suite.
+###
+INTERNAL.runBeforeHandlers = (suite, options = {}, callback) ->
+  if suite
+    deep = options.deep ? false
+    beforeHandlers = suite.getBefore(deep)
+    BDD.runMany beforeHandlers, { this:UIHarness, throw:true }, -> callback?()
+
+
+###
+Refrehses a suite, clearing stored state and
+running all before handlers.
+###
+INTERNAL.refreshSuite = (suite, options = {}) ->
+  if suite
+    # Clear all [localStorage] state.
+    suite.localStorage.clear()
+    for spec in suite.specs()
+      spec.localStorage.clear()
+
+    # Reset and run "before" handlers.
+    UIHarness.reset()
+    INTERNAL.runBeforeHandlers(suite, options)
+
+
+
 
 
 
@@ -72,7 +108,7 @@ INTERNAL.headerText = ->
   getText = (prop) ->
         # Retrieve reactive values.
         viaProp   = UIHarness[prop]()
-        viaBefore = UIHarness.suite()?.uiHarness?[prop]
+        viaBefore = UIHarness.suite()?.meta?[prop]
 
         # Explicitly set title values on [UIHarness].
         if viaProp?
@@ -85,9 +121,12 @@ INTERNAL.headerText = ->
   title = getText('title')
   subtitle = getText('subtitle')
 
+  title = true if title is undefined
   if title is true
-    if suiteName = UIHarness.suite().name
+    if suiteName = UIHarness.suite()?.name
       title = formatValue(suiteName)
+
+  title = null if title is false
 
   # Finish up.
   result =
@@ -107,31 +146,8 @@ INTERNAL.valueAsMarkdown = (value) ->
 Formats the text of labels within the index tree.
 ###
 INTERNAL.formatText = (text) ->
+  text = Util.asValue(text)
   text = Markdown.toHtml(text)
   text = '&nbsp;' if Util.isBlank(text)
   text
-
-
-
-# ----------------------------------------------------------------------
-
-
-
-Meteor.startup ->
-  # Keep the current Suite ID up-to-date.
-  Deps.autorun ->
-    if currentSuite = UIHarness.suite()
-      INTERNAL.currentSuiteUid(currentSuite.uid())
-
-  # Monitor the screen size (throttled).
-  elWindow = $(window)
-  updateWindowSize = ->
-        size =
-          width:elWindow.width()
-          height:elWindow.height()
-        INTERNAL.windowSize(size)
-  updateWindowSize = updateWindowSize.throttle(100)
-  elWindow.resize (e) -> updateWindowSize()
-  updateWindowSize()
-
 

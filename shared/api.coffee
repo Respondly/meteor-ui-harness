@@ -1,4 +1,0 @@
-#= base
-UIHarness = {} unless UIHarness?
-
-
