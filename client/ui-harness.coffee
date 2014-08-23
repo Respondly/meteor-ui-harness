@@ -1,4 +1,5 @@
 #= require ./ns.client.js
+#= require ./log
 @expect = chai.expect
 
 
@@ -16,9 +17,9 @@ Root API for the [UIHarness]
 ###
 class INTERNAL.UIHarness
   constructor: ->
-    @__internal__ =
-      timers:[]
+    @__internal__ = { timers:[] }
     @hash = new ReactiveHash() # Hash used by specs.
+    @log = INTERNAL.log
 
 
   ###
@@ -107,40 +108,12 @@ class INTERNAL.UIHarness
                           when the size is set to 'fill'.
                              String: {left|top|right|bottom}
 
+            - cssClass:   A CSS class to apply to the container element.
+
             - args:       Arguments to pass to the content/ctrl/template.
   ###
   load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
 
-
-  ###
-  Loads a visual object.
-  @param value: The object to load.
-  @param options:
-            - showFuncs:    Flag indicating whether function values are rendered.
-            - invokeFuncs:  Flag indicating whether functions should be invoked to convert them to a value.
-            - exclude:      The key name(s) to exclude from the output.
-                            String or Array of strings.
-  ###
-  json: (value, options = {}) ->
-    Deps.nonreactive =>
-      return unless Util.isObject(value)
-      options.showFuncs ?= true
-      if ctrl = @ctrl()
-        if ctrl.type is 'uih-json'
-          # Set the value on existing JSON ctrl.
-          ctrl.showFuncs(options.showFuncs)
-          ctrl.invokeFuncs(options.invokeFuncs)
-          ctrl.exclude(options.exclude)
-          ctrl.value(value)
-          return
-
-      # Load new JSON ctrl.
-      args =
-        value:        value
-        showFuncs:    options.showFuncs
-        invokeFuncs:  options.invokeFuncs
-        exclude:      options.exclude
-      @load 'uih-json', size:'fill', args:args, scroll:true
 
 
   ###

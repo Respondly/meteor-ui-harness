@@ -115,7 +115,7 @@ BDD.beforeDescribe (context) ->
   context.subtitle = (value) -> setHeaderText.call(context, 'subtitle', value)
   context.ctrl = -> UIHarness.ctrl()
   context.hash = UIHarness.hash
-  context.json = (value, options) -> UIHarness.json(value, options)
+  context.log = INTERNAL.log
   context.prop = (key, value, options) -> UIHarness.prop(key, value, options)
   context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
 

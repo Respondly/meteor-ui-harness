@@ -18,6 +18,7 @@ Ctrl.define
 
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
+      cssClass: (value) -> @prop 'cssClass', value, default:''
 
       size: (value) ->
         result = @prop 'size', value, default:[DEFAULT_SIZE]
@@ -64,6 +65,7 @@ Ctrl.define
               @api.align(options.align ? DEFAULT_ALIGN)
               @api.margin(options.margin ? DEFAULT_MARGIN)
               @api.scroll(options.scroll ? DEFAULT_SCROLL)
+              @api.cssClass(options.cssClass ? '')
               @api.updateState()
 
               # Store global state.
@@ -122,6 +124,7 @@ Ctrl.define
         @api.clear()
         @api.size(DEFAULT_SIZE)
         @api.align(DEFAULT_ALIGN)
+        @api.cssClass('')
 
 
       ###
@@ -244,10 +247,13 @@ Ctrl.define
 
 
       containerClass: ->
-        ctrl = UIHarness.ctrl()
-        if ctrl
-          # Provide a simple for putting styles in test/spec files.
-          "#{ ctrl.type }-outer"
+        css = @api.cssClass()
+
+        # Provide a standard class for putting styles in test/spec files.
+        if ctrl = UIHarness.ctrl()
+          css += " #{ ctrl.type }-outer"
+
+        css
 
 
 
