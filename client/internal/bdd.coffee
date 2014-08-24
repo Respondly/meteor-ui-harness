@@ -111,25 +111,12 @@ Update the [this] context that is passed to the
 "describe" function
 ###
 BDD.beforeDescribe (context) ->
-  context.title    = (value) -> setHeaderText.call(context, 'title', value)
-  context.subtitle = (value) -> setHeaderText.call(context, 'subtitle', value)
+  context.title    = (value) -> UIHarness.title(value)
+  context.subtitle = (value) -> UIHarness.subtitle(value)
   context.ctrl = -> UIHarness.ctrl()
   context.hash = UIHarness.hash
   context.log = INTERNAL.log
   context.prop = (key, value, options) -> UIHarness.prop(key, value, options)
   context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
-
-
-###
-Sets the "display" title/subtitle on the host header.
-@param prop:  The name of the property attribute.
-@param value: The title to display:
-               - String
-               - Function
-###
-setHeaderText = (prop, value) ->
-  meta = @suite.meta
-  meta[prop] = value
-
 
 
