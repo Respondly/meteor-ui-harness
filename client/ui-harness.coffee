@@ -83,7 +83,6 @@ class INTERNAL.UIHarness
   subtitle: (value) -> hash.prop 'subtitle', value, default:null
 
 
-
   ###
   Inserts a visual element into the [Host].
   @param content: The control to insert. Can be:
