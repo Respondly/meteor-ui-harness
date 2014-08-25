@@ -111,8 +111,6 @@ Update the [this] context that is passed to the
 "describe" function
 ###
 BDD.beforeDescribe (context) ->
-  context.title    = (value) -> UIHarness.title(value)
-  context.subtitle = (value) -> UIHarness.subtitle(value)
   context.ctrl = -> UIHarness.ctrl()
   context.hash = UIHarness.hash
   context.log = INTERNAL.log
