@@ -24,8 +24,8 @@ Meteor.startup ->
           else
             INTERNAL.gotoParentSuite()
 
-        # Prevent backspacing off the page by default.
-        e.preventDefault()
+          # Prevent backspacing off the page by default.
+          e.preventDefault()
 
 
       # Handle "open suite" keys (right key).
