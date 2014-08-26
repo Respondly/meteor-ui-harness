@@ -4,15 +4,11 @@ Handles the SELECT options on a Spec index-tree item.
 class INTERNAL.SpecTypeSelect extends INTERNAL.SpecTypeBase
   ready: ->
     # Sync the <select> with the current property value.
-    propName = @propName
     @autorun =>
-      if ctrl = UIHarness.ctrl()
-        if Object.isFunction(ctrl[propName])
-          value = ctrl[propName]()
-          @specCtrl.el('select').val(value)
+      @specCtrl.el('select').val(@prop())
 
 
-  onCtrlLoaded: (ctrl) -> @setProp(@localStorage())
+  onLoaded: -> @prop(@localStorage())
 
 
   ###
@@ -42,7 +38,12 @@ class INTERNAL.SpecTypeSelect extends INTERNAL.SpecTypeBase
   Invoked when the <select> changes.
   ###
   onChange: (e) ->
+    # Store the new value.
     value = e.target.value
     @localStorage(value)
-    UIHarness.ctrl()?[@meta.propName]?(value)
+
+    # Update the API.
+    @prop(value)
+
+    # Pass execution to the [Spec].
     @specCtrl.run()

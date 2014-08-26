@@ -72,6 +72,18 @@ class INTERNAL.UIHarness
 
 
   ###
+  REACTIVE Gets or sets the object used as the API for spec-types.
+
+    eg. describe.boolean 'isEnabled', ->
+
+  Set this when you want to store values against a specific object other
+  than the loaded control, for example a [ReactiveHash].
+
+  ###
+  api: (value) -> hash.prop 'api', value, default:null
+
+
+  ###
   REACTIVE Gets or sets the display title shown in the header of the Harness
   ###
   title: (value) -> hash.prop 'title', value, default:null
@@ -128,6 +140,7 @@ class INTERNAL.UIHarness
     @title(null)
     @subtitle(null)
     @scroll(false)
+    @api(null)
     @hash.clear()
     @stopTimers()
     INTERNAL.host.reset()
@@ -203,23 +216,23 @@ class INTERNAL.UIHarness
   @param value:   (optional) The boolean value to set.
                              Calculates the opposite if not specified.
   ###
-  toggle: (attr, value) ->
-    if ctrl = @ctrl()
-      # Ensure the property exists.
-      unless Object.isFunction(ctrl[attr])
-        throw new Error("The control does not have a property named '#{ attr }'.")
+  # toggle: (attr, value) ->
+  #   if ctrl = @ctrl()
+  #     # Ensure the property exists.
+  #     unless Object.isFunction(ctrl[attr])
+  #       throw new Error("The control does not have a property named '#{ attr }'.")
 
-      # Determine the new toggled value.
-      unless value?
-        value = ctrl[attr]()
-        value = true if (not value?) or Util.isBlank(value)
-        unless Object.isBoolean(value)
-          throw new Error("Cannot toggle because the current '#{ attr }' value is not a boolean. (Value: #{ value })")
-        value = not value
+  #     # Determine the new toggled value.
+  #     unless value?
+  #       value = ctrl[attr]()
+  #       value = true if (not value?) or Util.isBlank(value)
+  #       unless Object.isBoolean(value)
+  #         throw new Error("Cannot toggle because the current '#{ attr }' value is not a boolean. (Value: #{ value })")
+  #       value = not value
 
-      # Update the property.
-      ctrl[attr](value)
-      value
+  #     # Update the property.
+  #     ctrl[attr](value)
+  #     value
 
 
 

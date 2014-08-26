@@ -6,7 +6,7 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
     elRadioButtons = => @specCtrl.el('input[type="radio"]')
 
     getCheckbox = (value) =>
-        value = value.toString()
+        value = value?.toString()
         for el in elRadioButtons()
           el = $(el)
           return el if value is el.val()
@@ -14,24 +14,21 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
     # Sync the selected radio button with the current property value.
     propName = @propName
     @autorun =>
-      if ctrl = UIHarness.ctrl()
-        if Object.isFunction(ctrl[propName])
+      # Reset radio buttons.
+      el = elRadioButtons()
+      el.prop('checked', false)
+      el.closest('label').toggleClass('uih-not-checked', true)
+      el.closest('label').toggleClass('uih-checked', false)
 
-          # Reset radio buttons.
-          el = elRadioButtons()
-          el.prop('checked', false)
-          el.closest('label').toggleClass('uih-not-checked', true)
-          el.closest('label').toggleClass('uih-checked', false)
-
-          # Update the checked radio button.
-          value = ctrl[propName]()
-          if el = getCheckbox(value)
-            el.prop('checked', true)
-            el.closest('label').toggleClass('uih-not-checked', false)
-            el.closest('label').toggleClass('uih-checked', true)
+      # Update the checked radio button.
+      value = @prop()
+      if el = getCheckbox(value)
+        el.prop('checked', true)
+        el.closest('label').toggleClass('uih-not-checked', false)
+        el.closest('label').toggleClass('uih-checked', true)
 
 
-  onCtrlLoaded: (ctrl) -> @setProp(@localStorage())
+  onLoaded: -> @prop(@localStorage())
 
 
   ###
@@ -60,15 +57,10 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
       label = item.label
       cssClass = ''
       cssClass += ' uih-blank-value' if not label? or label is ''
-
       item.cssClass = cssClass
-
       item.label = 'null' if label is null
       item.label = 'undefined' if label is undefined
       item.label = '<empty>' if label is ''
-
-
-
 
     result
 
@@ -77,9 +69,15 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
   Invoked when the radio changes.
   ###
   onChange: (e) ->
+    # Store the value.
     value = e.target.value
     @localStorage(value)
-    UIHarness.ctrl()?[@meta.propName]?(value)
+
+    # Update the API.
+    @prop(value)
+    # UIHarness.ctrl()?[@meta.propName]?(value)
+
+    # Pass execution to the [Spec].
     @specCtrl.run()
 
 

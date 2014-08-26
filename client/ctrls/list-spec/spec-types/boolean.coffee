@@ -4,18 +4,16 @@ Handles the Boolean checkbox on a Spec index-tree item.
 class INTERNAL.SpecTypeBoolean extends INTERNAL.SpecTypeBase
   ready: ->
     checkbox = @specCtrl.children.chk
-    propName = @propName
 
     # Sync: Checkbox state.
     @autorun =>
-      if ctrl = UIHarness.ctrl()
-        if Object.isFunction(ctrl[propName])
-          value = ctrl[propName]()
-          checkbox.isEnabled(Object.isBoolean(value))
-          checkbox.toggle(value) if Object.isBoolean(value)
+      value = @prop()
+      checkbox.isEnabled(Object.isBoolean(value))
+      checkbox.toggle(value) if Object.isBoolean(value)
 
 
-  onCtrlLoaded: (ctrl) -> @setProp(@localStorage())
+
+  onLoaded: -> @prop(@localStorage())
 
 
   ###
@@ -28,8 +26,7 @@ class INTERNAL.SpecTypeBoolean extends INTERNAL.SpecTypeBase
 
   onRun: ->
     # Toggle the value.
-    UIHarness.toggle(@spec.name)
+    @prop(not @prop())
 
     # Persist to [localStorage].
-    value = UIHarness.ctrl()?[@propName]?()
-    @localStorage(value)
+    @localStorage(@prop())

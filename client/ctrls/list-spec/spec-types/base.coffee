@@ -14,26 +14,24 @@ class INTERNAL.SpecTypeBase extends AutoRun
     @meta = @spec.meta
     @propName = @meta.propName
 
-    # Listen for when the Ctrl is ready.
+    # Listen for when the [Ctrl] is ready.
     @specCtrl.onReady =>
       @ready()
       handle = @autorun =>
+        if api = UIHarness.api()
+          handle?.stop()
+          @onLoaded()
+
         if ctrl = UIHarness.ctrl()
           handle?.stop()
-          @onCtrlLoaded(ctrl)
+          @onLoaded()
 
-
-
-  ###
-  Invoked when the spec control is ready.
-  ###
-  onReady: -> # No-op.
 
 
   ###
   Invoked once when the hosted control is loaded.
   ###
-  onCtrlLoaded: (ctrl) -> # No-op.
+  onLoaded: (ctrl) -> # No-op.
 
 
   ###
@@ -43,13 +41,24 @@ class INTERNAL.SpecTypeBase extends AutoRun
 
 
   ###
-  Attempts to write to the prop with the given value.
+  Retrieves the object that exposes the API.
   ###
-  setProp: (value) ->
+  api: ->
     propName = @propName
+
+    if api = UIHarness.api()
+      return api if Object.isFunction(api[propName])
+
     if ctrl = UIHarness.ctrl()
-      if value isnt undefined
-        if Object.isFunction(ctrl[propName])
-          ctrl[propName](value)
+      return ctrl if Object.isFunction(ctrl[propName])
+
+
+
+  ###
+  Attempts to read/write to the property function.
+  ###
+  prop: (value) -> @api()?[@propName]?(value)
+
+
 
 
