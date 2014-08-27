@@ -1,7 +1,7 @@
 Ctrl.define
   'ui-harness':
     ready: ->
-      INTERNAL.index = @children.index.ctrl
+      INTERNAL.index = @children.index
 
       # Keep the top of the [host] in sync with the height
       # of the header if it's visible.
