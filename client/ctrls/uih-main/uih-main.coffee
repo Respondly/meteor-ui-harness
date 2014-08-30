@@ -7,7 +7,7 @@ Ctrl.define
         # Hook into reactive callback.
         title      = @api.headerText()
         windowSize = INTERNAL.windowSize()
-        hasTitle   = @helpers.hasTitle()
+        hasTitle   = not @api.headerText().isBlank
 
         Deps.afterFlush =>
             top = @children.header?.el().height() ? 0
