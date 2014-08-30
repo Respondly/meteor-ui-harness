@@ -19,6 +19,3 @@ Ctrl.define
       headerCtrl: -> @children.header
       headerText: -> INTERNAL.headerText(@data)
 
-    helpers:
-      hasTitle: -> not @api.headerText().isBlank
-

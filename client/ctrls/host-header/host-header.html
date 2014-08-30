@@ -1,14 +1,15 @@
 <template name='uih-host-header'>
   <div class='uih-host-header'>
-    <div class='uih-content'>
-      {{#with text}}
+    {{#with text}}
+      {{#unless isBlank}}
+
+      <div class='uih-content'>
         <h1>{{{ title }}}</h1>
         {{#if subtitle}}
           <h2>{{{ subtitle }}}</h2>
         {{/if}}
-      {{/with}}
-    </div>
+      </div>
+      {{/unless}}
+    {{/with}}
   </div>
 </template>
-
-
