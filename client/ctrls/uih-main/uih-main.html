@@ -1,0 +1,10 @@
+<template name='uih-main'>
+  <div class='uih-main'>
+    {{#if hasTitle}}
+      {{> ctrl type='uih-host-header' id='header' data=data }}
+    {{/if}}
+    {{> ctrl type='uih-host' id='mainHost' }}
+  </div>
+</template>
+
+

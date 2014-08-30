@@ -100,15 +100,17 @@ REACTIVE: Gets the current title/sub-title text for the header.
                   @title('My Title')
 
 ###
-INTERNAL.headerText = ->
+INTERNAL.headerText = (harness) ->
+  harness ?= UIHarness
+
   formatValue = (value) ->
         return value unless Object.isString(value)
         INTERNAL.formatText(value)
 
   getText = (prop) ->
         # Retrieve reactive values.
-        viaProp   = UIHarness[prop]()
-        viaBefore = UIHarness.suite()?.meta?[prop]
+        viaProp   = harness[prop]()
+        viaBefore = harness.suite()?.meta?[prop]
 
         # Explicitly set title values on [UIHarness].
         if viaProp isnt undefined
@@ -123,7 +125,7 @@ INTERNAL.headerText = ->
 
   title = true if title is undefined
   if title is true
-    if suiteName = UIHarness.suite()?.name
+    if suiteName = harness.suite()?.name
       title = formatValue(suiteName)
 
   title = null if title is false or title is '&nbsp;'

@@ -1,4 +1,5 @@
 //= base
+Ctrls = Ctrls != null ? Ctrls : {}
 
 
 /*

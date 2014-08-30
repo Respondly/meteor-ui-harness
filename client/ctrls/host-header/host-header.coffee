@@ -1,6 +1,8 @@
 Ctrl.define
   'uih-host-header':
     init: ->
+      @harness = @data
+
       # Clear the custom title if the new suite has a title
       # set by the [@title] method that was set within the
       # [describe] block.
@@ -13,5 +15,5 @@ Ctrl.define
 
 
     helpers:
-      text: -> INTERNAL.headerText()
+      text: -> INTERNAL.headerText(@harness)
 

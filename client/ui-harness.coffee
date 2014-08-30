@@ -12,12 +12,15 @@ depsHandles = []
 # ----------------------------------------------------------------------
 
 
+
 ###
 Root API for the [UIHarness]
 ###
-class INTERNAL.UIHarness
+class Ctrls.UIHarness
   constructor: ->
-    @__internal__ = { timers:[] }
+    @__internal =
+      timers:[]
+      hash: new ReactiveHash()
     @hash = new ReactiveHash() # Hash used by specs.
     @log = INTERNAL.log
 
@@ -46,7 +49,7 @@ class INTERNAL.UIHarness
   ###
   REACTIVE Gets or sets the current [Suite].
   ###
-  suite: (value) -> hash.prop 'suite', value, default:null
+  suite: (value) -> @__internal.hash.prop 'suite', value, default:null
 
 
   ###
@@ -61,14 +64,14 @@ class INTERNAL.UIHarness
     if Object.isString(value)
       selector = value
       value = undefined
-    result = hash.prop 'el', value, default:null
+    result = @__internal.hash.prop 'el', value, default:null
     if Util.isBlank(selector) then result else result.find(selector)
 
 
   ###
   REACTIVE Retrieves the Ctrl that is currently under test (if exists).
   ###
-  ctrl: (value) -> hash.prop 'ctrl', value, default:null
+  ctrl: (value) -> @__internal.hash.prop 'ctrl', value, default:null
 
 
   ###
@@ -80,19 +83,19 @@ class INTERNAL.UIHarness
   than the loaded control, for example a [ReactiveHash].
 
   ###
-  api: (value) -> hash.prop 'api', value, default:null
+  api: (value) -> @__internal.hash.prop 'api', value, default:null
 
 
   ###
   REACTIVE Gets or sets the display title shown in the header of the Harness
   ###
-  title: (value) -> hash.prop 'title', value, default:null
+  title: (value) -> @__internal.hash.prop 'title', value, default:null
 
 
   ###
   REACTIVE Gets or sets the display sub-title shown in the header of the Harness
   ###
-  subtitle: (value) -> hash.prop 'subtitle', value, default:null
+  subtitle: (value) -> @__internal.hash.prop 'subtitle', value, default:null
 
 
   ###
@@ -123,14 +126,23 @@ class INTERNAL.UIHarness
 
             - args:       Arguments to pass to the content/ctrl/template.
   ###
-  load: (content, options, callback) -> INTERNAL.host.insert(content, options, callback)
+  load: (content, options, callback) ->
+    hostCtrl = INTERNAL.mainHost
+    hostCtrl.load content, options, =>
+        # Update current state.
+        @el(hostCtrl.elContent())
+        @ctrl(hostCtrl.currentCtrl())
+        callback?()
 
 
 
   ###
   Removes the hosted control.
   ###
-  unload: -> INTERNAL.host.clear()
+  unload: ->
+    INTERNAL.mainHost.clear()
+    @el(null)
+    @ctrl(null)
 
 
   ###
@@ -143,7 +155,7 @@ class INTERNAL.UIHarness
     @api(null)
     @hash.clear()
     @stopTimers()
-    INTERNAL.host.reset()
+    INTERNAL.mainHost.reset()
     depsHandles.each (handle) -> handle?.stop?()
     depsHandles = []
 
@@ -164,7 +176,7 @@ class INTERNAL.UIHarness
   ###
   Updates the visual state of the test-harness.
   ###
-  updateState: -> INTERNAL.host.updateState()
+  updateState: -> INTERNAL.mainHost.updateState()
 
 
   ###
@@ -176,7 +188,7 @@ class INTERNAL.UIHarness
   ###
   size: (value...) ->
     value = undefined if value.length is 0
-    INTERNAL.host.size(value)
+    INTERNAL.mainHost.size(value)
 
 
   ###
@@ -187,7 +199,7 @@ class INTERNAL.UIHarness
   ###
   scroll: (value...) ->
     value = undefined if value.length is 0
-    INTERNAL.host.scroll(value)
+    INTERNAL.mainHost.scroll(value)
 
 
 
@@ -198,7 +210,7 @@ class INTERNAL.UIHarness
            - x: left|center|right
            - y: top|middle|bottom
   ###
-  align: (value) -> INTERNAL.host.align(value)
+  align: (value) -> INTERNAL.mainHost.align(value)
 
 
   ###
@@ -206,33 +218,7 @@ class INTERNAL.UIHarness
   Relevant when 'size' is set to 'fill'.
   @param value: String - {left|top|right|bottom}
   ###
-  margin: (value) -> INTERNAL.host.margin(value)
-
-
-
-  ###
-  Toggles a boolean property method on the ctrl.
-  @param attr:    The name of the property.
-  @param value:   (optional) The boolean value to set.
-                             Calculates the opposite if not specified.
-  ###
-  # toggle: (attr, value) ->
-  #   if ctrl = @ctrl()
-  #     # Ensure the property exists.
-  #     unless Object.isFunction(ctrl[attr])
-  #       throw new Error("The control does not have a property named '#{ attr }'.")
-
-  #     # Determine the new toggled value.
-  #     unless value?
-  #       value = ctrl[attr]()
-  #       value = true if (not value?) or Util.isBlank(value)
-  #       unless Object.isBoolean(value)
-  #         throw new Error("Cannot toggle because the current '#{ attr }' value is not a boolean. (Value: #{ value })")
-  #       value = not value
-
-  #     # Update the property.
-  #     ctrl[attr](value)
-  #     value
+  margin: (value) -> INTERNAL.mainHost.margin(value)
 
 
 
@@ -247,15 +233,15 @@ class INTERNAL.UIHarness
   ###
   delay: (msecs, func) ->
     timer = Util.delay(msecs, func)
-    @__internal__.timers.push(timer)
+    @__internal.timers.push(timer)
 
 
   ###
   Stops any timers that have been started.
   ###
   stopTimers: ->
-    timer.stop() for timer in @__internal__.timers
-    @__internal__.timers = []
+    timer.stop() for timer in @__internal.timers
+    @__internal.timers = []
 
 
 
@@ -321,9 +307,5 @@ class INTERNAL.UIHarness
 # EXPORT ----------------------------------------------------------------------
 
 
-UIHarness = new INTERNAL.UIHarness()
-
-
-
-
+UIHarness = new Ctrls.UIHarness()
 

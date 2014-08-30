@@ -7,7 +7,6 @@ DEFAULT_SCROLL = false
 Ctrl.define
   'uih-host':
     init: ->
-      INTERNAL.host = @ctrl
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
 
@@ -15,6 +14,7 @@ Ctrl.define
     api:
       elContainer: -> @find('.uih-container')
       elContent: -> $(@api.elContainer()?.children()[0])
+      currentCtrl: (value) -> @prop 'currentCtrl', value, default:null
 
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
@@ -40,7 +40,7 @@ Ctrl.define
       Inserts a visual element into the [Host].
       See: [UIHarness] object for parameter documentation.
       ###
-      insert: (content, options = {}, callback) ->
+      load: (content, options = {}, callback) ->
         # Setup initial conditions.
         @api.clear()
         elContainer = @api.elContainer()
@@ -66,14 +66,13 @@ Ctrl.define
               @api.margin(options.margin ? DEFAULT_MARGIN)
               @api.scroll(options.scroll ? DEFAULT_SCROLL)
               @api.cssClass(options.cssClass ? '')
+
+              # Update state.
+              @api.currentCtrl(@_current.ctrl ? null)
               @api.updateState()
 
-              # Store global state.
-              UIHarness.el(@api.elContent())
-              UIHarness.ctrl(@_current.ctrl ? null)
-              elContainer.toggle(true)
-
               # Finish up.
+              elContainer.toggle(true)
               callback?()
 
         # Don't continue unless some content has been specified.
@@ -141,8 +140,6 @@ Ctrl.define
         elContainer.toggle(false)
 
         # Finish up.
-        UIHarness.el(null)
-        UIHarness.ctrl(null)
         delete @_current
 
 
@@ -250,7 +247,7 @@ Ctrl.define
         css = @api.cssClass()
 
         # Provide a standard class for putting styles in test/spec files.
-        if ctrl = UIHarness.ctrl()
+        if ctrl = @api.currentCtrl()
           css += " #{ ctrl.type }-outer"
 
         css
