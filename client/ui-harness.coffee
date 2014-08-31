@@ -127,7 +127,7 @@ class Ctrls.UIHarness
             - args:       Arguments to pass to the content/ctrl/template.
   ###
   load: (content, options, callback) ->
-    hostCtrl = INTERNAL.mainHost
+    hostCtrl = @__internal.mainHostCtrl
     hostCtrl.load content, options, =>
         # Update current state.
         @el(hostCtrl.elContent())
@@ -140,7 +140,7 @@ class Ctrls.UIHarness
   Removes the hosted control.
   ###
   unload: ->
-    INTERNAL.mainHost.clear()
+    @__internal.mainHostCtrl.clear()
     @el(null)
     @ctrl(null)
 
@@ -155,7 +155,7 @@ class Ctrls.UIHarness
     @api(null)
     @hash.clear()
     @stopTimers()
-    INTERNAL.mainHost.reset()
+    @__internal.mainHostCtrl.reset()
     depsHandles.each (handle) -> handle?.stop?()
     depsHandles = []
 
@@ -176,7 +176,7 @@ class Ctrls.UIHarness
   ###
   Updates the visual state of the test-harness.
   ###
-  updateState: -> INTERNAL.mainHost.updateState()
+  updateState: -> @__internal.mainHostCtrl.updateState()
 
 
   ###
@@ -188,7 +188,7 @@ class Ctrls.UIHarness
   ###
   size: (value...) ->
     value = undefined if value.length is 0
-    INTERNAL.mainHost.size(value)
+    @__internal.mainHostCtrl.size(value)
 
 
   ###
@@ -199,7 +199,7 @@ class Ctrls.UIHarness
   ###
   scroll: (value...) ->
     value = undefined if value.length is 0
-    INTERNAL.mainHost.scroll(value)
+    @__internal.mainHostCtrl.scroll(value)
 
 
 
@@ -210,7 +210,7 @@ class Ctrls.UIHarness
            - x: left|center|right
            - y: top|middle|bottom
   ###
-  align: (value) -> INTERNAL.mainHost.align(value)
+  align: (value) -> @__internal.mainHostCtrl.align(value)
 
 
   ###
@@ -218,7 +218,7 @@ class Ctrls.UIHarness
   Relevant when 'size' is set to 'fill'.
   @param value: String - {left|top|right|bottom}
   ###
-  margin: (value) -> INTERNAL.mainHost.margin(value)
+  margin: (value) -> @__internal.mainHostCtrl.margin(value)
 
 
 

@@ -7,11 +7,11 @@ Ctrl.define
       # set by the [@title] method that was set within the
       # [describe] block.
       @autorun =>
-        suite = UIHarness.suite() # Hook into reactive context.
+        suite = @harness.suite() # Hook into reactive context.
         Deps.nonreactive =>
             if metaValues = suite?.uiHarness
-              UIHarness.title(null)    if INTERNAL.valueAsMarkdown(metaValues.title)?
-              UIHarness.subtitle(null) if INTERNAL.valueAsMarkdown(metaValues.subtitle)?
+              @harness.title(null)    if INTERNAL.valueAsMarkdown(metaValues.title)?
+              @harness.subtitle(null) if INTERNAL.valueAsMarkdown(metaValues.subtitle)?
 
 
     helpers:
