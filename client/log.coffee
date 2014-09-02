@@ -21,7 +21,7 @@ json = (value, options = {}) ->
     return unless Util.isObject(value)
     options.showFuncs ?= true
     if ctrl = UIHarness.ctrl()
-      if ctrl.type is 'uih-json'
+      if ctrl.type is 'c-json'
         # Set the value on existing JSON ctrl.
         ctrl.showFuncs(options.showFuncs)
         ctrl.invokeFuncs(options.invokeFuncs)
@@ -35,7 +35,7 @@ json = (value, options = {}) ->
       showFuncs:    options.showFuncs
       invokeFuncs:  options.invokeFuncs
       exclude:      options.exclude
-    UIHarness.load 'uih-json', size:'fill', args:args, scroll:true
+    UIHarness.load 'c-json', size:'fill', args:args, scroll:true
 
 
 

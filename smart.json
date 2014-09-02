@@ -23,6 +23,9 @@
     "ctrls-input": {
       "path": "../ctrls-input"
     },
+    "ctrls-log": {
+      "path": "../ctrls-log"
+    },
     "css-stylus": {
       "path": "../css-stylus"
     },

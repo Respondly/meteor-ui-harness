@@ -7,10 +7,10 @@ Package.describe({
 Package.on_use(function (api) {
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
-  api.use(['coffeescript', 'sugar', 'chai', 'npm']);
+  api.use(['coffeescript', 'chai', 'npm']);
   api.use(['css-stylus', 'css-common']);
   api.use(['util', 'bdd', 'ctrl', 'markdown']);
-  api.use(['ctrls', 'ctrls-input']);
+  api.use(['ctrls', 'ctrls-input', 'ctrls-log']);
   api.export('chai');
   api.export('UIHarness');
   api.export('TEST');
