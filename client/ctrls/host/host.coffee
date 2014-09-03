@@ -1,5 +1,5 @@
 DEFAULT_SIZE = 'auto'
-DEFAULT_ALIGN = 'center,middle'
+DEFAULT_ALIGN = 'center,top'
 DEFAULT_MARGIN = 50
 DEFAULT_SCROLL = false
 
