@@ -127,6 +127,10 @@ class Ctrls.UIHarness
             - args:       Arguments to pass to the content/ctrl/template.
   ###
   load: (content, options, callback) ->
+    if Object.isFunction(options) and not callback?
+      callback = options
+      options = {}
+
     hostCtrl = @__internal.mainHostCtrl
     hostCtrl.load content, options, =>
         # Update current state.
