@@ -58,7 +58,7 @@ Package.on_use(function (api) {
   api.add_files('client/ctrls/ui-harness/ui-harness.styl', 'client');
   api.add_files('client/ctrls/list-suite/list-suite.coffee', 'client');
   api.add_files('client/ctrls/list-suite/list-suite.styl', 'client');
-  api.add_files('client/css-mixins/ui-harness.import.styl', 'client');
+  api.add_files('client/css-mixins/uih.import.styl', 'client');
   api.add_files('client/internal/bdd.coffee', 'client');
   api.add_files('client/internal/init.coffee', 'client');
   api.add_files('client/internal/internal.coffee', 'client');
