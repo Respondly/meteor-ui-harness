@@ -5,6 +5,7 @@ Ctrl.define
   'uih-list':
     init: -> @suite = @data.suite
 
+
     api:
       ###
       Invoked when the list has been revealed on screen.
@@ -39,6 +40,8 @@ Ctrl.define
 
 
     helpers:
+      showSearch: -> @suite.isSection isnt true
+
       mouseOver: (e, isOver) ->
         # Store a reference to the currently overed list-item ctrl.
         if isOver

@@ -8,6 +8,9 @@ KEYS =
 
 Meteor.startup ->
   $(document).keydown (e) ->
+      # Setup initial conditions.
+      return if Ctrl.focused()?
+
       # Only react if the UIHarness has been instantiated.
       elTree = $('.uih-suite-tree')
       return unless elTree.length > 0

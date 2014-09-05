@@ -23,6 +23,7 @@ Package.on_use(function (api) {
   api.add_files('client/ctrls/suite-tree/suite-tree.html', 'client');
   api.add_files('client/ctrls/host-header/host-header.html', 'client');
   api.add_files('client/ctrls/list/list.html', 'client');
+  api.add_files('client/ctrls/list-search-box/list-search-box.html', 'client');
   api.add_files('client/ctrls/list-spec/list-spec.html', 'client');
   api.add_files('client/ctrls/host/host.html', 'client');
   api.add_files('client/ctrls/list-suite-section/list-suite-section.html', 'client');
@@ -41,6 +42,8 @@ Package.on_use(function (api) {
   api.add_files('client/ctrls/host-header/host-header.styl', 'client');
   api.add_files('client/ctrls/list/list.coffee', 'client');
   api.add_files('client/ctrls/list/list.styl', 'client');
+  api.add_files('client/ctrls/list-search-box/list-search-box.coffee', 'client');
+  api.add_files('client/ctrls/list-search-box/list-search-box.styl', 'client');
   api.add_files('client/ctrls/list-spec/list-spec.coffee', 'client');
   api.add_files('client/ctrls/list-spec/list-spec.styl', 'client');
   api.add_files('client/ctrls/host/host.coffee', 'client');
@@ -55,11 +58,11 @@ Package.on_use(function (api) {
   api.add_files('client/ctrls/ui-harness/ui-harness.styl', 'client');
   api.add_files('client/ctrls/list-suite/list-suite.coffee', 'client');
   api.add_files('client/ctrls/list-suite/list-suite.styl', 'client');
+  api.add_files('client/css-mixins/ui-harness.import.styl', 'client');
   api.add_files('client/internal/bdd.coffee', 'client');
   api.add_files('client/internal/init.coffee', 'client');
   api.add_files('client/internal/internal.coffee', 'client');
   api.add_files('client/internal/key-handlers.coffee', 'client');
-  api.add_files('client/css-mixins/ui-harness.import.styl', 'client');
   api.add_files('client/css/common.styl', 'client');
   api.add_files('client/log.coffee', 'client');
   api.add_files('client/ui-harness.coffee', 'client');
