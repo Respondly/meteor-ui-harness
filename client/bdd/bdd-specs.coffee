@@ -2,7 +2,7 @@
 Declares a "spec" as a boolean property that can be toggled.
 
 @param name: The name of the property
-@param func: The test function.
+@param func: Optional. The test function.
 
 ###
 it.boolean = (name, func) ->
@@ -15,13 +15,13 @@ it.boolean = (name, func) ->
 
 
 ###
-Decalres a "spec" with multiple dropdown options.
+Declares a "spec" with multiple dropdown options.
 
 @param name:    The name of the property
 @param options: The options:
                  - array
                  - object (key:value)
-@param func:    The test function.
+@param func:    Optional. The test function.
 
 ###
 it.select = (name, options, func) ->
@@ -37,13 +37,13 @@ it.select = (name, options, func) ->
 
 
 ###
-Decalres a "spec" with multiple radio-button options.
+Declares a "spec" with multiple radio-button options.
 
 @param name:    The name of the property
 @param options: The options:
                  - array
                  - object (key:value)
-@param func:    The test function.
+@param func:    Optional. The test function.
 
 ###
 it.radio = (name, options, func) ->
@@ -56,9 +56,61 @@ it.radio = (name, options, func) ->
   spec
 
 
+###
+Declares a "spec" as a markdown file.
 
-# ----------------------------------------------------------------------
+@param name:  The name of the spec.
+              If not declared the title (h1) of the file is used.
 
+@param file:  The markdown file, either
+                - String: The path to the markdown file.
+                - {file}  The file object, as declared on [Markdown.files].
+
+@param func:   Optional. The test function.
+
+###
+it.md = (name, file, func) ->
+  { name, file, func } = fixMarkdownParams(name, file, func)
+  spec = it(name, func)
+  spec = asMarkdown(spec)
+  spec
+
+
+INTERNAL.markdownSpec = (name, file, func) ->
+  # Makes the new spec without putting it in the default parent
+  # context that happens with "it" is called.
+  { name, file, func } = fixMarkdownParams(name, file, func)
+  spec = new BDD.Spec(name, func)
+  spec = asMarkdown(spec)
+  spec
+
+
+
+# PRIVATE ----------------------------------------------------------------------
+
+
+asMarkdown = (spec) ->
+  meta = spec.meta
+  meta.type = 'markdown'
+  spec
+
+
+fixMarkdownParams = (name, file, func) ->
+  if Object.isString(file)
+    path = file
+    file = Markdown.files[file]
+
+  if not file?
+    throw new Error("Markdown file not found: #{ path }")
+
+  if not name?
+    name = file.title
+    name ?= '*Untitled*' # Italic.
+
+  result =
+    name: name
+    file: file
+    func: func
 
 
 
