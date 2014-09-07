@@ -27,6 +27,9 @@ class INTERNAL.SpecTypeBase extends AutoRun
           @onLoaded()
 
 
+  # Invoked when the [Spec] UI control is DOM ready.
+  ready: -> # No-op.
+
 
   ###
   Invoked once when the hosted control is loaded.

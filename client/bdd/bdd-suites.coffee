@@ -27,10 +27,19 @@ describe.md = (name, folderPath, func) ->
     if key.startsWith(folderPath)
       files[key] = value
 
+
   # Add child specs.
+  specs = []
   for path, file of files
     spec = INTERNAL.markdownSpec(null, path)
-    suite.addSpec(spec)
+    specs.push({ spec:spec, file:file })
+
+  # Sort alphabetically.
+  specs = specs.sortBy (item) ->
+      item.file.title ? 'Untitled' # NB: Accounts for the *italics* markdown on the spec name.
+
+  for item in specs
+    suite.addSpec(item.spec)
 
   # Finish up.
   suite

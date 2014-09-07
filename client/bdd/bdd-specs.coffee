@@ -72,7 +72,7 @@ Declares a "spec" as a markdown file.
 it.md = (name, file, func) ->
   { name, file, func } = fixMarkdownParams(name, file, func)
   spec = it(name, func)
-  spec = asMarkdown(spec)
+  spec = asMarkdown(spec, file)
   spec
 
 
@@ -81,7 +81,7 @@ INTERNAL.markdownSpec = (name, file, func) ->
   # context that happens with "it" is called.
   { name, file, func } = fixMarkdownParams(name, file, func)
   spec = new BDD.Spec(name, func)
-  spec = asMarkdown(spec)
+  spec = asMarkdown(spec, file)
   spec
 
 
@@ -89,9 +89,10 @@ INTERNAL.markdownSpec = (name, file, func) ->
 # PRIVATE ----------------------------------------------------------------------
 
 
-asMarkdown = (spec) ->
+asMarkdown = (spec, file) ->
   meta = spec.meta
   meta.type = 'markdown'
+  meta.file = file
   spec
 
 

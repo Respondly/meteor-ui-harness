@@ -34,6 +34,7 @@ Package.on_use(function (api) {
   api.add_files('client/ns.client.js', 'client');
   api.add_files('client/ctrls/list-spec/spec-types/base.coffee', 'client');
   api.add_files('client/ctrls/list-spec/spec-types/boolean.coffee', 'client');
+  api.add_files('client/ctrls/list-spec/spec-types/markdown.coffee', 'client');
   api.add_files('client/ctrls/list-spec/spec-types/radio.coffee', 'client');
   api.add_files('client/ctrls/list-spec/spec-types/select.coffee', 'client');
   api.add_files('client/ctrls/suite-tree/suite-tree.coffee', 'client');
@@ -62,6 +63,7 @@ Package.on_use(function (api) {
   api.add_files('client/bdd/bdd-suites.coffee', 'client');
   api.add_files('client/bdd/bdd.coffee', 'client');
   api.add_files('client/css/common.styl', 'client');
+  api.add_files('client/css/markdown.styl', 'client');
   api.add_files('client/css-mixins/uih.import.styl', 'client');
   api.add_files('client/internal/init.coffee', 'client');
   api.add_files('client/internal/internal.coffee', 'client');
