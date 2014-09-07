@@ -2,6 +2,11 @@
 
 
 .uih-list-suite-section
+  &:first-child
+    // Push down if first child so that the section title
+    // does not crash into the search-box.
+    margin-top 8px
+
   .uih-title
     position relative
     background darken($UIH_INDEX_DIVIDER_COLOR, 5%)
