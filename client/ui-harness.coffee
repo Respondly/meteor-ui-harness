@@ -18,11 +18,13 @@ Root API for the [UIHarness]
 ###
 class Ctrls.UIHarness
   constructor: ->
-    @__internal =
+    @__internal = internal =
       timers:[]
       hash: new ReactiveHash()
     @hash = new ReactiveHash() # Hash used by specs.
     @log = INTERNAL.log
+    @title.hr = (value) -> internal.hash.prop 'hr', value, default:true
+
 
 
   ###
@@ -154,6 +156,7 @@ class Ctrls.UIHarness
   ###
   reset: ->
     @title(null)
+    @title.hr(true)
     @subtitle(null)
     @scroll(false)
     @api(null)

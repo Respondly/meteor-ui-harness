@@ -17,3 +17,8 @@ Ctrl.define
     helpers:
       text: -> INTERNAL.headerText(@harness)
 
+      cssClass: ->
+        css = ''
+        css += ' uih-show-hr' if @harness.title.hr()
+        css
+
