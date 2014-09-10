@@ -40,6 +40,12 @@ Ctrl.define
 
 
     helpers:
+      cssClass: ->
+        css = @data.cssClass ? ''
+        css += ' uih-is-section' if @suite.isSection
+        css += ' uih-not-section' if not @suite.isSection
+        css
+
       showSearch: -> @suite.isSection isnt true
 
       mouseOver: (e, isOver) ->
