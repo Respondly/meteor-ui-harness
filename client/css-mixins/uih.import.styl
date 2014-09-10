@@ -1,0 +1,31 @@
+@import 'core.import'
+
+
+$UIH_INDEX_WIDTH = 300px
+$UIH_SANS = 'Helvetica Neue', Helvetica, Arial, sans-serif
+
+
+$UIH_INDEX_TEXT_DARK = #7E8893
+$UIH_INDEX_BG_LIGHT = #e0e4ea
+$UIH_INDEX_BG_DARK = #d0d7e0
+
+$UIH_INDEX_HEADER_HEIGHT = 40px
+
+$UIH_INDEX_DIVIDER_COLOR = darken($UIH_INDEX_BG_DARK, 3%)
+
+$UIH_LINK_BLUE = #2987d0
+$UIH_BLUE_GRADIENT = linear-gradient(top, #a7c7ec, #6984d5)
+
+$UIH_CODE_COLOR = #d14
+
+
+uih-code()
+  padding 2px 4px
+  color $UIH_CODE_COLOR
+  white-space nowrap
+  background-color #f7f7f9
+  border 1px solid #e1e1e8
+
+uih-index-code()
+  background rgba(white, 0.3)
+  border-color darken($UIH_INDEX_BG_LIGHT, 7%)

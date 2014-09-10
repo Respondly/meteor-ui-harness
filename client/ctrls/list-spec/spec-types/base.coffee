@@ -27,6 +27,9 @@ class INTERNAL.SpecTypeBase extends AutoRun
           @onLoaded()
 
 
+  # Invoked when the [Spec] UI control is DOM ready.
+  ready: -> # No-op.
+
 
   ###
   Invoked once when the hosted control is loaded.
@@ -58,6 +61,35 @@ class INTERNAL.SpecTypeBase extends AutoRun
   Attempts to read/write to the property function.
   ###
   prop: (value) -> @api()?[@propName]?(value)
+
+
+
+  ###
+  Converts label values into common formats, for null/false/undefined/empty-string.
+  @param label: The label to convert.
+  ###
+  formatLabel: (label) ->
+    label = 'null' if label is null
+    label = 'undefined' if label is undefined
+    label = '<empty>' if label is ''
+    label = 'false' if label is false
+    label
+
+
+
+  ###
+  Converts a value to it's raw type if necessary.
+  @param value: The value to examine and convert.
+  ###
+  formatValue: (value) ->
+    value = value.toNumber() if Util.isNumeric(value)
+    value = null if value is 'null'
+    value = true if value is 'true'
+    value = false if value is 'false'
+    value
+
+
+
 
 
 

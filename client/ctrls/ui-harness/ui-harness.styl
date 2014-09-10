@@ -1,17 +1,16 @@
-@import 'ui-harness.import'
+@import 'uih.import'
 
 
 .uih-root
   abs-pos 0, 0, 0, 0
   overflow hidden
-  font-family $TH_SANS
+  font-family $UIH_SANS
 
   .uih-suite-tree
     abs-pos 0, 0, null, 0
-    width $TH_INDEX_WIDTH
+    width $UIH_INDEX_WIDTH
 
-  .uih-main
-    abs-pos $TH_INDEX_WIDTH, 0, 0, 0
-    background white
+  > .uih-main
+    abs-pos $UIH_INDEX_WIDTH, 0, 0, 0
     border-left solid 1px darken(white, 50%)
     box-shadow 0px 0px 30px 10px rgba(black ,0.10)

@@ -1,4 +1,4 @@
-@import 'ui-harness.import'
+@import 'uih.import'
 
 
 
@@ -26,7 +26,7 @@ li.uih-list-spec
 
     &.uih-blue-bullet
       .uih-bullet
-        background $TH_BLUE_GRADIENT
+        background $UIH_BLUE_GRADIENT
 
 
   // ----------------------------------------------------
@@ -34,7 +34,7 @@ li.uih-list-spec
   .uih-spec-hover
     abs-pos 0, 0, null, 0
     width 4px
-    background linear-gradient(top, lighten($TH_LINK_BLUE, 20%), $TH_LINK_BLUE)
+    background linear-gradient(top, lighten($UIH_LINK_BLUE, 20%), $UIH_LINK_BLUE)
     display none
   &:hover
     .uih-spec-hover
@@ -55,11 +55,12 @@ li.uih-list-spec
     select
       width 100%
       background rgba(white, 0.8)
-      border-color darken($TH_INDEX_BG_DARK, 8%)
+      border-color darken($UIH_INDEX_BG_DARK, 8%)
       appearance none
       outline none
       line-height normal
-      padding 8px 10px
+      padding 6px 10px
+      min-height 32px
 
   // ------------------------------------------------------
 
@@ -80,6 +81,7 @@ li.uih-list-spec
     ul
       margin 0
       paddding 0
+      padding-left 8px
     li
       margin-bottom 5px
     label

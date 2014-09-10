@@ -1,5 +1,12 @@
 <template name='uih-list'>
-  <div class='uih-list {{ data.cssClass }}'>
+  <div class='uih-list {{ cssClass }}'>
+
+
+    {{#if showSearch}}
+      {{> ctrl type='uih-list-search-box' }}
+    {{/if}}
+
+
     {{#if isEmpty}}
       <div class='uih-empty'>Nothing to display.</div>
     {{else}}

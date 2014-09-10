@@ -58,9 +58,7 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
       cssClass = ''
       cssClass += ' uih-blank-value' if not label? or label is ''
       item.cssClass = cssClass
-      item.label = 'null' if label is null
-      item.label = 'undefined' if label is undefined
-      item.label = '<empty>' if label is ''
+      item.label = @formatLabel(label)
 
     result
 
@@ -70,17 +68,21 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
   ###
   onChange: (e) ->
     # Store the value.
-    value = e.target.value
+    value = @formatValue(e.target.value)
     @localStorage(value)
 
     # Update the API.
     @prop(value)
-    # UIHarness.ctrl()?[@meta.propName]?(value)
 
     # Pass execution to the [Spec].
     @specCtrl.run()
 
 
 
+
+# ----------------------------------------------------------------------
+
+
+INTERNAL.processSelectItem = (item) ->
 
 

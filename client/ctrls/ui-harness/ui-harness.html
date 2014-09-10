@@ -2,13 +2,7 @@
   <div class='uih-root'>
 
     {{> ctrl type='uih-suite-tree' id='index' }}
-
-    <div class='uih-main {{ mainCss }}'>
-      {{#if hasTitle}}
-        {{> ctrl type='uih-host-header' id='header' }}
-      {{/if}}
-      {{> ctrl type='uih-host' }}
-    </div>
+    {{> ctrl type='uih-main' id='main' data=harness }}
 
   </div>
 </template>

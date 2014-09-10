@@ -31,6 +31,10 @@ class INTERNAL.SpecTypeSelect extends INTERNAL.SpecTypeBase
     if Object.isObject(options)
       for key, value of options
         result.push { label:key, value:value }
+
+    for item in result
+      item.label = @formatLabel(item.label)
+
     result
 
 
@@ -39,7 +43,7 @@ class INTERNAL.SpecTypeSelect extends INTERNAL.SpecTypeBase
   ###
   onChange: (e) ->
     # Store the new value.
-    value = e.target.value
+    value = @formatValue(e.target.value)
     @localStorage(value)
 
     # Update the API.

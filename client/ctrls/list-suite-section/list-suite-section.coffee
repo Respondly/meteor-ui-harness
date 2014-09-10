@@ -18,7 +18,7 @@ Ctrl.define
       # Sync: UI controls with logical state.
       @autorun =>
           isOpen = @api.isOpen()
-          @ctrl.children.twisty.isOpen(isOpen)
+          @children.twisty.isOpen(isOpen)
           heightAnimator.toggle(isOpen)
 
 

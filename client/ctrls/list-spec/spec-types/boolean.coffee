@@ -3,7 +3,7 @@ Handles the Boolean checkbox on a Spec index-tree item.
 ###
 class INTERNAL.SpecTypeBoolean extends INTERNAL.SpecTypeBase
   ready: ->
-    checkbox = @specCtrl.children.chk
+    checkbox = @specCtrl.context.children.chk
 
     # Sync: Checkbox state.
     @autorun =>

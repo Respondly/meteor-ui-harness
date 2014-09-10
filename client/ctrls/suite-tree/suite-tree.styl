@@ -1,9 +1,9 @@
-@import 'ui-harness.import'
+@import 'uih.import'
 
 
 
 .uih-suite-tree
-  font-family $TH_SANS
+  font-family $UIH_SANS
   user-select none
   overflow hidden
 
@@ -11,22 +11,22 @@
     box-sizing border-box !important
 
   > .uih-header
-    background $TH_INDEX_BG_DARK
+    background $UIH_INDEX_BG_DARK
     border-bottom solid 1px rgba(black, 0.15)
     abs-pos 0, 0, 0, null
-    height $TH_INDEX_HEADER_HEIGHT
+    height $UIH_INDEX_HEADER_HEIGHT
 
   > .uih-tree-outer
-    abs-pos 0, $TH_INDEX_HEADER_HEIGHT, 0, 0
-    background linear-gradient(top, $TH_INDEX_BG_LIGHT, $TH_INDEX_BG_DARK)
+    abs-pos 0, $UIH_INDEX_HEADER_HEIGHT, 0, 0
+    background linear-gradient(top, $UIH_INDEX_BG_LIGHT, $UIH_INDEX_BG_DARK)
     border-top solid 1px rgba(white, 0.8)
 
   .uih-list
     abs-pos 0, 0, 0, 0
     transition transform 0.2s
     &.uih-right
-      transform translateX($TH_INDEX_WIDTH)
+      transform translateX($UIH_INDEX_WIDTH)
     &.uih-left
-      transform translateX(0 - $TH_INDEX_WIDTH)
+      transform translateX(0 - $UIH_INDEX_WIDTH)
 
 

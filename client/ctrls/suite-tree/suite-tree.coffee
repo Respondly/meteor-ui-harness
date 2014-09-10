@@ -29,7 +29,7 @@ Ctrl.define
 
 
     api:
-      title: (value) -> @ctrl.children.header.title(value)
+      title: (value) -> @children.header.title(value)
       currentSuite: (value) -> @prop 'currentSuite', value
       currentListCtrl: (value) -> @prop 'currentListCtrl', value
 
@@ -52,7 +52,7 @@ Ctrl.define
         direction     = options.direction
         isAnimated    = direction?
         options.suite = suite
-        headerCtrl    = @ctrl.children.header
+        headerCtrl    = @children.header
 
         switch direction
           when 'left'

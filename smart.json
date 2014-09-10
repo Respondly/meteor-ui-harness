@@ -6,7 +6,6 @@
   "version": "0.0.1",
   "git": "",
   "packages": {
-    "sugar": {},
     "npm": {},
     "util": {
       "path": "../util"
@@ -22,6 +21,9 @@
     },
     "ctrls-input": {
       "path": "../ctrls-input"
+    },
+    "ctrls-log": {
+      "path": "../ctrls-log"
     },
     "css-stylus": {
       "path": "../css-stylus"
