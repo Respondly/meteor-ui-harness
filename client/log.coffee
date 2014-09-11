@@ -43,5 +43,5 @@ json = (value, options = {}) ->
 # ----------------------------------------------------------------------
 
 
-INTERNAL.log = log
+PKG.log = log
 log.json = json

@@ -23,9 +23,9 @@ Meteor.startup ->
         # was pressed while the mouse is over the index.
         if isOverTree
           if e.metaKey
-            INTERNAL.gotoRootSuite()
+            PKG.gotoRootSuite()
           else
-            INTERNAL.gotoParentSuite()
+            PKG.gotoParentSuite()
 
           # Prevent backspacing off the page by default.
           e.preventDefault()
@@ -33,7 +33,7 @@ Meteor.startup ->
 
       # Handle "open suite" keys (right key).
       if isOverTree and (keyCode is KEYS.CURSOR_RIGHT or keyCode is KEYS.ENTER)
-        if ctrl = INTERNAL.hoveredListItemCtrl()
+        if ctrl = PKG.hoveredListItemCtrl()
           type = ctrl.type
           if type.endsWith('-suite')
             ctrl.open()

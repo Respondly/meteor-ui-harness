@@ -28,7 +28,7 @@ Ctrl.define
 
 
     helpers:
-      title: -> INTERNAL.formatText(@data.name)
+      title: -> PKG.formatText(@data.name)
       listData: -> { suite: @data }
       isOpen: -> @api.isOpen()
       isOpenStorage: (value) -> @suite.localStorage 'isOpen', value, default:true

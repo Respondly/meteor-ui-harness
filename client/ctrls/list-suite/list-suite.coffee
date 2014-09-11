@@ -3,10 +3,10 @@ Ctrl.define
     init: -> @suite = @data
 
     api:
-      open: -> INTERNAL.index.insertFromRight(@suite)
+      open: -> PKG.index.insertFromRight(@suite)
 
     helpers:
-      label: -> INTERNAL.formatText(@suite.name)
+      label: -> PKG.formatText(@suite.name)
 
     events:
       'click': -> @api.open()

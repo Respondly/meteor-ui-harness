@@ -1,4 +1,4 @@
-#= require ./ns.client.js
+#= require ./ns.js
 #= require ./log
 @expect = chai.expect
 
@@ -22,7 +22,7 @@ class Ctrls.UIHarness
       timers:[]
       hash: new ReactiveHash()
     @hash = new ReactiveHash() # Hash used by specs.
-    @log = INTERNAL.log
+    @log = PKG.log
     @title.hr = (value) -> internal.hash.prop 'hr', value, default:true
 
 

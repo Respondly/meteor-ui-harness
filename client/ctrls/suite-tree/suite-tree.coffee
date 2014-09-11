@@ -9,7 +9,7 @@ Ctrl.define
   'uih-suite-tree':
     ready: ->
       # Retrieve the Suite that was last loaded from [localStorage].
-      if uid = INTERNAL.currentSuiteUid()
+      if uid = PKG.currentSuiteUid()
         suite = BDD.suite.findOne(uid:uid)
 
       # Load the tree with the initial Suite.
@@ -20,7 +20,7 @@ Ctrl.define
       #     on first load.
       Util.delay =>
         @el().addClass('uih-loaded')
-        INTERNAL.isInitialized(true)
+        PKG.isInitialized(true)
 
 
     destroyed: ->
@@ -76,7 +76,7 @@ Ctrl.define
         listCtrl.onReady =>
             # Store new state.
             UIHarness.suite(suite)
-            INTERNAL.hoveredListItemCtrl(null)
+            PKG.hoveredListItemCtrl(null)
 
             onComplete = =>
                   # Store state.

@@ -1,7 +1,7 @@
 Ctrl.define
   'ui-harness':
     ready: ->
-      INTERNAL.index = @children.index
+      PKG.index = @children.index
 
 
     helpers:

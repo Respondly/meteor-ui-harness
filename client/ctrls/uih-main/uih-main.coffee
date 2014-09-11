@@ -12,7 +12,7 @@ Ctrl.define
       @autorun =>
         # Hook into reactive callback.
         title      = @api.headerText()
-        windowSize = INTERNAL.windowSize()
+        windowSize = PKG.windowSize()
         hasTitle   = not @api.headerText().isBlank
 
         Deps.afterFlush =>
@@ -23,5 +23,5 @@ Ctrl.define
     api:
       hostCtrl: -> @children.mainHost
       headerCtrl: -> @children.header
-      headerText: -> INTERNAL.headerText(@harness)
+      headerText: -> PKG.headerText(@harness)
 

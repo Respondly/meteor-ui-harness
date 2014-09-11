@@ -10,12 +10,12 @@ Ctrl.define
         suite = @harness.suite() # Hook into reactive context.
         Deps.nonreactive =>
             if metaValues = suite?.uiHarness
-              @harness.title(null)    if INTERNAL.valueAsMarkdown(metaValues.title)?
-              @harness.subtitle(null) if INTERNAL.valueAsMarkdown(metaValues.subtitle)?
+              @harness.title(null)    if PKG.valueAsMarkdown(metaValues.title)?
+              @harness.subtitle(null) if PKG.valueAsMarkdown(metaValues.subtitle)?
 
 
     helpers:
-      text: -> INTERNAL.headerText(@harness)
+      text: -> PKG.headerText(@harness)
 
       cssClass: ->
         css = ''

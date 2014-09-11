@@ -1,16 +1,16 @@
-#= require ../ns.client.js
+#= require ../ns.js
 
 ###
 Internal API for shared functions and state.
 ###
-INTERNAL.hash = hash = new ReactiveHash()
+PKG.hash = hash = new ReactiveHash()
 
 
 ###
 REACTIVE: Gets or sets the [Suite] or [Spec] list-item control
           that the mouse is currently over.
 ###
-INTERNAL.hoveredListItemCtrl = (value) -> hash.prop 'hoveredListItemCtrl', value, onlyOnChange:true
+PKG.hoveredListItemCtrl = (value) -> hash.prop 'hoveredListItemCtrl', value, onlyOnChange:true
 
 
 
@@ -18,36 +18,36 @@ INTERNAL.hoveredListItemCtrl = (value) -> hash.prop 'hoveredListItemCtrl', value
 REACTIVE: Gets or sets whether the UIHarness has completed
           it's initial load sequence.
 ###
-INTERNAL.isInitialized = (value) -> hash.prop 'isInitialized', value, onlyOnChange:true, default:false
+PKG.isInitialized = (value) -> hash.prop 'isInitialized', value, onlyOnChange:true, default:false
 
 
 
 ###
 REACTIVE: Gets or sets the screen dimensions.
 ###
-INTERNAL.windowSize = (value) -> hash.prop 'windowSize', value
+PKG.windowSize = (value) -> hash.prop 'windowSize', value
 
 
 ###
 Loads the parent suite into the tree index.
 ###
-INTERNAL.gotoParentSuite = (callback) ->
+PKG.gotoParentSuite = (callback) ->
   if parentSuite = UIHarness.suite()?.parent
     # Step up a level if this is a "section"
     # ie. [describe.section '', ->]
     parentSuite = parentSuite.parent if parentSuite.isSection
 
     if parentSuite is BDD.suite
-      INTERNAL.gotoRootSuite()
+      PKG.gotoRootSuite()
     else
-      INTERNAL.index.insertFromLeft(parentSuite, callback)
+      PKG.index.insertFromLeft(parentSuite, callback)
 
 
 ###
 Loads the root suite into the tree index.
 ###
-INTERNAL.gotoRootSuite = (callback) ->
-  INTERNAL.index.insertFromLeft(BDD.suite, callback)
+PKG.gotoRootSuite = (callback) ->
+  PKG.index.insertFromLeft(BDD.suite, callback)
   UIHarness.reset()
 
 
@@ -55,13 +55,13 @@ INTERNAL.gotoRootSuite = (callback) ->
 ###
 LOCAL-STORAGE: Gets or sets the UID of the current suite.
 ###
-INTERNAL.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
+PKG.currentSuiteUid = (value) -> LocalStorage.prop 'currentSuiteUid', value
 
 
 ###
 Invokes the "before" handlers for the given suite.
 ###
-INTERNAL.runBeforeHandlers = (suite, options = {}, callback) ->
+PKG.runBeforeHandlers = (suite, options = {}, callback) ->
   if suite
     deep = options.deep ? false
     beforeHandlers = suite.getBefore(deep)
@@ -72,7 +72,7 @@ INTERNAL.runBeforeHandlers = (suite, options = {}, callback) ->
 Refrehses a suite, clearing stored state and
 running all before handlers.
 ###
-INTERNAL.refreshSuite = (suite, options = {}) ->
+PKG.refreshSuite = (suite, options = {}) ->
   if suite
     # Clear all [localStorage] state.
     suite.localStorage.clear()
@@ -81,7 +81,7 @@ INTERNAL.refreshSuite = (suite, options = {}) ->
 
     # Reset and run "before" handlers.
     UIHarness.reset()
-    INTERNAL.runBeforeHandlers(suite, options)
+    PKG.runBeforeHandlers(suite, options)
 
 
 
@@ -100,12 +100,12 @@ REACTIVE: Gets the current title/sub-title text for the header.
                   @title('My Title')
 
 ###
-INTERNAL.headerText = (harness) ->
+PKG.headerText = (harness) ->
   harness ?= UIHarness
 
   formatValue = (value) ->
         return value unless Object.isString(value)
-        INTERNAL.formatText(value)
+        PKG.formatText(value)
 
   getText = (prop) ->
         # Retrieve reactive values.
@@ -143,7 +143,7 @@ INTERNAL.headerText = (harness) ->
 ###
 Formats the text of labels within the index tree.
 ###
-INTERNAL.formatText = (text) ->
+PKG.formatText = (text) ->
   text = text.call(UIHarness) if Object.isFunction(text)
   text = Util.asValue(text)
   text = Markdown.toHtml(text)

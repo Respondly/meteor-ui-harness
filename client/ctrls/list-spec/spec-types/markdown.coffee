@@ -1,7 +1,7 @@
 ###
 Handles the Markdown spec type.
 ###
-class INTERNAL.SpecTypeMarkdown extends INTERNAL.SpecTypeBase
+class PKG.SpecTypeMarkdown extends PKG.SpecTypeBase
   onRun: ->
     # Setup initial conditions.
     file = @meta.file

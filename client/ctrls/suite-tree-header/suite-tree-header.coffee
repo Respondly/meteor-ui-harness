@@ -10,11 +10,11 @@ Ctrl.define
 
 
     events:
-      'click .uih-refresh-btn': (e) -> INTERNAL.refreshSuite(UIHarness.suite(), deep:false)
+      'click .uih-refresh-btn': (e) -> PKG.refreshSuite(UIHarness.suite(), deep:false)
       'click .uih-back-btn': (e) ->
         if e.metaKey
-          INTERNAL.gotoRootSuite()
+          PKG.gotoRootSuite()
         else
-          INTERNAL.gotoParentSuite()
+          PKG.gotoParentSuite()
 
 

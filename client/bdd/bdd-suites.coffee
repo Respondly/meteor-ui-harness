@@ -31,7 +31,7 @@ describe.md = (name, folderPath, func) ->
   # Add child specs.
   specs = []
   for path, file of files
-    spec = INTERNAL.markdownSpec(null, path)
+    spec = PKG.markdownSpec(null, path)
     specs.push({ spec:spec, file:file })
 
   # Sort alphabetically.

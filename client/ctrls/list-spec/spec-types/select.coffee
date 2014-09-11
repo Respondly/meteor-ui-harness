@@ -1,7 +1,7 @@
 ###
 Handles the SELECT options on a Spec index-tree item.
 ###
-class INTERNAL.SpecTypeSelect extends INTERNAL.SpecTypeBase
+class PKG.SpecTypeSelect extends PKG.SpecTypeBase
   ready: ->
     # Sync the <select> with the current property value.
     @autorun =>

@@ -76,7 +76,7 @@ it.md = (name, file, func) ->
   spec
 
 
-INTERNAL.markdownSpec = (name, file, func) ->
+PKG.markdownSpec = (name, file, func) ->
   # Makes the new spec without putting it in the default parent
   # context that happens with "it" is called.
   { name, file, func } = fixMarkdownParams(name, file, func)

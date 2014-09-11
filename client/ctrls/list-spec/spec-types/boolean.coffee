@@ -1,7 +1,7 @@
 ###
 Handles the Boolean checkbox on a Spec index-tree item.
 ###
-class INTERNAL.SpecTypeBoolean extends INTERNAL.SpecTypeBase
+class PKG.SpecTypeBoolean extends PKG.SpecTypeBase
   ready: ->
     checkbox = @specCtrl.context.children.chk
 

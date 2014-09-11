@@ -7,14 +7,14 @@ Ctrl.define
 
       # Create controllers for the various types of spec.
       switch @meta?.type
-        when 'boolean' then @boolean = new INTERNAL.SpecTypeBoolean(@ctrl)
-        when 'markdown' then @markdown = new INTERNAL.SpecTypeMarkdown(@ctrl)
+        when 'boolean' then @boolean = new PKG.SpecTypeBoolean(@ctrl)
+        when 'markdown' then @markdown = new PKG.SpecTypeMarkdown(@ctrl)
         when 'select'
           if @meta.options?
-            @select = new INTERNAL.SpecTypeSelect(@ctrl)
+            @select = new PKG.SpecTypeSelect(@ctrl)
         when 'radio'
           if @meta.options?
-            @radio = new INTERNAL.SpecTypeRadio(@ctrl)
+            @radio = new PKG.SpecTypeRadio(@ctrl)
 
       # Finish up.
       @isSpecial = @boolean? or @radio? or @select? or @markdown?
@@ -47,7 +47,7 @@ Ctrl.define
         name = @spec.name
         name = name + ':' if @select? or @radio?
         name = "`#{ name }`" if @meta.propName?
-        INTERNAL.formatText(name)
+        PKG.formatText(name)
 
       count: (value) -> @prop 'count', value
       isBoolean: -> @boolean?

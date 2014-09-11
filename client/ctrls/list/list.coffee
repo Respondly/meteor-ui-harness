@@ -16,8 +16,8 @@ Ctrl.define
         # run already.
         # If this is not the initial load, then each "before" handler
         # will have been run as the user stepped down into the suite.
-        deep = not INTERNAL.isInitialized()
-        INTERNAL.runBeforeHandlers(@suite, deep:deep, callback)
+        deep = not PKG.isInitialized()
+        PKG.runBeforeHandlers(@suite, deep:deep, callback)
 
       ###
       Invoked immediately before the list is taken off screen.
@@ -54,7 +54,7 @@ Ctrl.define
           ctrl = Ctrl.fromElement(e) ? null
         else
           ctrl = null
-        INTERNAL.hoveredListItemCtrl(ctrl)
+        PKG.hoveredListItemCtrl(ctrl)
 
       isEmpty: -> @suite.items.length is 0
 

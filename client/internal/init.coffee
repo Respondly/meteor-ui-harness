@@ -3,7 +3,7 @@ Meteor.startup ->
   # Keep the current Suite ID up-to-date.
   Deps.autorun ->
     if currentSuite = UIHarness.suite()
-      INTERNAL.currentSuiteUid(currentSuite.uid())
+      PKG.currentSuiteUid(currentSuite.uid())
 
   # Monitor the screen size (throttled).
   elWindow = $(window)
@@ -11,7 +11,7 @@ Meteor.startup ->
         size =
           width:elWindow.width()
           height:elWindow.height()
-        INTERNAL.windowSize(size)
+        PKG.windowSize(size)
   updateWindowSize = updateWindowSize.throttle(100)
   elWindow.resize (e) -> updateWindowSize()
   updateWindowSize()

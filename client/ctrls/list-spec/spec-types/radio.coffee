@@ -1,7 +1,7 @@
 ###
 Handles the radio-buttons options on a Spec index-tree item.
 ###
-class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
+class PKG.SpecTypeRadio extends PKG.SpecTypeBase
   ready: ->
     elRadioButtons = => @specCtrl.el('input[type="radio"]')
 
@@ -83,6 +83,6 @@ class INTERNAL.SpecTypeRadio extends INTERNAL.SpecTypeBase
 # ----------------------------------------------------------------------
 
 
-INTERNAL.processSelectItem = (item) ->
+PKG.processSelectItem = (item) ->
 
 

@@ -5,7 +5,7 @@
 Base class for controllers of the various
 different spec types (eg. "it.boolean")
 ###
-class INTERNAL.SpecTypeBase extends AutoRun
+class PKG.SpecTypeBase extends AutoRun
   constructor: (@specCtrl) ->
     super
 
