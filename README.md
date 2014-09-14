@@ -1,29 +1,21 @@
-# TestHarness
+# UI Harness
 A visual test harness for UI controls running within Meteor.
 
-# TODO
 
-- Rename "TestHarness" => "UIHarness"
-- HR divider between specs (div , aka "divider")
-- divider ("title")
-- it.toggle 'property' (put checkbox slider into harness)
-- Markdown documentation
-
-
-# Installation
+## Installation
 When running for the first time:
 
     mrt update
     package update
 
 
-# Run tests
+## Run tests
 
     mrt test-packages ui-harness
 
 
 
-# License (MIT)
+## License (MIT)
 
 Copyright © 2014, **Respondly**
 
