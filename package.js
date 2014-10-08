@@ -5,6 +5,7 @@ Package.describe({
 
 
 Package.on_use(function (api) {
+  api.use('standard-app-packages');
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use(['coffeescript', 'chai', 'npm']);
