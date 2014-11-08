@@ -1,5 +1,5 @@
-#= require ./ns.js
-#= require ./log
+#= require ../ns.js
+#= require ../log
 @expect = chai.expect
 
 
@@ -314,5 +314,4 @@ class Ctrls.UIHarness
 # EXPORT ----------------------------------------------------------------------
 
 
-UIHarness = new Ctrls.UIHarness()
 
