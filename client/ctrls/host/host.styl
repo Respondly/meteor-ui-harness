@@ -11,38 +11,10 @@
     .uih-container-margin
       position relative
 
-  // ------------------------------------------------------
-
-  .uih-container
-    position absolute
-
-    /* Set the default box-sizing for the content. */
-    box-sizing content-box
-
-    &.uih-left
-      left 0px
-
-    &.uih-center
-      abs-center-x()
-
-    &.uih-right
-      right 0px
-
-    &.uih-top
-      top 0px
-
-    &.uih-middle
-      abs-center-y()
-
-    &.uih-bottom
-      bottom 0px
-
-    &.uih-center-middle
-      abs-center()
 
   /* Relative positioned when scrolling. */
   &.uih-is-scrolling.uih-is-fill
-    .uih-container
+    .uih-host-ctrl-container
       position relative
 
 

@@ -93,6 +93,57 @@ PKG.stamps.CtrlHost = stampit().enclose ->
     if Util.isBlank(selector) then result else result.find(selector)
 
 
+  ###
+  Gets or sets the size of the hosted controls
+  @param value: String
+           - 'width,height', eg: '20,30', [20,30], (30,40)
+           - 'fill'
+           - 'auto' (default)
+  ###
+  @size = (value...) ->
+    value = undefined if value.length is 0
+    @hostCtrl().size(value)
+
+
+  ###
+  Gets or sets the scroll behavior of the host.
+  @param value:
+            - boolean (value for X and Y)
+            - {x:boolean, y:boolean}
+  ###
+  @scroll = (value...) ->
+    value = undefined if value.length is 0
+    @hostCtrl().scroll(value)
+
+
+
+  ###
+  Gets or sets the alignment of the hosted control.
+  @param value: String - {x:y}
+           - 'center,middle' (default)
+           - x: left|center|right
+           - y: top|middle|bottom
+  ###
+  @align = (value) -> @hostCtrl().align(value)
+
+
+  ###
+  Gets or sets the margin around the content.
+  Relevant when 'size' is set to 'fill'.
+  @param value: String - {left|top|right|bottom}
+  ###
+  @margin = (value) -> @hostCtrl().margin(value)
+
+
+
+  ###
+  Gets or sets the device/version/orientation being used. Default null.
+  Example:
+      'iPhone:6'
+  ###
+  @device = (value) -> @hostCtrl().device(value)
+
+
 
   # METHODS ----------------------------------------------------------------------
 
@@ -152,48 +203,6 @@ PKG.stamps.CtrlHost = stampit().enclose ->
   Updates the visual state of the test-harness.
   ###
   @updateState = -> @hostCtrl().updateState()
-
-
-  ###
-  Gets or sets the size of the hosted controls
-  @param value: String
-           - 'width,height', eg: '20,30', [20,30], (30,40)
-           - 'fill'
-           - 'auto' (default)
-  ###
-  @size = (value...) ->
-    value = undefined if value.length is 0
-    @hostCtrl().size(value)
-
-
-  ###
-  Gets or sets the scroll behavior of the host.
-  @param value:
-            - boolean (value for X and Y)
-            - {x:boolean, y:boolean}
-  ###
-  @scroll = (value...) ->
-    value = undefined if value.length is 0
-    @hostCtrl().scroll(value)
-
-
-
-  ###
-  Gets or sets the alignment of the hosted control.
-  @param value: String - {x:y}
-           - 'center,middle' (default)
-           - x: left|center|right
-           - y: top|middle|bottom
-  ###
-  @align = (value) -> @hostCtrl().align(value)
-
-
-  ###
-  Gets or sets the margin around the content.
-  Relevant when 'size' is set to 'fill'.
-  @param value: String - {left|top|right|bottom}
-  ###
-  @margin = (value) -> @hostCtrl().margin(value)
 
 
   # ----------------------------------------------------------------------
