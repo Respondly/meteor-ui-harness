@@ -3,9 +3,10 @@ Ctrl.define
     init: ->
       @harness = @data
 
+
     ready: ->
       # Store referecnes.
-      @harness.__internal.mainHostCtrl = @api.hostCtrl()
+      @harness.hostCtrl(@api.hostCtrl())
 
       # Keep the top of the [host] in sync with the height
       # of the header if it's visible.

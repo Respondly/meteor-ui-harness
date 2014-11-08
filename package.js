@@ -66,8 +66,14 @@ Package.on_use(function (api) {
   api.add_files('client/bdd/bdd-suites.coffee', 'client');
   api.add_files('client/bdd/bdd.coffee', 'client');
   api.add_files('client/css-mixins/uih.import.styl', 'client');
-  api.add_files('client/log.coffee', 'client');
-  api.add_files('client/models/ui-harness.coffee', 'client');
+  api.add_files('client/stamps/autorun.coffee', 'client');
+  api.add_files('client/stamps/config.coffee', 'client');
+  api.add_files('client/stamps/ctrl-host.coffee', 'client');
+  api.add_files('client/stamps/helper-delay.coffee', 'client');
+  api.add_files('client/stamps/helper-lorem.coffee', 'client');
+  api.add_files('client/stamps/helpers.coffee', 'client');
+  api.add_files('client/stamps/log.coffee', 'client');
+  api.add_files('client/stamps/ui-harness.coffee', 'client');
   api.add_files('client/internal/init.coffee', 'client');
   api.add_files('client/internal/internal.coffee', 'client');
   api.add_files('client/internal/key-handlers.coffee', 'client');
