@@ -1,0 +1,14 @@
+<template name='uih-device'>
+  <div class='uih-device {{ cssClass }}'>
+
+    <div class='uih-screen'
+      style='width:{{ size.width }}px; height:{{ size.height }}px;'>
+      {{> ctrl type='uih-host-ctrl-container' id='ctrlOuter' data=data }}
+    </div>
+
+    <div class='uih-home-button'></div>
+
+    <div class='uih-size'>{{ sizeLabel }}</div>
+
+  </div>
+</template>

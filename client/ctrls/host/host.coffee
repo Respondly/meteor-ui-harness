@@ -3,22 +3,28 @@ DEFAULT_ALIGN = 'center,top'
 DEFAULT_MARGIN = 50
 DEFAULT_SCROLL = false
 
-
+###
+The Control Host canvas.
+###
 Ctrl.define
   'uih-host':
-    init: ->
+    ready: ->
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
+      @autorun => @api.updateDevice(  )
 
 
     api:
-      elContainer: -> @find('.uih-container')
-      elContent: -> $(@api.elContainer()?.children()[0])
-      currentCtrl: (value) -> @prop 'currentCtrl', value, default:null
+      elContainer: -> @children.ctrlOuter.el()
+      elContent: -> @children.ctrlOuter.elContent()
+
+      currentCtrl: (value) -> @children.ctrlOuter.currentCtrl()
+      cssClass: (value) -> @children.ctrlOuter.cssClass()
 
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
-      cssClass: (value) -> @prop 'cssClass', value, default:''
+      device: (value) -> @prop 'device', value, default:null
+      orientation: (value) -> @prop 'orientation', value, default:'portrait'
 
       size: (value) ->
         result = @prop 'size', value, default:[DEFAULT_SIZE]
@@ -42,105 +48,54 @@ Ctrl.define
       ###
       load: (content, options = {}, callback) ->
         # Setup initial conditions.
-        @api.clear()
-        elContainer = @api.elContainer()
+        @api.unload()
 
-        # Parameter fix-up.
-        if Object.isFunction(options)
-          callback = options
-          options = {}
+        # Override display options for showing the device
+        # if a device was specified.
+        if device = @api.device()
+          options =
+            size: 'auto'
+            align: 'center,middle'
+            scroll: false
+            margin: 0
+            args:
+              content:  content
+              device:   device
+              args:     options.args
 
-        # Attempt to match strings with Ctrl/Template.
-        if Object.isString(content)
-          unless content.startsWith('<')
-            if ctrl = Ctrl.defs[content]
-              content = ctrl
-            else
-              content = Template[content] if Template[content]?
+          content = 'uih-device'
 
-
-        done = =>
+        @children.ctrlOuter.load content, options, =>
               # Update visual state.
               @api.size(options.size ? DEFAULT_SIZE)
               @api.align(options.align ? DEFAULT_ALIGN)
               @api.margin(options.margin ? DEFAULT_MARGIN)
               @api.scroll(options.scroll ? DEFAULT_SCROLL)
-              @api.cssClass(options.cssClass ? '')
-
-              # Update state.
-              @api.currentCtrl(@_current.ctrl ? null)
-              @api.updateState()
 
               # Finish up.
-              elContainer.toggle(true)
+              @api.updateState()
+              @el().toggle(true)
               callback?()
 
-        # Don't continue unless some content has been specified.
-        return done() unless content?
 
-        # Ctrl.
-        if (content instanceof Ctrl.CtrlDefinition)
-          ctrl = @appendCtrl(content, '.uih-container', options.args)
-          ctrl.onReady -> done()
-          @_current =
-            type:       'ctrl'
-            ctrl:       ctrl
-            blazeView:  ctrl.context.__internal__.blazeView
-            options:    options
-
-        # Template.
-        if content.__proto__ is Template.prototype
-          domrange = UI.renderWithData(content, options.args)
-          domrange.view.onRendered -> done()
-          UI.insert(domrange, elContainer[0])
-          @_current =
-            type:       'tmpl'
-            tmpl:       content
-            blazeView:  domrange.view
-            options:    options
-
-        # String (HTML).
-        content = $(content) if Object.isString(content)
-
-        # jQuery element.
-        content = content[0] if content.jquery?
-
-        # DOM element.
-        if (content instanceof HTMLElement)
-          elContainer.append(content)
-          @_current =
-            type:       'element'
-            el:         $(content)
-            options:    options
-          done()
-
+      ###
+      Removes the hosted control.
+      ###
+      unload: ->
+        @children.ctrlOuter.unload()
+        @el().toggle(false)
 
 
       ###
       Resets the host to it's default state.
       ###
       reset: ->
-        @api.clear()
+        @api.unload()
         @api.size(DEFAULT_SIZE)
         @api.align(DEFAULT_ALIGN)
+        @api.margin(DEFAULT_MARGIN)
         @api.cssClass('')
 
-
-      ###
-      Removes the hosted control.
-      ###
-      clear: ->
-        # Dispose of the Blaze view.
-        if view = @_current?.blazeView
-          UI.remove(view.domrange)
-
-        # Ensure the DOM element is empty.
-        elContainer = @api.elContainer()
-        elContainer.empty()
-        elContainer.toggle(false)
-
-        # Finish up.
-        delete @_current
 
 
       ###
@@ -149,13 +104,16 @@ Ctrl.define
       updateState: ->
         @api.updateSize()
         @api.updatePosition()
+        @api.updateDevice()
+
+
 
 
       ###
       Updates the size of the hosted content.
       ###
       updateSize: ->
-        size   = @api.size()
+        size = @api.size()
         margin = @api.margin()
         isScrolling = @api.scroll().isScrolling()
 
@@ -230,6 +188,17 @@ Ctrl.define
               else
                 elContainer.addClass("uih-#{ align.x } uih-#{ align.y }")
 
+      ###
+      Updates the device settings.
+      ###
+      updateDevice: ->
+        device = @api.device()
+        orientation = @api.orientation()
+        if device?
+          if ctrl = @api.currentCtrl()
+            if ctrl.type is 'uih-device'
+              ctrl.device(device)
+              ctrl.orientation(orientation)
 
 
     helpers:
@@ -243,14 +212,6 @@ Ctrl.define
         css
 
 
-      containerClass: ->
-        css = @api.cssClass()
-
-        # Provide a standard class for putting styles in test/spec files.
-        if ctrl = @api.currentCtrl()
-          css += " #{ ctrl.type }-outer"
-
-        css
 
 
 

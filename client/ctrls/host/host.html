@@ -1,7 +1,7 @@
 <template name='uih-host'>
   <div class='uih-host {{ rootClass }}'>
     <div class='uih-container-margin'>
-      <div class='uih-container {{ containerClass }}'></div>
+      {{> ctrl type='uih-host-ctrl-container' id='ctrlOuter' data=data }}
     </div>
   </div>
 </template>
