@@ -19,13 +19,17 @@ Ctrl.define
         css = @api.orientation()
         css
 
-      size: ->
-        size = @helpers.device()?.size
+      screenSize: ->
+        { width, height } = @helpers.device()?.size
+
+        # Acount for screen border.
+        width += 2
+        height += 2
+
         switch @api.orientation()
-          when 'portrait' then size
-          when 'landscape' then { width:size.height, height:size.width }
+          when 'portrait'  then { width:width,  height:height }
+          when 'landscape' then { width:height, height:width } # Flip orientation.
 
       sizeLabel: ->
         if size = @helpers.device()?.size
-
           "#{ size.width } x #{ size.height }"
