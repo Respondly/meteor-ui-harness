@@ -1,7 +1,17 @@
 <template name='uih-main'>
-  <div class='uih-main'>
-    {{> ctrl type='uih-host-header' id='header' data=data }}
-    {{> ctrl type='uih-host' id='mainHost' }}
+  <div class='uih-main {{ cssClass }}'>
+
+    <div class='uih-content-outer' style='{{ contentOffsetStyle }}'>
+      {{> ctrl type='uih-host-header' id='header' data=data }}
+      {{> ctrl type='uih-host' id='host' }}
+    </div>
+
+    {{#if showLog}}
+      <div class='uih-log-outer' style='{{ logOffsetStyle }}'>
+        <code>log</code>
+      </div>
+    {{/if}}
+
   </div>
 </template>
 

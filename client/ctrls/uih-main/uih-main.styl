@@ -3,3 +3,38 @@
 
 .uih-main
   background white
+
+  > .uih-content-outer
+    abs-pos()
+
+  > .uih-log-outer
+    background white
+    padding 20px
+
+  // ------------------------------------------------------
+
+  LOG_BORDER_COLOR = darken(white, 12%)
+  &.uih-log-left
+    > .uih-log-outer
+      abs-pos 0, 0, null, 0
+      border-right solid 1px LOG_BORDER_COLOR
+
+  &.uih-log-top
+    > .uih-log-outer
+      abs-pos 0, 0, 0, null
+      border-bottom solid 1px LOG_BORDER_COLOR
+
+  &.uih-log-right
+    > .uih-log-outer
+      abs-pos null, 0, 0, 0
+      border-left solid 1px LOG_BORDER_COLOR
+
+  &.uih-log-bottom
+    > .uih-log-outer
+      abs-pos 0, null, 0, 0
+      border-top solid 1px LOG_BORDER_COLOR
+
+
+
+
+

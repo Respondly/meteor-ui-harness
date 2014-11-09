@@ -6,6 +6,7 @@ UIHarness = stampit
     @hostCtrl?.reset()
     @delay?.reset()
     @autorun?.reset()
+    @log?.reset()
 
 
 

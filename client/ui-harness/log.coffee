@@ -1,12 +1,52 @@
+DEFAULT_EDGE = null
+DEFAULT_OFFSET = 300
+
+
+###
+The API to the log.
+###
 PKG.Log = stampit().enclose ->
+  hash = new ReactiveHash(onlyOnChange:true)
+
+
+  # ----------------------------------------------------------------------
+
+
   ###
   Logs a value for debugging.
   ###
-  @log = (value) ->
+  @log = log = (value) ->
     if Util.isObject(value)
-      @log.json(value)
+      log.json(value)
     else
       console.log value
+
+
+  # ----------------------------------------------------------------------
+
+
+  ###
+  REACTIVE: Gets or sets the edge that the log is on.
+  @param value: 'left', 'top', 'right', 'bottom'
+  ###
+  log.edge = (value) => hash.prop 'edge', value, default:DEFAULT_EDGE
+
+
+  ###
+  REACTIVE: Gets or sets the pixel offset of the log
+  ie. the width or height depending upon what edge the
+  log is pinned to.
+  ###
+  log.offset = (value) -> hash.prop 'offset', value, default:DEFAULT_OFFSET
+
+
+
+  ###
+  Resets the log to it's original state.
+  ###
+  log.reset = =>
+    log.edge(DEFAULT_EDGE)
+    log.offset(DEFAULT_OFFSET)
 
 
 
@@ -20,7 +60,7 @@ PKG.Log = stampit().enclose ->
             - exclude:      The key name(s) to exclude from the output.
                             String or Array of strings.
   ###
-  @log.json = (value, options = {}) =>
+  log.json = (value, options = {}) =>
     Deps.nonreactive =>
       return unless Util.isObject(value)
       options.showFuncs ?= true
