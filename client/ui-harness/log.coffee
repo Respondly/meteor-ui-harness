@@ -1,5 +1,6 @@
 DEFAULT_EDGE = null
 DEFAULT_OFFSET = 300
+DEFAULT_TAIL = true
 
 
 ###
@@ -24,13 +25,38 @@ PKG.Log = stampit().enclose ->
           @load 'c-log', size:'fill', scroll:true, => callback?(@ctrl())
 
 
+  write = (propName, value, options) =>
+    getLogCtrl (ctrl) =>
+      @log.clear() if not @log.tail()
+      ctrl[propName](value, options)
+
+
   # ----------------------------------------------------------------------
 
 
   ###
   Logs a value for debugging.
   ###
-  @log = log = (value) -> getLogCtrl (ctrl) => ctrl.log(value)
+  @log = log = (value, options) -> write('log', value, options)
+
+
+  ###
+  Loads a visual object.
+  @param value: The object to load.
+  @param options:
+            - showFuncs:    Flag indicating whether function values are rendered.
+            - invokeFuncs:  Flag indicating whether functions should be invoked to convert them to a value.
+            - exclude:      The key name(s) to exclude from the output.
+                            String or Array of strings.
+  ###
+  log.json = (value, options) => write('logJson', value, options)
+
+
+
+  ###
+  Clears the log.
+  ###
+  log.clear = -> getLogCtrl (ctrl) => ctrl.clear()
 
 
 
@@ -52,6 +78,13 @@ PKG.Log = stampit().enclose ->
   log.offset = (value) -> hash.prop 'offset', value, default:DEFAULT_OFFSET
 
 
+  ###
+  REACTIVE: Gets or sets whether the log tails, or replaces the valud
+  on each write.
+  ###
+  log.tail = (value) -> hash.prop 'tail', value, default:DEFAULT_TAIL
+
+
   # ----------------------------------------------------------------------
 
   ###
@@ -62,25 +95,6 @@ PKG.Log = stampit().enclose ->
     log.offset(DEFAULT_OFFSET)
 
 
-
-  ###
-  Loads a visual object.
-  @param value: The object to load.
-  @param options:
-            - showFuncs:    Flag indicating whether function values are rendered.
-            - invokeFuncs:  Flag indicating whether functions should be invoked to convert them to a value.
-            - exclude:      The key name(s) to exclude from the output.
-                            String or Array of strings.
-  ###
-  log.json = (value, options) =>
-    getLogCtrl (ctrl) => ctrl.logJson(value, options)
-
-
-
-  ###
-  Clears the log.
-  ###
-  log.clear = -> getLogCtrl (ctrl) => ctrl.clear()
 
 
   # ----------------------------------------------------------------------
