@@ -10,13 +10,13 @@ PKG.toDevice = (value) ->
   # Extract parts from the definition.
   parts = value.split(':')
   result =
-    device:       (parts[0] ? 'iphone').toLowerCase()
-    version:      (parts[1] ? '6').toLowerCase()
+    type:    (parts[0] ? 'iphone').toLowerCase()
+    version: (parts[1] ? '6').toLowerCase()
 
   # Determine size.
   size = (width, height) -> result.size = { width:width, height:height }
 
-  switch result.device
+  switch result.type
     when 'iphone'
       switch result.version
         when '4', '4s'        then size(320, 480)

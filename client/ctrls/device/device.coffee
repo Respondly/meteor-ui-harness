@@ -31,5 +31,19 @@ Ctrl.define
           when 'landscape' then { width:height, height:width } # Flip orientation.
 
       sizeLabel: ->
-        if size = @helpers.device()?.size
-          "#{ size.width } x #{ size.height }"
+        isOverLabel = @helpers.isOverLabel()
+        device = @helpers.device()
+        if size = device?.size
+          text = "#{ size.width } x #{ size.height } dp"
+          if isOverLabel
+            text = "#{ device.type } | #{ device.version } | #{ text }"
+          text
+
+
+
+      isOverLabel: (value) -> @prop 'isOverLabel', value, default:false
+
+    events:
+      'mouseenter .uih-size-label': -> @helpers.isOverLabel(true)
+      'mouseleave .uih-size-label': -> @helpers.isOverLabel(false)
+
