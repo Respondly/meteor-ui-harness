@@ -45,7 +45,6 @@ Ctrl.define
 
       label: ->
         name = @spec.name
-        name = name + ':' if @select? or @radio?
         name = "`#{ name }`" if @meta.propName?
         PKG.formatText(name)
 
