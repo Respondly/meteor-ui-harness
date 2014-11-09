@@ -7,6 +7,21 @@ The API to the log.
 ###
 PKG.Log = stampit().enclose ->
   hash = new ReactiveHash(onlyOnChange:true)
+  mainCtrl = null
+
+  getLogCtrl = (callback) =>
+    Deps.nonreactive =>
+      if ctrl = @configure.ctrls.main?.logCtrl()
+        # The log control is loaded into one of the edges.
+        callback?(ctrl)
+      else
+        # The log control is not loaded within an edge.
+        # Get it from the main host.
+        ctrl = @ctrl()
+        if ctrl?.type is 'c-log'
+          callback?(ctrl)
+        else
+          @load 'c-log', size:'fill', scroll:true, => callback?(@ctrl())
 
 
   # ----------------------------------------------------------------------
@@ -15,11 +30,8 @@ PKG.Log = stampit().enclose ->
   ###
   Logs a value for debugging.
   ###
-  @log = log = (value) ->
-    if Util.isObject(value)
-      log.json(value)
-    else
-      console.log value
+  @log = log = (value) -> getLogCtrl (ctrl) => ctrl.log(value)
+
 
 
   # ----------------------------------------------------------------------
@@ -40,6 +52,7 @@ PKG.Log = stampit().enclose ->
   log.offset = (value) -> hash.prop 'offset', value, default:DEFAULT_OFFSET
 
 
+  # ----------------------------------------------------------------------
 
   ###
   Resets the log to it's original state.
@@ -47,7 +60,6 @@ PKG.Log = stampit().enclose ->
   log.reset = =>
     log.edge(DEFAULT_EDGE)
     log.offset(DEFAULT_OFFSET)
-
 
 
 
@@ -61,25 +73,26 @@ PKG.Log = stampit().enclose ->
                             String or Array of strings.
   ###
   log.json = (value, options = {}) =>
-    Deps.nonreactive =>
-      return unless Util.isObject(value)
-      options.showFuncs ?= true
-      if ctrl = UIHarness.ctrl()
-        if ctrl.type is 'c-json'
-          # Set the value on existing JSON ctrl.
-          ctrl.showFuncs(options.showFuncs)
-          ctrl.invokeFuncs(options.invokeFuncs)
-          ctrl.exclude(options.exclude ? null)
-          ctrl.value(value)
-          return
+    getLogCtrl (ctrl) => ctrl.logJson(value, options)
+    # Deps.nonreactive =>
+      # return unless Util.isObject(value)
+      # options.showFuncs ?= true
+      # if ctrl = UIHarness.ctrl()
+      #   if ctrl.type is 'c-json'
+      #     # Set the value on existing JSON ctrl.
+      #     ctrl.showFuncs(options.showFuncs)
+      #     ctrl.invokeFuncs(options.invokeFuncs)
+      #     ctrl.exclude(options.exclude ? null)
+      #     ctrl.value(value)
+      #     return
 
-      # Load new JSON ctrl.
-      args =
-        value:        value
-        showFuncs:    options.showFuncs
-        invokeFuncs:  options.invokeFuncs
-        exclude:      options.exclude
-      UIHarness.load 'c-json', size:'fill', args:args, scroll:true
+      # # Load new JSON ctrl.
+      # args =
+      #   value:        value
+      #   showFuncs:    options.showFuncs
+      #   invokeFuncs:  options.invokeFuncs
+      #   exclude:      options.exclude
+      # UIHarness.load 'c-json', size:'fill', args:args, scroll:true
 
 
   # ----------------------------------------------------------------------

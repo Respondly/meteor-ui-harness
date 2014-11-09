@@ -2,34 +2,28 @@
 Methods for loading controls in the UIHarness host.
 ###
 PKG.CtrlHost = stampit().enclose ->
-  _hostCtrl = null
   hash = new ReactiveHash(onlyOnChange:true)
+
+  hostCtrl = =>
+    ctrl = @configure.ctrls.host
+    if not ctrl?
+      throw new Error('The [uih-host] has not been initialized. Ensure it is set on [harness.configure.ctrls.host]')
+    ctrl
 
 
   # ----------------------------------------------------------------------
 
 
   ###
-  Initializes the UIHarness with the main-host ctrl that it
-  will be rendering to.
+  Resets the host control.
   ###
-  @hostCtrl = (ctrl) ->
-    _hostCtrl = ctrl if ctrl isnt undefined # WRITE.
-    unless _hostCtrl
-      throw new Error('The [hostCtrl] has not been initialized.')
-    _hostCtrl
-
-
-  ###
-  Resets the UIHarness to it's default state.
-  ###
-  @hostCtrl.reset = =>
+  @reset.hostCtrl = =>
     @title(null)
     @title.hr(true)
     @subtitle(null)
     @scroll(false)
     @api(null)
-    @hostCtrl()?.reset()
+    hostCtrl()?.reset()
 
 
   # ----------------------------------------------------------------------
@@ -102,7 +96,7 @@ PKG.CtrlHost = stampit().enclose ->
   ###
   @size = (value...) ->
     value = undefined if value.length is 0
-    @hostCtrl().size(value)
+    hostCtrl().size(value)
 
 
   ###
@@ -113,7 +107,7 @@ PKG.CtrlHost = stampit().enclose ->
   ###
   @scroll = (value...) ->
     value = undefined if value.length is 0
-    @hostCtrl().scroll(value)
+    hostCtrl().scroll(value)
 
 
 
@@ -124,7 +118,7 @@ PKG.CtrlHost = stampit().enclose ->
            - x: left|center|right
            - y: top|middle|bottom
   ###
-  @align = (value) -> @hostCtrl().align(value)
+  @align = (value) -> hostCtrl().align(value)
 
 
   ###
@@ -132,7 +126,7 @@ PKG.CtrlHost = stampit().enclose ->
   Relevant when 'size' is set to 'fill'.
   @param value: String - {left|top|right|bottom}
   ###
-  @margin = (value) -> @hostCtrl().margin(value)
+  @margin = (value) -> hostCtrl().margin(value)
 
 
 
@@ -142,7 +136,7 @@ PKG.CtrlHost = stampit().enclose ->
       'iPhone:6'
       'iPhone:5s'
   ###
-  @device = (value) -> @hostCtrl().device(value)
+  @device = (value) -> hostCtrl().device(value)
 
 
   ###
@@ -151,7 +145,7 @@ PKG.CtrlHost = stampit().enclose ->
     - 'portrait' (default)
     - 'landscape'
   ###
-  @orientation = (value) -> @hostCtrl().orientation(value)
+  @orientation = (value) -> hostCtrl().orientation(value)
 
 
 
@@ -191,11 +185,11 @@ PKG.CtrlHost = stampit().enclose ->
       callback = options
       options = {}
 
-    hostCtrl = @hostCtrl()
-    hostCtrl.load content, options, =>
+    ctrl = hostCtrl()
+    ctrl.load content, options, =>
         # Update current state.
-        @el(hostCtrl.elContent())
-        @ctrl(hostCtrl.currentCtrl())
+        @el(ctrl.elContent())
+        @ctrl(ctrl.currentCtrl())
         callback?()
 
 
@@ -203,7 +197,7 @@ PKG.CtrlHost = stampit().enclose ->
   Removes the hosted control.
   ###
   @unload = ->
-    @hostCtrl().clear()
+    hostCtrl().clear()
     @el(null)
     @ctrl(null)
 
@@ -212,7 +206,7 @@ PKG.CtrlHost = stampit().enclose ->
   ###
   Updates the visual state of the test-harness.
   ###
-  @updateState = -> @hostCtrl().updateState()
+  @updateState = -> hostCtrl().updateState()
 
 
   # ----------------------------------------------------------------------

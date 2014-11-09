@@ -5,9 +5,6 @@ Ctrl.define
 
 
     ready: ->
-      # Store referecnes.
-      @harness.hostCtrl(@api.hostCtrl())
-
       # Keep the top of the [host] in sync with the height
       # of the header if it's visible.
       @autorun =>
@@ -25,6 +22,7 @@ Ctrl.define
       hostCtrl: -> @children.host
       headerCtrl: -> @children.header
       headerText: -> PKG.headerText(@harness)
+      logCtrl: -> @children.log
 
 
     helpers:
@@ -48,7 +46,6 @@ Ctrl.define
                     when 'left', 'right' then 'width'
                     when 'top', 'bottom' then 'height'
           "#{ style }:#{ log.offset() }px;"
-              # ...
 
 
 
