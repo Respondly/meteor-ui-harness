@@ -56,7 +56,9 @@ PKG.Log = stampit().enclose ->
   ###
   Clears the log.
   ###
-  log.clear = -> getLogCtrl (ctrl) => ctrl.clear()
+  log.clear = =>
+    @ctrl().clear() if @ctrl()?.type is 'c-log' # Clear if loaded in main host too.
+    getLogCtrl (ctrl) => ctrl.clear()
 
 
 
