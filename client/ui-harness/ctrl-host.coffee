@@ -1,7 +1,7 @@
 ###
 Methods for loading controls in the UIHarness host.
 ###
-PKG.stamps.CtrlHost = stampit().enclose ->
+PKG.CtrlHost = stampit().enclose ->
   _hostCtrl = null
   hash = new ReactiveHash(onlyOnChange:true)
 
@@ -137,11 +137,21 @@ PKG.stamps.CtrlHost = stampit().enclose ->
 
 
   ###
-  Gets or sets the device/version/orientation being used. Default null.
+  Gets or sets the device/version being used. Default null.
   Example:
       'iPhone:6'
+      'iPhone:5s'
   ###
   @device = (value) -> @hostCtrl().device(value)
+
+
+  ###
+  Gets or sets orientation of the device (if a device has been set).
+  Values:
+    - 'portrait' (default)
+    - 'landscape'
+  ###
+  @orientation = (value) -> @hostCtrl().orientation(value)
 
 
 

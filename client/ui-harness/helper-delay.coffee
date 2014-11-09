@@ -1,7 +1,7 @@
 ###
 Provides a delay timer method to the object.
 ###
-PKG.stamps.Delay = stampit().enclose ->
+PKG.Delay = stampit().enclose ->
   timers = []
 
   # ----------------------------------------------------------------------

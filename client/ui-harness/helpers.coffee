@@ -1,7 +1,7 @@
 ###
 General purpose helper methods.
 ###
-PKG.stamps.Helpers = stampit
+PKG.Helpers = stampit
   ###
   Retrieves the computed CSS style on the given element.
   @param el:            The element to examine.

@@ -1,7 +1,7 @@
 ###
 Handles configuring the UI harness.
 ###
-PKG.stamps.Config = stampit().enclose ->
+PKG.Config = stampit().enclose ->
   config = {}
 
 

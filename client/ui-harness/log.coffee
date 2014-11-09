@@ -1,4 +1,4 @@
-PKG.stamps.Log = stampit().enclose ->
+PKG.Log = stampit().enclose ->
   ###
   Logs a value for debugging.
   ###

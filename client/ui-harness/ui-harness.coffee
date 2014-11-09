@@ -13,13 +13,13 @@ UIHarness = stampit
 Creates a new UIHarness model.
 ###
 Ctrls.UIHarness = stampit.compose(
-  PKG.stamps.AutoRun,
-  PKG.stamps.CtrlHost,
-  PKG.stamps.Config,
-  PKG.stamps.Delay,
-  PKG.stamps.Lorem,
-  PKG.stamps.Log,
-  PKG.stamps.Helpers,
+  PKG.AutoRun,
+  PKG.CtrlHost,
+  PKG.Config,
+  PKG.Delay,
+  PKG.Lorem,
+  PKG.Log,
+  PKG.Helpers,
   UIHarness
 )
 

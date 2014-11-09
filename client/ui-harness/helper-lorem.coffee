@@ -5,7 +5,7 @@ LOREM_WORDS = LOREM.split(' ')
 ###
 Helpers for generating "lorem ipsum..." sample text.
 ###
-PKG.stamps.Lorem = stampit
+PKG.Lorem = stampit
   ###
   Generates a string of Lorem Ipsum
   @param options: The number of words, or an object:

@@ -1,7 +1,7 @@
 ###
 Provides auto-run functionality to an object.
 ###
-PKG.stamps.AutoRun = stampit().enclose ->
+PKG.AutoRun = stampit().enclose ->
   depsHandles = []
 
 

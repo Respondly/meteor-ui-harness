@@ -8,7 +8,6 @@ Ctrl.define
       currentCtrl: (value) -> @prop 'currentCtrl', value, default:null
       elContent: -> $(@el()?.children()[0])
 
-
       ###
       Inserts a visual element into the [Host].
       See: [UIHarness] object for parameter documentation.

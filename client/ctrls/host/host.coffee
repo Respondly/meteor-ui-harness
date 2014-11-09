@@ -11,6 +11,7 @@ Ctrl.define
     ready: ->
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
+      @autorun => @api.updateDevice(  )
 
 
     api:
@@ -23,6 +24,7 @@ Ctrl.define
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
       device: (value) -> @prop 'device', value, default:null
+      orientation: (value) -> @prop 'orientation', value, default:'portrait'
 
       size: (value) ->
         result = @prop 'size', value, default:[DEFAULT_SIZE]
@@ -45,7 +47,24 @@ Ctrl.define
       See: [UIHarness] object for parameter documentation.
       ###
       load: (content, options = {}, callback) ->
+        # Setup initial conditions.
         @api.unload()
+
+        # Override display options for showing the device
+        # if a device was specified.
+        if device = @api.device()
+          options =
+            size: 'auto'
+            align: 'center,middle'
+            scroll: false
+            margin: 0
+            args:
+              content:  content
+              device:   device
+              args:     options.args
+
+          content = 'uih-device'
+
         @children.ctrlOuter.load content, options, =>
               # Update visual state.
               @api.size(options.size ? DEFAULT_SIZE)
@@ -57,7 +76,6 @@ Ctrl.define
               @api.updateState()
               @el().toggle(true)
               callback?()
-
 
 
       ###
@@ -86,6 +104,8 @@ Ctrl.define
       updateState: ->
         @api.updateSize()
         @api.updatePosition()
+        @api.updateDevice()
+
 
 
 
@@ -168,6 +188,17 @@ Ctrl.define
               else
                 elContainer.addClass("uih-#{ align.x } uih-#{ align.y }")
 
+      ###
+      Updates the device settings.
+      ###
+      updateDevice: ->
+        device = @api.device()
+        orientation = @api.orientation()
+        if device?
+          if ctrl = @api.currentCtrl()
+            if ctrl.type is 'uih-device'
+              ctrl.device(device)
+              ctrl.orientation(orientation)
 
 
     helpers:
