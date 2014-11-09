@@ -50,23 +50,22 @@ Ctrl.define
       load: (content, options = {}, callback) ->
         # Setup initial conditions.
         @api.unload()
+        device = options.device
+        orientation = options.orientation ? DEFAULT_ORIENTATION
 
         # Override display options for showing the device
         # if a device was specified.
-        if device = options.device
-
-          # @api.device(options.device)
-          # @api.orientation(options.orientation) if options.orientation
-
+        if device
           options =
             size: 'auto'
             align: 'center,middle'
             scroll: false
             margin: 0
             args:
-              content:  content
-              device:   device
-              args:     options.args
+              content:      content
+              device:       device
+              orientation:  orientation
+              args:         options.args
 
           content = 'uih-device'
 
