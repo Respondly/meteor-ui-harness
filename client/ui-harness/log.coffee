@@ -72,27 +72,15 @@ PKG.Log = stampit().enclose ->
             - exclude:      The key name(s) to exclude from the output.
                             String or Array of strings.
   ###
-  log.json = (value, options = {}) =>
+  log.json = (value, options) =>
     getLogCtrl (ctrl) => ctrl.logJson(value, options)
-    # Deps.nonreactive =>
-      # return unless Util.isObject(value)
-      # options.showFuncs ?= true
-      # if ctrl = UIHarness.ctrl()
-      #   if ctrl.type is 'c-json'
-      #     # Set the value on existing JSON ctrl.
-      #     ctrl.showFuncs(options.showFuncs)
-      #     ctrl.invokeFuncs(options.invokeFuncs)
-      #     ctrl.exclude(options.exclude ? null)
-      #     ctrl.value(value)
-      #     return
 
-      # # Load new JSON ctrl.
-      # args =
-      #   value:        value
-      #   showFuncs:    options.showFuncs
-      #   invokeFuncs:  options.invokeFuncs
-      #   exclude:      options.exclude
-      # UIHarness.load 'c-json', size:'fill', args:args, scroll:true
+
+
+  ###
+  Clears the log.
+  ###
+  log.clear = -> getLogCtrl (ctrl) => ctrl.clear()
 
 
   # ----------------------------------------------------------------------
