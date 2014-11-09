@@ -1,7 +1,8 @@
-DEFAULT_SIZE = 'auto'
-DEFAULT_ALIGN = 'center,top'
-DEFAULT_MARGIN = 50
-DEFAULT_SCROLL = false
+DEFAULT_SIZE        = 'auto'
+DEFAULT_ALIGN       = 'center,top'
+DEFAULT_MARGIN      = 50
+DEFAULT_SCROLL      = false
+DEFAULT_ORIENTATION = 'portrait'
 
 ###
 The Control Host canvas.
@@ -24,7 +25,7 @@ Ctrl.define
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
       device: (value) -> @prop 'device', value, default:null
-      orientation: (value) -> @prop 'orientation', value, default:'portrait'
+      orientation: (value) -> @prop 'orientation', value, default:DEFAULT_ORIENTATION
 
       size: (value) ->
         result = @prop 'size', value, default:[DEFAULT_SIZE]
@@ -52,7 +53,11 @@ Ctrl.define
 
         # Override display options for showing the device
         # if a device was specified.
-        if device = @api.device()
+        if device = options.device
+
+          # @api.device(options.device)
+          # @api.orientation(options.orientation) if options.orientation
+
           options =
             size: 'auto'
             align: 'center,middle'
@@ -71,6 +76,8 @@ Ctrl.define
               @api.align(options.align ? DEFAULT_ALIGN)
               @api.margin(options.margin ? DEFAULT_MARGIN)
               @api.scroll(options.scroll ? DEFAULT_SCROLL)
+              @api.device(device ? null)
+              @api.orientation(orientation ? DEFAULT_ORIENTATION)
 
               # Finish up.
               @api.updateState()
@@ -95,6 +102,8 @@ Ctrl.define
         @api.align(DEFAULT_ALIGN)
         @api.margin(DEFAULT_MARGIN)
         @api.cssClass('')
+        @api.device(null)
+        @api.orientation(DEFAULT_ORIENTATION)
 
 
 
