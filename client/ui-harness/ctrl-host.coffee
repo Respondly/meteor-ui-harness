@@ -197,7 +197,7 @@ PKG.CtrlHost = stampit().enclose ->
   Removes the hosted control.
   ###
   @unload = ->
-    hostCtrl().clear()
+    hostCtrl().unload()
     @el(null)
     @ctrl(null)
 
