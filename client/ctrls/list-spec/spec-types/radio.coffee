@@ -6,6 +6,8 @@ class PKG.SpecTypeRadio extends PKG.SpecTypeBase
     elRadioButtons = => @specCtrl.el('input[type="radio"]')
 
     getCheckbox = (value) =>
+        value = 'null' if value is null
+        value = 'undefined' if value is undefined
         value = value?.toString()
         for el in elRadioButtons()
           el = $(el)
@@ -28,14 +30,16 @@ class PKG.SpecTypeRadio extends PKG.SpecTypeBase
         el.closest('label').toggleClass('uih-checked', true)
 
 
-  onLoaded: -> @prop(@localStorage())
+  onLoaded: ->
+    @prop(@localStorage())
 
 
   ###
   Gets or sets the local storage value stored on the spec
   for the radio UI element.
   ###
-  localStorage: (value) -> @spec.localStorage 'radio-value', value
+  localStorage: (value) ->
+    @spec.localStorage 'radio-value', value
 
 
   ###
@@ -55,6 +59,13 @@ class PKG.SpecTypeRadio extends PKG.SpecTypeBase
 
     for item in result
       label = item.label
+
+      # Escape [null] and [undefined] values.
+      value = item.value
+      value = 'null' if value is null
+      value = 'undefined' if value is undefined
+      item.value = value
+
       cssClass = ''
       cssClass += ' uih-blank-value' if not label? or label is ''
       item.cssClass = cssClass
@@ -76,8 +87,6 @@ class PKG.SpecTypeRadio extends PKG.SpecTypeBase
 
     # Pass execution to the [Spec].
     @specCtrl.run()
-
-
 
 
 # ----------------------------------------------------------------------
