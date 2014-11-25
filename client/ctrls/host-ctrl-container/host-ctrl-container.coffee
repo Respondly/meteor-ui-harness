@@ -82,7 +82,7 @@ Ctrl.define
       unload: ->
         # Dispose of the Blaze view.
         if view = @_current?.blazeView
-          UI.remove(view.domrange)
+          Blaze.remove(view)
 
         # Ensure the DOM element is empty.
         @el().empty()
