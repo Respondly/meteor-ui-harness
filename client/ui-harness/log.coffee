@@ -25,31 +25,28 @@ PKG.Log = stampit().enclose ->
           @load 'c-log', size:'fill', scroll:true, => callback?(@ctrl())
 
 
-  write = (propName, value, options) =>
-    getLogCtrl (ctrl) =>
-      @log.clear() if not @log.tail()
-      ctrl[propName](value, options)
-
-
   # ----------------------------------------------------------------------
 
 
   ###
   Logs a value for debugging.
-  ###
-  @log = log = (value, options) -> write('log', value, options)
+  @param value: The value to log.
+  @param options
+            For an Object:
+              - showFuncs:    Flag indicating whether function values are rendered.
+              - invokeFuncs:  Flag indicating whether functions should be invoked to convert them to a value.
+              - exclude:      The key name(s) to exclude from the output.
+                              String or Array of strings.
 
+  ###
+  @log = log = (value, options) ->
+    handle = new LogHandle()
 
-  ###
-  Loads a visual object.
-  @param value: The object to load.
-  @param options:
-            - showFuncs:    Flag indicating whether function values are rendered.
-            - invokeFuncs:  Flag indicating whether functions should be invoked to convert them to a value.
-            - exclude:      The key name(s) to exclude from the output.
-                            String or Array of strings.
-  ###
-  log.json = (value, options) => write('logJson', value, options)
+    getLogCtrl (logCtrl) =>
+      itemCtrl = logCtrl.log(value, options)
+      handle.init(itemCtrl)
+
+    handle
 
 
 
@@ -78,13 +75,6 @@ PKG.Log = stampit().enclose ->
   log is pinned to.
   ###
   log.offset = (value) -> hash.prop 'offset', value, default:DEFAULT_OFFSET
-
-
-  ###
-  REACTIVE: Gets or sets whether the log tails, or replaces the valud
-  on each write.
-  ###
-  log.tail = (value) -> hash.prop 'tail', value, default:DEFAULT_TAIL
 
 
   # ----------------------------------------------------------------------
