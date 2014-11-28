@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:ui-harness',
   summary: 'A visual test harness for UI controls.',
-  version: '1.0.0',
+  version: '1.0.1',
   git: 'https://github.com/Respondly/meteor-ui-harness.git'
 });
 
@@ -21,9 +21,9 @@ Package.onUse(function (api) {
   api.use('respondly:bdd@1.0.0');
   api.use('respondly:ctrl@1.0.0');
   api.use('respondly:markdown@1.0.0');
-  api.use('respondly:ctrls@1.0.0');
-  api.use('respondly:ctrls-input@1.0.0');
-  api.use('respondly:ctrls-log@1.0.0');
+  api.use('respondly:ctrls@1.0.1');
+  api.use('respondly:ctrls-input@1.0.1');
+  api.use('respondly:ctrls-log@1.0.1');
   api.export('chai');
   api.export('UIHarness');
   api.export('TEST');
