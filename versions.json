@@ -109,8 +109,12 @@
       "1.2.0"
     ],
     [
-      "meteorhacks:npm",
+      "meteorhacks:async",
       "1.0.0"
+    ],
+    [
+      "meteorhacks:npm",
+      "1.2.1"
     ],
     [
       "minifiers",
@@ -158,11 +162,11 @@
     ],
     [
       "respondly:bdd",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:css-common",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:css-stylus",
@@ -170,23 +174,23 @@
     ],
     [
       "respondly:ctrl",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:ctrls",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:ctrls-input",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:ctrls-log",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:markdown",
-      "0.0.1"
+      "1.0.0"
     ],
     [
       "respondly:util",
