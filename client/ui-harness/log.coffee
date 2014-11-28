@@ -43,7 +43,7 @@ PKG.Log = stampit().enclose ->
     handle = new LogHandle()
 
     getLogCtrl (logCtrl) =>
-      itemCtrl = logCtrl.log(value, options)
+      itemCtrl = logCtrl.write(value, options)
       handle.init(itemCtrl)
 
     handle
