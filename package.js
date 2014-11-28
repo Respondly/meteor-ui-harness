@@ -8,14 +8,22 @@ Package.describe({
 
 
 Package.onUse(function (api) {
+  api.versionsFrom('1.0');
   api.use('standard-app-packages');
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use('coffeescript');
-  api.use(['meteorhacks:npm', 'practicalmeteor:chai']);
-  api.use(['respondly:css-stylus', 'respondly:css-common']);
-  api.use(['respondly:util', 'respondly:bdd', 'respondly:ctrl', 'respondly:markdown']);
-  api.use(['respondly:ctrls', 'respondly:ctrls-input', 'respondly:ctrls-log']);
+  api.use('meteorhacks:npm');
+  api.use('practicalmeteor:chai');
+  api.use('respondly:css-stylus');
+  api.use('respondly:css-common');
+  api.use('respondly:util');
+  api.use('respondly:bdd');
+  api.use('respondly:ctrl');
+  api.use('respondly:markdown');
+  api.use('respondly:ctrls');
+  api.use('respondly:ctrls-input');
+  api.use('respondly:ctrls-log');
   api.export('chai');
   api.export('UIHarness');
   api.export('TEST');
