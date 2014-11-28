@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:ui-harness',
   summary: 'A visual test harness for UI controls.',
-  version: '1.0.1',
+  version: '1.0.2',
   git: 'https://github.com/Respondly/meteor-ui-harness.git'
 });
 

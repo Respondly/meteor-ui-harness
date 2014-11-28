@@ -40,14 +40,16 @@ PKG.gotoParentSuite = (callback) ->
     if parentSuite is BDD.suite
       PKG.gotoRootSuite()
     else
-      PKG.index.insertFromLeft(parentSuite, callback)
+      indexCtrl = UIHarness.configure.ctrls.index
+      indexCtrl.insertFromLeft(parentSuite, callback)
 
 
 ###
 Loads the root suite into the tree index.
 ###
 PKG.gotoRootSuite = (callback) ->
-  PKG.index.insertFromLeft(BDD.suite, callback)
+  indexCtrl = UIHarness.configure.ctrls.index
+  indexCtrl.insertFromLeft(BDD.suite, callback)
   UIHarness.reset()
 
 

@@ -5,9 +5,6 @@ Ctrl.define
 
 
     ready: ->
-      console.log 'TODO - DO this in the instance of harness.'
-      PKG.index = @children.index
-
       # Store referecnes.
       ctrls           = @harness.configure.ctrls
       ctrls.uiHarness = @ctrl

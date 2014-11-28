@@ -3,7 +3,8 @@ Ctrl.define
     init: -> @suite = @data
 
     api:
-      open: -> PKG.index.insertFromRight(@suite)
+      open: ->
+        UIHarness.configure.ctrls.index.insertFromRight(@suite)
 
     helpers:
       label: -> PKG.formatText(@suite.name)
