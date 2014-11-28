@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:ui-harness',
   summary: 'A visual test harness for UI controls.',
-  version: '0.0.1',
+  version: '1.0.0',
   git: 'https://github.com/Respondly/meteor-ui-harness.git'
 });
 
@@ -13,17 +13,17 @@ Package.onUse(function (api) {
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use('coffeescript');
-  api.use('meteorhacks:npm');
-  api.use('practicalmeteor:chai');
-  api.use('respondly:css-stylus');
-  api.use('respondly:css-common');
-  api.use('respondly:util');
-  api.use('respondly:bdd');
-  api.use('respondly:ctrl');
-  api.use('respondly:markdown');
-  api.use('respondly:ctrls');
-  api.use('respondly:ctrls-input');
-  api.use('respondly:ctrls-log');
+  api.use('meteorhacks:npm@1.2.1');
+  api.use('practicalmeteor:chai@1.9.2_3');
+  api.use('respondly:css-stylus@1.0.0');
+  api.use('respondly:css-common@1.0.0');
+  api.use('respondly:util@1.0.0');
+  api.use('respondly:bdd@1.0.0');
+  api.use('respondly:ctrl@1.0.0');
+  api.use('respondly:markdown@1.0.0');
+  api.use('respondly:ctrls@1.0.0');
+  api.use('respondly:ctrls-input@1.0.0');
+  api.use('respondly:ctrls-log@1.0.0');
   api.export('chai');
   api.export('UIHarness');
   api.export('TEST');
