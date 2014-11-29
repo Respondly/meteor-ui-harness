@@ -13,7 +13,7 @@ Package.onUse(function (api) {
   api.use('http', ['client', 'server']);
   api.use(['templating', 'ui', 'spacebars'], 'client');
   api.use('coffeescript');
-  api.use('meteorhacks:npm@1.2.1');
+  api.use('meteorhacks:async@1.0.0');
   api.use('practicalmeteor:chai@1.9.2_3');
   api.use('respondly:css-stylus@1.0.0');
   api.use('respondly:css-common@1.0.0');
