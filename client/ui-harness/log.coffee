@@ -9,6 +9,8 @@ The API to the log.
 PKG.Log = stampit().enclose ->
   hash = new ReactiveHash(onlyOnChange:true)
   mainCtrl = null
+  queue = []
+
 
   getLogCtrl = (callback) =>
     Deps.nonreactive =>
@@ -42,12 +44,22 @@ PKG.Log = stampit().enclose ->
 
   @returns a [LogHandle] for future updates to the log item.
   ###
-  @log = log = (value, options) ->
+  @log = log = (value, options = {}) ->
+    # Store the value in queue, in case this method get called again
+    # before the Log Ctrl has finished loading.
     handle = new LogHandle()
+    queue.push({ value:value, options:options, handle:handle })
+
+    # Get or load the log Ctrl.
     getLogCtrl (logCtrl) =>
         log.clear() unless log.tail()
-        itemCtrl = logCtrl.write(value, options)
-        handle.init(itemCtrl)
+        for item in queue
+          { value, options, handle } = item
+          options.showUndefined ?= false
+          itemCtrl = logCtrl.write(value, options)
+          handle.init(itemCtrl)
+
+        queue = []
     handle
 
   # Convenience method.
