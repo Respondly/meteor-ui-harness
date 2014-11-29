@@ -43,13 +43,15 @@ PKG.Log = stampit().enclose ->
   @returns a [LogHandle] for future updates to the log item.
   ###
   @log = log = (value, options) ->
-    # initHandle (logCtrl) -> logCtrl.write(value, options)
     handle = new LogHandle()
     getLogCtrl (logCtrl) =>
         log.clear() unless log.tail()
         itemCtrl = logCtrl.write(value, options)
         handle.init(itemCtrl)
     handle
+
+  # Convenience method.
+  log.write = log
 
 
 
