@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:ui-harness',
   summary: 'Isolate, test and document modular UI with Meteor.',
-  version: '1.0.6',
+  version: '1.0.7',
   git: 'https://github.com/Respondly/meteor-ui-harness.git'
 });
 
