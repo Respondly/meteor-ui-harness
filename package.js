@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:ui-harness',
   summary: 'Isolate, test and document modular UI with Meteor.',
-  version: '1.0.4',
+  version: '1.0.6',
   git: 'https://github.com/Respondly/meteor-ui-harness.git'
 });
 
@@ -15,8 +15,8 @@ Package.onUse(function (api) {
   api.use('coffeescript');
   api.use('meteorhacks:async@1.0.0');
   api.use('practicalmeteor:chai@1.9.2_3');
-  api.use('respondly:css-stylus@1.0.0');
-  api.use('respondly:css-common@1.0.0');
+  api.use('respondly:css-stylus@1.0.3');
+  api.use('respondly:css-common@1.0.1');
   api.use('respondly:util@1.0.0');
   api.use('respondly:bdd@1.0.0');
   api.use('respondly:ctrl@1.0.0');
