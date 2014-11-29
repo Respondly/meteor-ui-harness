@@ -23,8 +23,7 @@ UIHarnessFactory = stampit.compose(
   PKG.CtrlHost,
   PKG.Log,
   PKG.Delay,
-  PKG.Lorem,
-  PKG.Helpers
+  PKG.Lorem
 )
 
 

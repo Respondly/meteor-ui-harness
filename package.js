@@ -86,7 +86,6 @@ Package.onUse(function (api) {
   api.addFiles('client/ui-harness/ctrl-host.coffee', 'client');
   api.addFiles('client/ui-harness/helper-delay.coffee', 'client');
   api.addFiles('client/ui-harness/helper-lorem.coffee', 'client');
-  api.addFiles('client/ui-harness/helpers.coffee', 'client');
   api.addFiles('client/ui-harness/log.coffee', 'client');
   api.addFiles('client/ui-harness/ui-harness.coffee', 'client');
   api.addFiles('client/css/common.styl', 'client');
