@@ -46,6 +46,7 @@ PKG.Log = stampit().enclose ->
     # initHandle (logCtrl) -> logCtrl.write(value, options)
     handle = new LogHandle()
     getLogCtrl (logCtrl) =>
+        log.clear() unless log.tail()
         itemCtrl = logCtrl.write(value, options)
         handle.init(itemCtrl)
     handle
@@ -87,6 +88,12 @@ PKG.Log = stampit().enclose ->
 
   # ----------------------------------------------------------------------
 
+  ###
+  Gets or sets whethe the log is tailing.
+  ###
+  log.tail = (value) -> hash.prop 'tail', value, default:true
+
+
 
   ###
   REACTIVE: Gets or sets the edge that the log is on.
@@ -124,6 +131,7 @@ PKG.Log = stampit().enclose ->
   log.reset = =>
     log.edge(DEFAULT_EDGE)
     log.offset(DEFAULT_OFFSET)
+    log.tail(DEFAULT_TAIL)
 
 
 
