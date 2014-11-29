@@ -25,11 +25,13 @@ PKG.Log = stampit().enclose ->
           @load 'c-log', size:'fill', scroll:true, => callback?(@ctrl())
 
 
+
   # ----------------------------------------------------------------------
 
 
+
   ###
-  Logs a value for debugging.
+  Adds a new log item.
   @param value: The value to log.
   @param options
             For an Object:
@@ -38,14 +40,38 @@ PKG.Log = stampit().enclose ->
               - exclude:      The key name(s) to exclude from the output.
                               String or Array of strings.
 
+  @returns a [LogHandle] for future updates to the log item.
   ###
   @log = log = (value, options) ->
+    # initHandle (logCtrl) -> logCtrl.write(value, options)
     handle = new LogHandle()
-
     getLogCtrl (logCtrl) =>
-      itemCtrl = logCtrl.write(value, options)
-      handle.init(itemCtrl)
+        itemCtrl = logCtrl.write(value, options)
+        handle.init(itemCtrl)
+    handle
 
+
+
+  ###
+  Adds a new log item with the given title.
+  @param value: The title.
+  @returns a [LogHandle] for future updates to the log item.
+  ###
+  log.title = (value) ->
+    handle = log(value)
+    handle.title(value)
+    handle
+
+
+
+  ###
+  Adds a new log item with the given sub-title.
+  @param value: The subtitle.
+  @returns a [LogHandle] for future updates to the log item.
+  ###
+  log.subtitle = (value) ->
+    handle = log(value)
+    handle.subtitle(value)
     handle
 
 
