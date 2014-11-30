@@ -6,6 +6,10 @@ Declares a "spec" as a boolean property that can be toggled.
 
 ###
 it.boolean = (name, func) ->
+  # Ensure there is no error when the user has put the
+  # test file in a shared location.
+  return unless Meteor.isClient
+
   spec = it(name, func)
   meta = spec.meta
   meta.type = 'boolean'
@@ -25,6 +29,10 @@ Declares a "spec" with multiple dropdown options.
 
 ###
 it.select = (name, options, func) ->
+  # Ensure there is no error when the user has put the
+  # test file in a shared location.
+  return unless Meteor.isClient
+
   { name, options, func } = fixOptionParams(name, options, func)
   spec = it(name, func)
   meta = spec.meta
@@ -47,6 +55,10 @@ Declares a "spec" with multiple radio-button options.
 
 ###
 it.radio = (name, options, func) ->
+  # Ensure there is no error when the user has put the
+  # test file in a shared location.
+  return unless Meteor.isClient
+
   { name, options, func } = fixOptionParams(name, options, func)
   spec = it(name, func)
   meta = spec.meta
@@ -70,10 +82,17 @@ Declares a "spec" as a markdown file.
 
 ###
 it.md = (name, file, func) ->
+  # Ensure there is no error when the user has put the
+  # test file in a shared location.
+  return unless Meteor.isClient
+
   { name, file, func } = fixMarkdownParams(name, file, func)
   spec = it(name, func)
   spec = asMarkdown(spec, file)
   spec
+
+
+# PRIVATE ----------------------------------------------------------------------
 
 
 PKG.markdownSpec = (name, file, func) ->
@@ -84,9 +103,6 @@ PKG.markdownSpec = (name, file, func) ->
   spec = asMarkdown(spec, file)
   spec
 
-
-
-# PRIVATE ----------------------------------------------------------------------
 
 
 asMarkdown = (spec, file) ->
