@@ -1,3 +1,5 @@
+console.log 'TODO: Use the AutoRun in Util'
+
 ###
 Provides auto-run functionality to an object.
 ###
