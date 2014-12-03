@@ -17,7 +17,7 @@ CommonMethods = stampit().enclose ->
 
 
 UIHarnessFactory = stampit.compose(
-  PKG.AutoRun,
+  Stamps.AutoRun,
   PKG.Config,
   CommonMethods,
   PKG.CtrlHost,
