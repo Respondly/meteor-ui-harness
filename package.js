@@ -83,6 +83,7 @@ Package.onUse(function (api) {
   api.addFiles('client/css-mixins/uih.import.styl', 'client');
   api.addFiles('client/css/common.styl', 'client');
   api.addFiles('client/css/markdown.styl', 'client');
+  api.addFiles('client/css/overrides.styl', 'client');
   api.addFiles('client/ui-harness/autorun.coffee', 'client');
   api.addFiles('client/ui-harness/config.coffee', 'client');
   api.addFiles('client/ui-harness/ctrl-host.coffee', 'client');
