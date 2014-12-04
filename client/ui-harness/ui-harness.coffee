@@ -1,15 +1,13 @@
 CommonMethods = stampit().enclose ->
-
-
   ###
   Resets the UIHarness to it's default state.
   ###
   @reset = ->
     @reset.hostCtrl?()
-    # @hostCtrl?.reset()
     @delay?.reset()
-    @autorun?.reset()
+    @autorun?.stop()
     @log?.reset()
+
 
   # ----------------------------------------------------------------------
   return @

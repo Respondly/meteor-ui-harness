@@ -158,7 +158,7 @@
     ],
     [
       "respondly:bdd",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "respondly:css-common",
@@ -170,19 +170,19 @@
     ],
     [
       "respondly:ctrl",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "respondly:ctrls",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "respondly:ctrls-input",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "respondly:ctrls-log",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "respondly:markdown",
@@ -190,7 +190,7 @@
     ],
     [
       "respondly:util",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "retry",

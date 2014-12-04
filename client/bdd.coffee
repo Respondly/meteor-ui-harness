@@ -15,7 +15,6 @@ BDD.beforeDescribe (context) ->
   context.ctrl = -> UIHarness.ctrl()
   context.hash = UIHarness.hash
   context.log = PKG.log
-  context.prop = (key, value, options) -> UIHarness.prop(key, value, options)
   context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
 
 
