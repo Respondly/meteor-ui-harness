@@ -8,7 +8,7 @@ Package.describe({
 
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.0');
+  // api.versionsFrom('1.0');
   api.use('standard-app-packages');
   api.use('http');
   api.use(['templating', 'ui', 'spacebars'], 'client');
