@@ -8,28 +8,33 @@ The API to the log.
 ###
 PKG.Log = stampit().enclose ->
   hash = new ReactiveHash(onlyOnChange:true)
-  mainCtrl = null
+  log = null # Main API function (defined below).
   queue = []
 
 
   getLogCtrl = (callback) =>
     Deps.nonreactive =>
-      if ctrl = @configure.ctrls.main?.logCtrl()
-        # The log control is loaded into one of the edges.
-        callback?(ctrl)
-      else
         # The log control is not loaded within an edge.
         # Get it from the main host.
-        ctrl = @ctrl()
-        if ctrl?.type is 'c-log'
-          callback?(ctrl)
-        else
-          @load 'c-log', size:'fill', scroll:true, => callback?(@ctrl())
+        loadInMain = =>
+            ctrl = @ctrl()
+            if ctrl?.type is 'c-log'
+              callback?(ctrl)
+            else
+              @load 'c-log', size:'fill', scroll:true, => callback?(@ctrl())
 
+        # The log control is loaded into one of the edges.
+        loadInEdge = =>
+            handle = @autorun =>
+                if ctrl = @configure.ctrls.main?.logCtrl()
+                  handle?.stop()
+                  callback?(ctrl)
+
+        # Get the control from either an edge panel, or the main canvas.
+        if log.edge()? then loadInEdge() else loadInMain()
 
 
   # ----------------------------------------------------------------------
-
 
 
   ###
@@ -48,21 +53,27 @@ PKG.Log = stampit().enclose ->
     # Store the value in queue, in case this method get called again
     # before the Log Ctrl has finished loading.
     handle = new LogHandle()
-    queue.push({ value:value, options:options, handle:handle })
+    queue.push(handle)
+
+    # Write to the handle (value writing queued internally)
+    options.showUndefined ?= false
+    handle.write(value, options)
 
     # Get or load the log Ctrl.
     getLogCtrl (logCtrl) =>
         log.clear() unless log.tail()
-        for item in queue
-          { value, options, handle } = item
-          options.showUndefined ?= false
+        for handle in queue
           itemCtrl = logCtrl.write(value, options)
           handle.init(itemCtrl)
-
         queue = []
-    handle
 
-  # Convenience method.
+    # Finish up.
+    return handle
+
+
+  ###
+  Write to the log (convenience method).
+  ###
   log.write = log
 
 
@@ -98,6 +109,7 @@ PKG.Log = stampit().enclose ->
     queue = []
     @ctrl().clear() if @ctrl()?.type is 'c-log' # Clear if loaded in main host too.
     getLogCtrl (ctrl) => ctrl.clear()
+    @
 
 
 
@@ -144,12 +156,13 @@ PKG.Log = stampit().enclose ->
   Resets the log to it's original state.
   ###
   log.reset = =>
-    log.edge(DEFAULT_EDGE)
+    log.clear()
     log.offset(DEFAULT_OFFSET)
     log.tail(DEFAULT_TAIL)
-    log.clear()
-
-
+    log.edge(DEFAULT_EDGE)
+    if @ctrl()?.type is 'c-log'
+      @unload()
+      console.log 'unloaded || ', @ctrl()
 
 
   # ----------------------------------------------------------------------

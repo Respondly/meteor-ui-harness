@@ -22,7 +22,8 @@ Ctrl.define
       hostCtrl: -> @children.host
       headerCtrl: -> @children.header
       headerText: -> PKG.headerText(@harness)
-      logCtrl: -> @children.log
+      logCtrl: (value) -> @prop 'logCtrl', value
+
 
 
     helpers:
@@ -33,6 +34,12 @@ Ctrl.define
         css
 
       showLog: -> @harness.log.edge()?
+      logHtml: ->
+        if @harness.log.edge()?
+          def =
+            type: 'c-log'
+            onInit: (ctrl) => @api.logCtrl(ctrl)
+            onDestroyed: => @api.logCtrl(null)
 
       contentOffsetStyle: ->
         log = @harness.log
