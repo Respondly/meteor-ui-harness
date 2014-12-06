@@ -95,6 +95,7 @@ PKG.Log = stampit().enclose ->
   Clears the log.
   ###
   log.clear = =>
+    queue = []
     @ctrl().clear() if @ctrl()?.type is 'c-log' # Clear if loaded in main host too.
     getLogCtrl (ctrl) => ctrl.clear()
 
@@ -146,6 +147,7 @@ PKG.Log = stampit().enclose ->
     log.edge(DEFAULT_EDGE)
     log.offset(DEFAULT_OFFSET)
     log.tail(DEFAULT_TAIL)
+    log.clear()
 
 
 
