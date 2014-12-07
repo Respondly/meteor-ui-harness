@@ -1,21 +1,21 @@
 Ctrl.define
   'uih-main':
-    init: ->
-      @harness = @data
+    init: -> @harness = @data
 
 
     ready: ->
       # Keep the top of the [host] in sync with the height
       # of the header if it's visible.
       @autorun =>
-        # Hook into reactive callback.
-        title      = @api.headerText()
-        windowSize = PKG.windowSize()
-        hasTitle   = not @api.headerText().isBlank
+          # Hook into reactive callback.
+          title      = @api.headerText()
+          windowSize = PKG.windowSize()
+          hasTitle   = not @api.headerText().isBlank
 
-        Deps.afterFlush =>
-            top = @children.header?.el().height() ? 0
-            @api.hostCtrl().el().style().top(top)
+          Deps.afterFlush =>
+              top = @children.header?.el().height() ? 0
+              @api.hostCtrl().el().style().top(top)
+
 
 
     api:
@@ -32,6 +32,13 @@ Ctrl.define
         css = ''
         css = " uih-log-#{ log.edge() }" if log.edge()
         css
+
+      
+      style: -> 
+        {r, g, b, a} = @harness.style.background()
+        color = "rgba(#{ r }, #{ g }, #{ b }, #{ a })"
+        "background-color:#{ color };"
+
 
       showLog: -> @harness.log.edge()?
       logHtml: ->

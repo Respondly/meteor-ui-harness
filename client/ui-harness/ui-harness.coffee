@@ -1,4 +1,7 @@
 CommonMethods = stampit().enclose ->
+
+  @style = PKG.Style().init(@)
+
   ###
   Resets the UIHarness to it's default state.
   ###
@@ -7,6 +10,7 @@ CommonMethods = stampit().enclose ->
     @delay?.reset()
     @autorun?.stop()
     @log?.reset()
+    @style.reset()
 
 
   # ----------------------------------------------------------------------
