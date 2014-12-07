@@ -7,7 +7,11 @@ Handles navigation through the hierarchy of lists.
 ###
 Ctrl.define
   'uih-suite-tree':
+    init: -> @harness = @data
     ready: ->
+      # Store reference.
+      @harness.configure.ctrls.index = @ctrl
+
       # Retrieve the Suite that was last loaded from [localStorage].
       if uid = PKG.currentSuiteUid()
         suite = BDD.suite.findOne(uid:uid)

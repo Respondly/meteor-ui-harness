@@ -2,8 +2,13 @@ Ctrl.define
   'uih-main':
     init: -> @harness = @data
 
-
     ready: ->
+      # Store reference.
+      ctrls = @harness.configure.ctrls
+      ctrls.main = @ctrl
+      ctrls.host = @api.hostCtrl()
+
+
       # Keep the top of the [host] in sync with the height
       # of the header if it's visible.
       @autorun =>
@@ -33,8 +38,8 @@ Ctrl.define
         css = " uih-log-#{ log.edge() }" if log.edge()
         css
 
-      
-      style: -> 
+
+      style: ->
         {r, g, b, a} = @harness.style.background()
         color = "rgba(#{ r }, #{ g }, #{ b }, #{ a })"
         "background-color:#{ color };"
