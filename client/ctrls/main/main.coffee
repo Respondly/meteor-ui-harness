@@ -40,8 +40,10 @@ Ctrl.define
 
 
       style: ->
-        {r, g, b, a} = @harness.style.background()
-        color = "rgba(#{ r }, #{ g }, #{ b }, #{ a })"
+        color = @harness.style.background()
+        if Util.isObject(color)
+          {r, g, b, a} = color
+          color = "rgba(#{ r }, #{ g }, #{ b }, #{ a })"
         "background-color:#{ color };"
 
 
