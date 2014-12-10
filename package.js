@@ -48,6 +48,7 @@ Package.onUse(function (api) {
   api.addFiles('client/ctrls/suite-tree/suite-tree.html', 'client');
   api.addFiles('client/ctrls/suite-tree-header/suite-tree-header.html', 'client');
   api.addFiles('client/ctrls/ui-harness/ui-harness.html', 'client');
+  api.addFiles('client/tmpl.html', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/base.coffee', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/boolean.coffee', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/markdown.coffee', 'client');
