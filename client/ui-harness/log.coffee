@@ -10,6 +10,7 @@ PKG.Log = stampit().enclose ->
   hash = new ReactiveHash(onlyOnChange:true)
   log = null # Main API function (defined below).
   queue = []
+  NOTHING = {}
 
 
   getLogCtrl = (callback) =>
@@ -57,7 +58,8 @@ PKG.Log = stampit().enclose ->
 
     # Write to the handle (value writing queued internally)
     options.showUndefined ?= false
-    handle.write(value, options)
+    unless value is NOTHING
+      handle.write(value, options)
 
     # Get or load the log Ctrl.
     getLogCtrl (logCtrl) =>
@@ -84,7 +86,7 @@ PKG.Log = stampit().enclose ->
   @returns a [LogHandle] for future updates to the log item.
   ###
   log.title = (value) ->
-    handle = log(value)
+    handle = log(NOTHING)
     handle.title(value)
     handle
 
@@ -96,7 +98,7 @@ PKG.Log = stampit().enclose ->
   @returns a [LogHandle] for future updates to the log item.
   ###
   log.subtitle = (value) ->
-    handle = log(value)
+    handle = log(NOTHING)
     handle.subtitle(value)
     handle
 
