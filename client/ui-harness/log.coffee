@@ -143,6 +143,7 @@ PKG.Log = stampit().enclose ->
   setEdge = (edge, offset) ->
     log.edge(edge)
     log.offset(offset)
+    log
 
   log.left = (offset = 350) -> setEdge('left', offset)
   log.top = (offset = 350) -> setEdge('top', offset)
