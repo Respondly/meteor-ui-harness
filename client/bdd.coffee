@@ -1,4 +1,13 @@
 ###
+See the extensions to the BDD "describe" and "it" statements
+in the [/shared] folder.
+
+Shared on the server to protect against the user writing these
+specs without putting them in a client-only location.
+###
+
+
+###
 Update the [this] context that is passed to the
 "describe" function
 ###
@@ -6,7 +15,6 @@ BDD.beforeDescribe (context) ->
   context.ctrl = -> UIHarness.ctrl()
   context.hash = UIHarness.hash
   context.log = PKG.log
-  context.prop = (key, value, options) -> UIHarness.prop(key, value, options)
   context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
 
 

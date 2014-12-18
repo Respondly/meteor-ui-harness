@@ -2,17 +2,6 @@
 A visual test harness for UI controls running within Meteor.
 
 
-## Installation
-When running for the first time:
-
-    mrt update
-    package update
-
-
-## Run tests
-
-    mrt test-packages ui-harness
-
 
 
 ## License (MIT)

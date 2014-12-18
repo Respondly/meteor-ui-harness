@@ -8,6 +8,10 @@ Declares a "suite" as a set of markdown documents.
 @returns the resulting [Suite] object.
 ###
 describe.md = (name, folderPath, func) ->
+  # Ensure there is no error when the user has put the
+  # test file in a shared location.
+  return unless Meteor.isClient
+
   # Fix up parameters.
   if Object.isFunction(folderPath)
     func = folderPath

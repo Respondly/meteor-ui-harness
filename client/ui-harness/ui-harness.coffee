@@ -1,15 +1,17 @@
 CommonMethods = stampit().enclose ->
 
+  @style = PKG.Style().init(@)
 
   ###
   Resets the UIHarness to it's default state.
   ###
   @reset = ->
     @reset.hostCtrl?()
-    # @hostCtrl?.reset()
     @delay?.reset()
-    @autorun?.reset()
+    @autorun?.stop()
     @log?.reset()
+    @style.reset()
+
 
   # ----------------------------------------------------------------------
   return @
@@ -17,14 +19,13 @@ CommonMethods = stampit().enclose ->
 
 
 UIHarnessFactory = stampit.compose(
-  PKG.AutoRun,
+  Stamps.AutoRun,
   PKG.Config,
   CommonMethods,
   PKG.CtrlHost,
   PKG.Log,
   PKG.Delay,
-  PKG.Lorem,
-  PKG.Helpers
+  PKG.Lorem
 )
 
 

@@ -1,4 +1,5 @@
 @import 'core.import'
+@import 'uih.import'
 
 
 $UIH_INDEX_WIDTH = 300px
@@ -26,6 +27,11 @@ uih-code()
   background-color #f7f7f9
   border 1px solid #e1e1e8
 
+
 uih-index-code()
   background rgba(white, 0.3)
   border-color darken($UIH_INDEX_BG_LIGHT, 7%)
+
+
+uih-image(path, width, height)
+  package-image 'respondly_ui-harness', path, width, height

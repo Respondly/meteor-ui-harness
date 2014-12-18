@@ -178,12 +178,19 @@ PKG.CtrlHost = stampit().enclose ->
 
             - cssClass:   A CSS class to apply to the container element.
 
+            - background: (alias 'bg').  The background color.
+                          - Number: 0..1 to represent an alpha value of black.
+                          - String: A CSS color value.
+
             - args:       Arguments to pass to the content/ctrl/template.
   ###
   @load = (content, options, callback) ->
     if Object.isFunction(options) and not callback?
       callback = options
       options = {}
+
+    options ?= {}
+    @style.background(options.background ? options.bg ? null)
 
     ctrl = hostCtrl()
     ctrl.load content, options, =>

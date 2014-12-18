@@ -46,7 +46,10 @@ Ctrl.define
         css += ' uih-not-section' if not @suite.isSection
         css
 
-      showSearch: -> @suite.isSection isnt true
+      showSearch: ->
+        @suite.isSection isnt true
+
+        false # TEMP: XXX Hide search until implemented.
 
       mouseOver: (e, isOver) ->
         # Store a reference to the currently overed list-item ctrl.

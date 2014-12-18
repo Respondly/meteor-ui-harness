@@ -1,17 +1,6 @@
-<!-- Public entry point -->
-<template name='UIHarness'>
-  {{> ctrl type='ui-harness' }}
-</template>
-
-
-
-
-
-
-
 <template name='ui-harness'>
   <div class='uih-root'>
-    {{> ctrl type='uih-suite-tree' id='index' }}
+    {{> ctrl type='uih-suite-tree' id='index' data=harness }}
     {{> ctrl type='uih-main' id='main' data=harness }}
   </div>
 </template>

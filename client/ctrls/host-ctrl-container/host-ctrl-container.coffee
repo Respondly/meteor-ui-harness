@@ -51,14 +51,13 @@ Ctrl.define
 
         # Template.
         if content.__proto__ is Template.prototype
-          domrange = UI.renderWithData(content, options.args)
-          domrange.view.onRendered -> done()
-          UI.insert(domrange, el[0])
+          view = Blaze.renderWithData(content, options.args, el[0])
           @_current =
             type:       'tmpl'
             tmpl:       content
-            blazeView:  domrange.view
+            blazeView:  view
             options:    options
+          Deps.afterFlush => done()
 
         # String (HTML).
         content = $(content) if Object.isString(content)
@@ -82,7 +81,7 @@ Ctrl.define
       unload: ->
         # Dispose of the Blaze view.
         if view = @_current?.blazeView
-          UI.remove(view.domrange)
+          Blaze.remove(view)
 
         # Ensure the DOM element is empty.
         @el().empty()

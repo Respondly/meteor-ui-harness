@@ -33,6 +33,14 @@ class PKG.SpecTypeSelect extends PKG.SpecTypeBase
         result.push { label:key, value:value }
 
     for item in result
+      # Escape [null] and [undefined] values.
+      value = item.value
+
+      value = 'null' if value is null
+      value = 'undefined' if value is undefined
+      item.value = value
+
+      # Format the label.
       item.label = @formatLabel(item.label)
 
     result

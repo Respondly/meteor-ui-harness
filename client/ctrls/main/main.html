@@ -1,5 +1,5 @@
 <template name='uih-main'>
-  <div class='uih-main {{ cssClass }}'>
+  <div class='uih-main {{ cssClass }}' style='{{ style }}'>
 
     <div class='uih-content-outer' style='{{ contentOffsetStyle }}'>
       {{> ctrl type='uih-host-header' id='header' data=data }}
@@ -8,7 +8,7 @@
 
     {{#if showLog}}
       <div class='uih-log-outer' style='{{ logOffsetStyle }}'>
-        {{> ctrl type='c-log' id='log' }}
+        {{> render ctrl=logHtml }}
       </div>
     {{/if}}
 
