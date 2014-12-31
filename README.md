@@ -6,7 +6,7 @@ A visual test harness for UI controls running within Meteor.
 
 ## License (MIT)
 
-Copyright © 2014, **Respondly**
+Copyright © 2015, **Respondly**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
