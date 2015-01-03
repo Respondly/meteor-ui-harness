@@ -165,7 +165,6 @@ PKG.Log = stampit().enclose ->
     log.edge(DEFAULT_EDGE)
     if @ctrl()?.type is 'c-log'
       @unload()
-      console.log 'unloaded || ', @ctrl()
 
 
   # ----------------------------------------------------------------------
