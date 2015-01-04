@@ -1,5 +1,5 @@
 ###
-Declares a "spec" as running on the server.
+Declares a "spec/test" that runs on the server.
 
 @param name: The name of the property
 @param func: The test function.
