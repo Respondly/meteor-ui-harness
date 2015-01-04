@@ -1,7 +1,7 @@
 ###
 Declares a "spec/test" that runs on the server.
 
-@param name: The name of the property
+@param name: The name of the test.
 @param func: The test function.
 @param callback(err, result): Optional. Invoked upon completion.
 
