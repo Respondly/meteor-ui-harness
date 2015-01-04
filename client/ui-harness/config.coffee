@@ -1,3 +1,6 @@
+PKG.title = 'UIHarness'
+
+
 ###
 Handles configuring the UI harness.
 ###
@@ -8,7 +11,7 @@ PKG.Config = stampit().enclose ->
             - title: The root title.
   ###
   @configure = (options = {}) ->
-    BDD.suite.name = options.title if options.title?
+    PKG.title = options.title if Object.isString(options.title)
 
 
   @configure.ctrls = {}

@@ -101,7 +101,7 @@ Ctrl.define
                   retire retiredListCtrl, =>
                     initialize listCtrl, =>
                       delete @isInserting
-                      @api.title(suite.name ? 'UI Harness')
+                      @api.title(suite.name ? PKG.title)
                       Util.delay 10, => headerCtrl.fadeTitle(true)
                       callback?() # Complete.
 
