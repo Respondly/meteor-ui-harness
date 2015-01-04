@@ -15,7 +15,8 @@ Meteor.methods
         spec.run (err, result) ->
             returnValue.result = result
             if err?
-              returnValue.error = error = { message: err.message }
+              message = if Object.isString(err) then err else err.message
+              returnValue.error = error = { message: message }
 
               if err.errorType is 'Meteor.Error'
                 error.number = err.error

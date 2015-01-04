@@ -23,8 +23,8 @@ it.server = (name, func, callback) ->
           # Print a default result set to the console.
           console.group(spec.name)
           console.log 'Result:', result.result
-          console.log 'Error:', result.error if result.error?
           console.log 'Elapsed:', result.msecs, 'msecs'
+          console.error 'Error:', result.error if result.error?
           console.groupEnd()
           console.log ''
 
