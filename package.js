@@ -32,10 +32,12 @@ Package.onUse(function (api) {
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.addFiles('shared/ns.shared.coffee', ['client', 'server']);
   api.addFiles('shared/ns.js', ['client', 'server']);
-  api.addFiles('shared/bdd/bdd-specs.coffee', ['client', 'server']);
-  api.addFiles('shared/bdd/bdd-suites.coffee', ['client', 'server']);
+  api.addFiles('shared/bdd/bdd-it.coffee', ['client', 'server']);
+  api.addFiles('shared/bdd/bdd-md.coffee', ['client', 'server']);
+  api.addFiles('shared/bdd/bdd-server.coffee', ['client', 'server']);
   api.addFiles('server/markdown.coffee', 'server');
   api.addFiles('server/ns.server.js', 'server');
+  api.addFiles('server/server-methods.coffee', 'server');
   api.addFiles('client/ctrls/list-suite-section/list-suite-section.html', 'client');
   api.addFiles('client/ctrls/host/host.html', 'client');
   api.addFiles('client/ctrls/host-ctrl-container/host-ctrl-container.html', 'client');
