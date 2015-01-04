@@ -2,8 +2,8 @@
 Declares a "spec" as running on the server.
 
 @param name: The name of the property
-@param func: Optional. The test function.
-@param callback(err, result): Invoked upon completion.
+@param func: The test function.
+@param callback(err, result): Optional. Invoked upon completion.
 
 ###
 it.server = (name, func, callback) ->
