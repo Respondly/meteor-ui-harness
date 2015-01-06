@@ -117,6 +117,3 @@ Package.onUse(function (api) {
   api.addFiles('images/suite@2x.png', ['client', 'server']);
 
 });
-
-
-

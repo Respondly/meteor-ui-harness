@@ -1,5 +1,13 @@
 # UI Harness
-A visual test harness for UI controls running within Meteor.
+Isolate, test and document modular UI quickly and simply
+using familiar BDD semantics (`describe` and `it` statements).
+
+See:
+ - [Documentation](https://github.com/Respondly/meteor-ui-harness/tree/master/docs)
+ - [uiharness.com](http://www.uiharness.com/)
+
+
+ Built for the [Meteor](http://meteor.com/) platform.
 
 
 
