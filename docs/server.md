@@ -70,3 +70,22 @@ take the result of the server method and either log the state to screen, or
 update a hosted UI control.
 
 To do this, pass an additional callback function to the `it.server` declaration:
+
+
+    describe 'My Server Package', ->
+      it.server 'runs on the server',
+        (done) ->
+          # Invoked on SERVER.
+          result = { value:'From the Server', when:new Date() }
+          done(null, result)
+
+        , (err, result) ->
+          # Callback invoked on CLIENT upon completion.
+          @log().title('My Result').write(result)
+
+
+![Logging Results in Callback](https://cloud.githubusercontent.com/assets/185555/5623693/c5cb36aa-95bc-11e4-9cb6-644242d801fd.png)
+
+
+For more details on using the UIHarness **Log** see the
+[visual log documentation](https://github.com/Respondly/meteor-ui-harness/blob/master/docs/log.md).
