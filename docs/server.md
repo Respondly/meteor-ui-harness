@@ -1,18 +1,17 @@
 # Testing Server Code
 When developing out a back-end system, or doing integration testing, it is
-useful run server side code.
+useful to quickly run server side code and see the results on screen.
 
-To achieve this use the `it.server` declaration.
+To achieve this in the UIHarness use the `it.server` declaration.
 
-### Sync
+### Synchronous
+When this spec is invoked within the UIHarness the method is run on the server
+and the return value is automatically logged to the console.
 
     describe 'My Server Package', ->
       it.server 'runs on the server', ->
         console.log 'Server!'
         "My Result"
-
-When the spec is invoked within the UIHarness the method is run on the server
-and the return value is automatically logged to the console:
 
 The return value (if there is one) can be any type of value or object that can be
 serialized and sent over the wire via a
@@ -23,9 +22,9 @@ serialized and sent over the wire via a
 
 
 
-### Async
+### Asynchronous
 Alternatively, you can use the async version by simply including a callback parmater.
-If there is a return value, pass it as the second parameter of the the `done(err, result)` callback:
+If there is a return value, pass it as the second parameter of the `done(err, result)` callback:
 
     it.server 'runs on the server', (done) ->
       console.log 'Server!'
@@ -34,8 +33,9 @@ If there is a return value, pass it as the second parameter of the the `done(err
 
 
 ### Errors
-Errors are handled implicitly, simply throw the error within the server method.
-This can be either a standard Javascript `Error`, or a `Meteor.Error`:
+Errors are handled implicitly. Simply throw the error within the server method
+and it will be returned and displayed on screen.
+The error can be either a standard Javascript `Error` object, or a `Meteor.Error`:
 
     it.server 'runs on the server', ->
       throw new Error('Fail')
@@ -45,8 +45,6 @@ or
     it.server 'runs on the server', ->
       throw new Meteor.Error(404, 'Model not found.')
 
-
-The error will be automatically reported to the console.
 
 #### Asynchronous Errors
 Likewise with asynchronous tests, simply throw an error
@@ -61,6 +59,10 @@ Or pass it back as the first parameter to the `done(err, result)` callback:
       it.server 'runs on the server', (done) ->
         err = new Error('Fail')
         done(err)
+
+Note: A simple string can be returned as an error in a async test:
+
+    done("This totally failed", null)
 
 
 
@@ -83,6 +85,7 @@ To do this, pass an additional callback function to the `it.server` declaration:
           # Callback invoked on CLIENT upon completion.
           @log().title('My Result').write(result)
 
+Which will result in this:
 
 ![Logging Results in Callback](https://cloud.githubusercontent.com/assets/185555/5623693/c5cb36aa-95bc-11e4-9cb6-644242d801fd.png)
 
