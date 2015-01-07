@@ -22,11 +22,17 @@ class PKG.SpecTypeSelect extends PKG.SpecTypeBase
   The <option> values used by the template.
   ###
   options: ->
-    options = @meta.options
+    options = Util.asValue(@meta.options)
     result = []
     if Object.isArray(options)
       for item in options
-        result.push { label:item, value:item }
+        if Object.isObject(item)
+          { label, value } = item
+          value = label if not value? and label?
+        else
+          label = item
+          value = item
+        result.push { label:label, value:value }
 
     if Object.isObject(options)
       for key, value of options
@@ -35,7 +41,6 @@ class PKG.SpecTypeSelect extends PKG.SpecTypeBase
     for item in result
       # Escape [null] and [undefined] values.
       value = item.value
-
       value = 'null' if value is null
       value = 'undefined' if value is undefined
       item.value = value
@@ -43,7 +48,9 @@ class PKG.SpecTypeSelect extends PKG.SpecTypeBase
       # Format the label.
       item.label = @formatLabel(item.label)
 
+    # Finish up.
     result
+
 
 
   ###
