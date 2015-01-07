@@ -12,10 +12,11 @@ Update the [this] context that is passed to the
 "describe" function
 ###
 BDD.beforeDescribe (context) ->
-  context.ctrl = -> UIHarness.ctrl()
-  context.hash = UIHarness.hash
-  context.log = PKG.log
-  context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
+  if Meteor.isClient
+    context.ctrl = -> UIHarness.ctrl()
+    context.hash = UIHarness.hash
+    context.log = PKG.log
+    context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
 
 
 
@@ -42,14 +43,15 @@ extendModel = (type, model) ->
   keyPrefix = "uih-#{ type }:#{ model.uid() }:"
 
   # Read/write to local storage for the model.
-  model.localStorage = (key, value, options) ->
-        LocalStorage.prop((keyPrefix + key), value, options)
+  if Meteor.isClient
+    model.localStorage = (key, value, options) ->
+          LocalStorage.prop((keyPrefix + key), value, options)
 
-  # Clears all local-storage values for the model.
-  model.localStorage.clear = ->
-    for key, value of localStorage
-      if key.startsWith(keyPrefix)
-        localStorage.removeItem(key)
+    # Clears all local-storage values for the model.
+    model.localStorage.clear = ->
+      for key, value of localStorage
+        if key.startsWith(keyPrefix)
+          localStorage.removeItem(key)
 
 
 

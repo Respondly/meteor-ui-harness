@@ -35,6 +35,7 @@ Package.onUse(function (api) {
   api.addFiles('shared/bdd/bdd-it.coffee', ['client', 'server']);
   api.addFiles('shared/bdd/bdd-md.coffee', ['client', 'server']);
   api.addFiles('shared/bdd/bdd-server.coffee', ['client', 'server']);
+  api.addFiles('shared/bdd/bdd.coffee', ['client', 'server']);
   api.addFiles('server/markdown.coffee', 'server');
   api.addFiles('server/ns.server.js', 'server');
   api.addFiles('server/server-methods.coffee', 'server');
@@ -96,7 +97,6 @@ Package.onUse(function (api) {
   api.addFiles('client/internal/init.coffee', 'client');
   api.addFiles('client/internal/internal.coffee', 'client');
   api.addFiles('client/internal/key-handlers.coffee', 'client');
-  api.addFiles('client/bdd.coffee', 'client');
   api.addFiles('client/ctrls/main/main.html', 'client');
   api.addFiles('client/ctrls/main/main.coffee', 'client');
   api.addFiles('client/ctrls/main/main.styl', 'client');
