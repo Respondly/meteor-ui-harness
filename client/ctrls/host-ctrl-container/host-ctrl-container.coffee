@@ -3,6 +3,10 @@ The hosted control loader.
 ###
 Ctrl.define
   'uih-host-ctrl-container':
+    init: ->
+      @harness = @options.harness
+
+
     api:
       cssClass: (value) -> @prop 'cssClass', value, default:''
       currentCtrl: (value) -> @prop 'currentCtrl', value, default:null
@@ -103,4 +107,11 @@ Ctrl.define
           css += " #{ ctrl.type }-test"
 
         css
+
+
+      style: ->
+        style = ''
+        style += "border:#{ @harness.style.border() };"
+        style
+
 

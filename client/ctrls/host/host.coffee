@@ -4,11 +4,16 @@ DEFAULT_MARGIN      = 50
 DEFAULT_SCROLL      = false
 DEFAULT_ORIENTATION = 'portrait'
 
+
 ###
 The Control Host canvas.
 ###
 Ctrl.define
   'uih-host':
+    init: ->
+      @harness = @options.harness
+
+
     ready: ->
       @autorun => @api.updateSize()
       @autorun => @api.updatePosition()
@@ -19,8 +24,8 @@ Ctrl.define
       elContainer: -> @children.ctrlOuter.el()
       elContent: -> @children.ctrlOuter.elContent()
 
-      currentCtrl: (value) -> @children.ctrlOuter.currentCtrl()
-      cssClass: (value) -> @children.ctrlOuter.cssClass()
+      currentCtrl: -> @children.ctrlOuter.currentCtrl()
+      cssClass: -> @children.ctrlOuter.cssClass()
 
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
@@ -210,6 +215,7 @@ Ctrl.define
 
 
     helpers:
+      harness: -> @harness
       rootClass: ->
         css = ''
         css += ' uih-is-fill' if @api.size() is 'fill'

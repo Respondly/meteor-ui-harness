@@ -182,6 +182,11 @@ PKG.CtrlHost = stampit().enclose ->
                           - Number: 0..1 to represent an alpha value of black.
                           - String: A CSS color value.
 
+            - border:     The border style to apply.
+                          - String: Any valid CSS border string.
+                          - 'dashed': A light dashed line.
+                          - 'solid':  A light solid line.
+
             - args:       Arguments to pass to the content/ctrl/template.
   ###
   @load = (content, options, callback) ->
@@ -191,6 +196,7 @@ PKG.CtrlHost = stampit().enclose ->
 
     options ?= {}
     @style.background(options.background ? options.bg ? null)
+    @style.border(options.border ? null)
 
     ctrl = hostCtrl()
     ctrl.load content, options, =>

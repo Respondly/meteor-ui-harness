@@ -29,6 +29,7 @@ PKG.Style = stampit().enclose ->
   ###
   @reset = ->
     @background(null)
+    @border(null)
     @
 
 
@@ -59,6 +60,30 @@ PKG.Style = stampit().enclose ->
 
 
     toStyle(result)
+
+
+  ###
+  REACTIVE: Gets or sets the border style.
+  ###
+  @border = (value) ->
+    result = hash.prop 'border', value, default:null
+
+    toStyle = (value) ->
+        return 'none' if not Object.isString(value)
+        value = value.toLowerCase()
+        DEFAULT_OPACITY = 0.2
+        switch value
+          when 'dashed' then value = "dashed 1px rgba(0,0,0,#{ DEFAULT_OPACITY })"
+          when 'solid' then value = "solid 1px rgba(0,0,0,#{ DEFAULT_OPACITY })"
+          else
+            # Use the given style value.
+
+        value
+
+
+    toStyle(result)
+
+
 
 
 

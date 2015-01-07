@@ -3,7 +3,7 @@
 
     <div class='uih-content-outer' style='{{ contentOffsetStyle }}'>
       {{> ctrl type='uih-host-header' id='header' data=data }}
-      {{> ctrl type='uih-host' id='host' }}
+      {{> ctrl type='uih-host' id='host' harness=data }}
     </div>
 
     {{#if showLog}}
