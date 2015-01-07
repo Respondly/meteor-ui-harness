@@ -47,11 +47,19 @@ class PKG.SpecTypeRadio extends PKG.SpecTypeBase
   ###
   options: ->
     uid = @spec.uid()
-    options = @meta.options
+    options = Util.asValue(@meta.options)
     result = []
     if Object.isArray(options)
       for item in options
-        result.push { uid:uid, label:item, value:item }
+
+        if Object.isObject(item)
+          { label, value } = item
+          value = label if not value? and label?
+        else
+          label = item
+          value = item
+
+        result.push { uid:uid, label:label, value:value }
 
     if Object.isObject(options)
       for key, value of options
