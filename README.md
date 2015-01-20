@@ -2,6 +2,8 @@
 Isolate, test and document modular UI quickly and simply
 using familiar BDD semantics (`describe` and `it` statements).
 
+[![Circle CI](https://circleci.com/gh/Respondly/meteor-ui-harness.svg?style=svg)](https://circleci.com/gh/Respondly/meteor-ui-harness)
+
 See:
  - [Documentation](https://github.com/Respondly/meteor-ui-harness/tree/master/docs)
  - [uiharness.com](http://www.uiharness.com/)
