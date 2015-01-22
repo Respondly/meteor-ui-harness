@@ -117,3 +117,11 @@ Package.onUse(function (api) {
   api.addFiles('images/suite@2x.png', ['client', 'server']);
 
 });
+
+Package.onTest(function(api){
+  api.use(['mike:mocha-package@0.4.7', 'coffeescript']);
+
+  // Generated with: github.com/philcockfield/meteor-package-paths
+  api.addFiles('tests/shared/sample.coffee', ['client', 'server']);
+
+});
