@@ -1,6 +1,5 @@
 DEFAULT_EDGE = null
 DEFAULT_OFFSET = 300
-DEFAULT_TAIL = true
 
 
 ###
@@ -63,7 +62,6 @@ PKG.Log = stampit().enclose ->
 
     # Get or load the log Ctrl.
     getLogCtrl (logCtrl) =>
-        log.clear() unless log.tail()
         for handle in queue
           itemCtrl = logCtrl.write(value, options)
           handle.init(itemCtrl)
@@ -117,11 +115,6 @@ PKG.Log = stampit().enclose ->
 
   # ----------------------------------------------------------------------
 
-  ###
-  Gets or sets whethe the log is tailing.
-  ###
-  log.tail = (value) -> hash.prop 'tail', value, default:true
-
 
 
   ###
@@ -161,7 +154,6 @@ PKG.Log = stampit().enclose ->
   log.reset = =>
     log.clear()
     log.offset(DEFAULT_OFFSET)
-    log.tail(DEFAULT_TAIL)
     log.edge(DEFAULT_EDGE)
     if @ctrl()?.type is 'c-log'
       @unload()
