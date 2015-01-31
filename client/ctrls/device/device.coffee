@@ -10,6 +10,7 @@ Ctrl.define
     api:
       device: (value) -> @prop 'device', value
       orientation: (value) -> @prop 'orientation', value, default:'portrait'
+      contentCtrl: -> @children.ctrlOuter.currentCtrl()
 
 
     helpers:

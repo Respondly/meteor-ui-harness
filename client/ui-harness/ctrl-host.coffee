@@ -68,7 +68,14 @@ PKG.CtrlHost = stampit().enclose ->
   ###
   REACTIVE Retrieves the Ctrl that is currently under test (if exists).
   ###
-  @ctrl = (value) -> hash.prop 'ctrl', value, default:null
+  @ctrl = (value) ->
+    result = hash.prop 'ctrl', value, default:null
+    if result?.type is 'uih-device'
+      # If the object is a "device" it is wrapping the
+      # actual content.  Step in and return the content.
+      result = result.contentCtrl()
+
+    result
 
 
   ###
@@ -203,6 +210,8 @@ PKG.CtrlHost = stampit().enclose ->
         # Update current state.
         @el(ctrl.elContent())
         @ctrl(ctrl.currentCtrl())
+
+        # Finish up.
         callback?()
 
 

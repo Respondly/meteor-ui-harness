@@ -4,13 +4,17 @@ The hosted control loader.
 Ctrl.define
   'uih-host-ctrl-container':
     init: ->
-      @harness = @options.harness
+      @harness = @options.harness ? UIHarness
 
 
     api:
       cssClass: (value) -> @prop 'cssClass', value, default:''
-      currentCtrl: (value) -> @prop 'currentCtrl', value, default:null
       elContent: -> $(@el()?.children()[0])
+
+      currentCtrl: ->
+        # @prop 'currentCtrl', value, default:null
+        @children[0]
+
 
       ###
       Inserts a visual element into the [Host].
@@ -37,7 +41,6 @@ Ctrl.define
 
         done = =>
               @api.cssClass(options.cssClass ? '')
-              @api.currentCtrl(@_current.ctrl ? null)
               callback?()
 
         # Don't continue unless some content has been specified.
@@ -111,8 +114,7 @@ Ctrl.define
 
       style: ->
         style = ''
-        if @harness
-          style += "border:#{ @harness.style.border() };"
+        style += "border:#{ @harness.style.border() };"
         style
 
 

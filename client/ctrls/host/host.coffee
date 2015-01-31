@@ -3,6 +3,7 @@ DEFAULT_ALIGN       = 'center,top'
 DEFAULT_MARGIN      = 50
 DEFAULT_SCROLL      = false
 DEFAULT_ORIENTATION = 'portrait'
+DEFAULT_DEVICE      = null
 
 
 ###
@@ -29,7 +30,7 @@ Ctrl.define
 
       align: (value) -> @prop 'align', value, default:DEFAULT_ALIGN
       margin: (value) -> @prop 'margin', value, default:DEFAULT_MARGIN
-      device: (value) -> @prop 'device', value, default:null
+      device: (value) -> @prop 'device', value, default:DEFAULT_DEVICE
       orientation: (value) -> @prop 'orientation', value, default:DEFAULT_ORIENTATION
 
       size: (value) ->
@@ -80,7 +81,7 @@ Ctrl.define
               @api.align(options.align ? DEFAULT_ALIGN)
               @api.margin(options.margin ? DEFAULT_MARGIN)
               @api.scroll(options.scroll ? DEFAULT_SCROLL)
-              @api.device(device ? null)
+              @api.device(device ? DEFAULT_DEVICE)
               @api.orientation(orientation ? DEFAULT_ORIENTATION)
 
               # Finish up.
@@ -105,9 +106,9 @@ Ctrl.define
         @api.size(DEFAULT_SIZE)
         @api.align(DEFAULT_ALIGN)
         @api.margin(DEFAULT_MARGIN)
-        @api.cssClass('')
-        @api.device(null)
+        @api.device(DEFAULT_DEVICE)
         @api.orientation(DEFAULT_ORIENTATION)
+        @api.cssClass('')
 
 
 
