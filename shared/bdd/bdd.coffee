@@ -14,8 +14,7 @@ Update the [this] context that is passed to the
 BDD.beforeDescribe (context) ->
   if Meteor.isClient
     context.ctrl = -> UIHarness.ctrl()
-    context.hash = UIHarness.hash
-    context.log = PKG.log
+    context.log = UIHarness.log
     context.delay = (msecs, func) -> UIHarness.delay(msecs, func)
 
 
