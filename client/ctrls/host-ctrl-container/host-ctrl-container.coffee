@@ -111,7 +111,8 @@ Ctrl.define
 
       style: ->
         style = ''
-        style += "border:#{ @harness.style.border() };"
+        if @harness
+          style += "border:#{ @harness.style.border() };"
         style
 
 
