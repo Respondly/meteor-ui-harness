@@ -4,8 +4,7 @@ Handles the custom Ctrl on a Spec index-tree item.
 class PKG.SpecTypeCtrl extends PKG.SpecTypeBase
   ready: ->
     type = @meta.options.type
-    @customCtrl = @specCtrl.context.findChild(type)
-
+    @customCtrl = @meta.ctrl = @specCtrl.context.findChild(type)
 
 
   onRun: ->
