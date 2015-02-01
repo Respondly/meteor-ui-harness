@@ -12,10 +12,12 @@
             type='c-checkbox'
             id='chk'
             isClickable=false
+            cssClass='uih-spec-checkbox'
       }}
     {{/if}}
 
-    {{#if select}}
+
+    {{#if isSelect}}
       <div class='uih-select-options'>
         <select>
           {{#each select.options}}
@@ -25,7 +27,8 @@
       </div>
     {{/if}}
 
-    {{#if radio}}
+
+    {{#if isRadio}}
       <div class='uih-radio-options'>
         <ul class='unstyled'>
           {{#each radio.options}}
@@ -37,6 +40,13 @@
             </li>
           {{/each}}
         </ul>
+      </div>
+    {{/if}}
+
+
+    {{#if isCustomCtrl }}
+      <div class='uih-custom-ctrl-outer'>
+        {{> render ctrl=customCtrl }}
       </div>
     {{/if}}
 

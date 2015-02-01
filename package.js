@@ -54,6 +54,7 @@ Package.onUse(function (api) {
   api.addFiles('client/tmpl.html', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/base.coffee', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/boolean.coffee', 'client');
+  api.addFiles('client/ctrls/list-spec/spec-types/ctrl.coffee', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/markdown.coffee', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/radio.coffee', 'client');
   api.addFiles('client/ctrls/list-spec/spec-types/select.coffee', 'client');

@@ -3,7 +3,9 @@ Lists a set of specs and sub-suites.
 ###
 Ctrl.define
   'uih-list':
-    init: -> @suite = @data.suite
+    init: ->
+      @suite = @data.suite
+      @harness = @defaultValue('harness')
 
 
     api:
@@ -39,6 +41,7 @@ Ctrl.define
       onHidden: (direction, callback) -> callback?()
 
 
+
     helpers:
       cssClass: ->
         css = @data.cssClass ? ''
@@ -68,6 +71,8 @@ Ctrl.define
 
         # Seperate out items for this list, vs. child suites.
         for item in @suite.items
+          item.harness = @harness
+
           if (item instanceof BDD.Spec)
             items.push({ isSpec:true, data:item })
 

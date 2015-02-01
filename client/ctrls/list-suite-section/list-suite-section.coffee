@@ -29,7 +29,7 @@ Ctrl.define
 
     helpers:
       title: -> PKG.formatText(@data.name)
-      listData: -> { suite: @data }
+      listData: -> { suite: @data, harness:@data.harness }
       isOpen: -> @api.isOpen()
       isOpenStorage: (value) -> @suite.localStorage 'isOpen', value, default:true
 

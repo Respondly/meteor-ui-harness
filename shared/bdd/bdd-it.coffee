@@ -56,6 +56,32 @@ it.radio = (name, options, func) ->
   spec
 
 
+
+###
+Declares a "spec" that has a custom UI control to be
+shown within the index.
+
+@param name:    The name of the spec.
+@param options: The options:
+                 - string: Ctrl type name.
+                 - object:
+                    - type
+                    - [args]
+@param func:    Optional. The test function.
+
+###
+it.ctrl = (name, options, func) ->
+  { name, options, func } = fixOptionParams(name, options, func)
+  options = { type:options } if Object.isString(options)
+  spec = it(name, func)
+  meta = spec.meta
+  meta.type = 'ctrl'
+  meta.options = options
+  spec
+
+
+
+
 ###
 Declares a "spec" as a markdown file.
 
@@ -74,6 +100,11 @@ it.md = (name, file, func) ->
   spec = it(name, func)
   spec = asMarkdown(spec, file)
   spec
+
+
+
+
+
 
 
 # PRIVATE ----------------------------------------------------------------------

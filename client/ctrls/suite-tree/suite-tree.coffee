@@ -72,6 +72,7 @@ Ctrl.define
 
         # Insert the new list.
         args =
+          harness: @harness
           suite: suite
           cssClass: revealClass
           expandSections: true
