@@ -70,6 +70,7 @@ Ctrl.define
             type: type
             data: options
             spec: @spec
+            suite: @spec.parent
             harness: @harness
             ctrl: -> @harness.ctrl()
             log: @harness.log

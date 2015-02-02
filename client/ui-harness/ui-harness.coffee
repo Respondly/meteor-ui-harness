@@ -1,5 +1,4 @@
 CommonMethods = stampit().enclose ->
-
   @style = PKG.Style().init(@)
 
   ###

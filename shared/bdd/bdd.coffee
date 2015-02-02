@@ -39,6 +39,7 @@ BDD.suiteCreated (suite) -> extendModel 'suite', suite
 
 extendModel = (type, model) ->
   model.meta ?= {}
+  model.api ?= {}
   keyPrefix = "uih-#{ type }:#{ model.uid() }:"
 
   # Read/write to local storage for the model.
