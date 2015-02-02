@@ -82,7 +82,7 @@ Ctrl.define
         el = $(e.target)
         return if @select? and el.closest('.uih-select-options').length > 0
         return if @radio? and el.closest('.uih-radio-options').length > 0
-        # return if @customCtrl? and el.closest('.uih-custom-ctrl-outer').length > 0
+        return if @customCtrl? and el.closest('.uih-custom-ctrl-outer').length > 0
         @api.run()
 
       'change select': (e) -> @select?.onChange(e)
