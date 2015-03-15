@@ -28,6 +28,7 @@ Package.onUse(function (api) {
   api.export('UIHarness');
   api.export('TEST');
   api.export(['describe', 'it', 'before', 'beforeEach', 'afterEach', 'after']);
+  api.export(['Data', 'Util', 'Ctrl' ]);
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.addFiles('shared/ns.shared.coffee', ['client', 'server']);
