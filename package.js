@@ -121,7 +121,7 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function(api){
-  api.use(['mike:mocha-package@0.5.6', 'coffeescript']);
+  api.use(['mike:mocha-package@0.5.7', 'coffeescript']);
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.addFiles('tests/shared/sample.coffee', ['client', 'server']);
